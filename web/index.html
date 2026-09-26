@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1d2b1f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="LeafGreen Online">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="style.css">
+  <title>LeafGreen Online</title>
+</head>
+<body>
+  <main id="setup" class="screen">
+    <h1>LeafGreen Online</h1>
+    <p class="lead">Explore Kanto together with your friends.</p>
+
+    <form id="setup-form">
+      <label for="player-name">Your name</label>
+      <input id="player-name" name="name" maxlength="16" autocomplete="nickname" placeholder="Trainer" required>
+
+      <label for="room-code">Room code</label>
+      <div class="row">
+        <input id="room-code" name="room" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false" required>
+        <button type="button" id="new-room" class="secondary">New</button>
+      </div>
+      <p class="hint">Everyone who enters the same room code plays together.</p>
+
+      <fieldset id="rom-section">
+        <legend>Game ROM</legend>
+        <p id="rom-saved" class="hint" hidden>Using the ROM saved on this device. <button type="button" id="rom-change" class="link">Change</button></p>
+        <div id="rom-picker">
+          <input id="rom-file" type="file" accept=".gba,application/octet-stream">
+          <p class="hint">Choose your own Pokémon LeafGreen (USA) ROM. It is patched on this device and never uploaded.</p>
+        </div>
+      </fieldset>
+
+      <p id="setup-status" class="status" role="status"></p>
+      <button type="submit" id="start" disabled>Loading…</button>
+    </form>
+  </main>
+
+  <main id="game" class="screen" hidden>
+    <header id="hud">
+      <span id="hud-room"></span>
+      <span id="hud-players"></span>
+      <button type="button" id="share" class="secondary small">Invite</button>
+    </header>
+    <div id="screen-wrap">
+      <canvas id="screen" width="240" height="160"></canvas>
+    </div>
+    <p id="toast" role="status" hidden></p>
+
+    <section id="controls" aria-label="Game controls">
+      <div class="shoulders">
+        <button type="button" class="btn shoulder" data-button="L">L</button>
+        <button type="button" class="btn shoulder" data-button="R">R</button>
+      </div>
+      <div class="pad-row">
+        <div id="dpad" aria-label="Direction pad">
+          <span class="dir up"></span><span class="dir left"></span><span class="dir right"></span><span class="dir down"></span>
+        </div>
+        <div class="face">
+          <button type="button" class="btn round b" data-button="B">B</button>
+          <button type="button" class="btn round a" data-button="A">A</button>
+        </div>
+      </div>
+      <div class="menu-row">
+        <button type="button" class="btn pill" data-button="Select">SELECT</button>
+        <button type="button" class="btn pill" data-button="Start">START</button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

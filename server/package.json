@@ -1,0 +1,15 @@
+{
+  "name": "poke-naruto-server",
+  "private": true,
+  "type": "module",
+  "description": "Static host and multiplayer relay for the Poke Naruto web client",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  }
+}

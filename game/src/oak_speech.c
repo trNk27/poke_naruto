@@ -780,6 +780,19 @@ static void Task_NewGameScene(u8 taskId)
         BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         break;
     case 10:
+#ifdef NETSYNC_QUICK_START
+    {
+        static const u8 sQuickStartName[] = _("TEST");
+        static const u8 sQuickStartRivalName[] = _("RIVAL");
+
+        StringCopy(gSaveBlock2Ptr->playerName, sQuickStartName);
+        StringCopy(gSaveBlock1Ptr->rivalName, sQuickStartRivalName);
+        gSaveBlock2Ptr->playerGender = MALE;
+        gMain.state = 0;
+        gTasks[taskId].func = Task_OakSpeech_FreeResources;
+        return;
+    }
+#endif
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
         ShowBg(0);

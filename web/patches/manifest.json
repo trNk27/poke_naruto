@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "patches": [
+    {
+      "base": "Pokémon LeafGreen (USA)",
+      "baseSha1": "574fa542ffebb14be69902d1d36f1ec0a4afd71e",
+      "file": "leafgreen.bps",
+      "targetSha1": "faf00cdf4a044c4c8fce52dc3d3d5a416fbf822e"
+    },
+    {
+      "base": "Pokémon LeafGreen (USA, Rev 1)",
+      "baseSha1": "7862c67bdecbe21d1d69ce082ce34327e1c6ed5e",
+      "file": "leafgreen_rev1.bps",
+      "targetSha1": "2f2a09e745c22a7c64bbaca5f724354f54e98f23"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "netsync.h"
 #include "gflib.h"
 #include "bg_regs.h"
 #include "cable_club.h"
@@ -1461,6 +1462,7 @@ static void OverworldBasic(void)
 {
     ScriptContext_RunScript();
     RunTasks();
+    NetSync_UpdateOverworld();
     AnimateSprites();
     CameraUpdate();
     SetQuestLogEvent_Arrived();

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "netsync.h"
 #include "gflib.h"
 #include "gba/flash_internal.h"
 #include "load_save.h"
@@ -182,7 +183,11 @@ void SaveObjectEvents(void)
     int i;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
         gSaveBlock1Ptr->objectEvents[i] = gObjectEvents[i];
+        if (IS_NETSYNC_LOCALID(gObjectEvents[i].localId))
+            gSaveBlock1Ptr->objectEvents[i].active = FALSE;
+    }
 }
 
 void LoadObjectEvents(void)

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "netsync.h"
 #include "gflib.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -148,6 +149,7 @@ void AgbMain()
     InitRFU();
     CheckForFlashMemory();
     InitMainCallbacks();
+    NetSync_Init();
     InitMapMusic();
     ClearDma3Requests();
     ResetBgs();
@@ -212,6 +214,7 @@ void AgbMain()
         }
 
         PlayTimeCounter_Update();
+        NetSync_FrameTick();
         MapMusicMain();
         WaitForVBlank();
     }
