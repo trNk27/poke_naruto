@@ -190,8 +190,8 @@ button.link { background: none; color: var(--accent); padding: 0; text-decoratio
 /* Landscape phones: screen in the middle, controls on the sides. */
 @media (orientation: landscape) and (max-height: 520px) {
   #game { flex-direction: row; justify-content: center; align-items: center; gap: 16px; }
-  #hud { position: absolute; top: max(4px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); width: auto; z-index: 1; }
-  #screen-wrap { height: calc(100% - 16px); width: auto; max-width: none; }
+  #hud { position: absolute; top: max(4px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); width: auto; max-width: 60vw; z-index: 1; }
+  #screen-wrap { height: calc(100% - 40px); width: auto; max-width: none; margin-top: 32px; }
   #toast { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); }
   #controls { display: contents; }
   .pad-row { display: contents; }
@@ -199,7 +199,7 @@ button.link { background: none; color: var(--accent); padding: 0; text-decoratio
   .face { order: 1; }
   .shoulders { position: absolute; top: max(8px, env(safe-area-inset-top)); left: 16px; right: 16px; pointer-events: none; }
   .shoulder { pointer-events: auto; }
-  .menu-row { position: absolute; bottom: max(8px, env(safe-area-inset-bottom)); right: 24px; }
+  .menu-row { position: absolute; bottom: max(8px, env(safe-area-inset-bottom)); right: max(16px, env(safe-area-inset-right)); flex-direction: column; align-items: flex-end; gap: 8px; }
 }
 
 /* Desktop with a keyboard: controls are optional. */

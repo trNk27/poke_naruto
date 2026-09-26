@@ -1,0 +1,10 @@
+# One-click deployment on Render (https://render.com): New > Blueprint, then
+# pick this repository. The server hosts the website and the multiplayer relay.
+services:
+  - type: web
+    name: leafgreen-online
+    runtime: node
+    plan: free
+    buildCommand: cd server && npm ci
+    startCommand: node server/server.js
+    healthCheckPath: /healthz

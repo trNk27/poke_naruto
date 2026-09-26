@@ -1,4 +1,4 @@
-import { setupControls } from './controls.js';
+import { captureKeyboard, setupControls } from './controls.js';
 import { startEmulator } from './emulator.js';
 import { NetClient } from './net.js';
 import { MAX_REMOTE, NetSyncBridge } from './netsync.js';
@@ -60,6 +60,7 @@ let manifest;
 let basePath;
 
 async function init() {
+  captureKeyboard();
   try {
     [{ Module: emulator, memory: bridge }, manifest] = await Promise.all([
       startEmulator($('screen')).then(({ Module, memory }) => ({ Module, memory: new NetSyncBridge(memory) })),
@@ -281,6 +282,8 @@ function setupSaving() {
     timer = setTimeout(() => emulator.FSSync(), 500);
   };
   emulator.addCoreCallbacks({ saveDataUpdatedCallback: sync });
+  // Ask the browser not to evict saves when storage runs low.
+  navigator.storage?.persist?.().catch(() => {});
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) emulator.FSSync();
   });

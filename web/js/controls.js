@@ -14,19 +14,49 @@ const KEYBOARD = {
   KeyS: 'R',
 };
 
+let keyHandler = null;
+
+/**
+ * The emulator listens for keys on the whole page and swallows them, which
+ * breaks typing into text fields. Call this before starting the emulator:
+ * keyboard events are intercepted first and never reach it; game keys are
+ * forwarded by setupControls instead.
+ */
+export function captureKeyboard() {
+  for (const type of ['keydown', 'keyup', 'keypress']) {
+    window.addEventListener(type, (event) => {
+      event.stopImmediatePropagation();
+      if (!(event.target instanceof HTMLInputElement)) keyHandler?.(event);
+    }, true);
+  }
+}
+
 export function setupControls(emulator) {
   // Several sources (touch, keyboard) may hold the same button.
   const holds = new Map();
+  // The game reads buttons once per frame, so a very quick tap could be
+  // missed; keep every press down for a few frames.
+  const MIN_PRESS_MS = 50;
+  const pressedAt = new Map();
+  const unpressTimers = new Map();
   const press = (button, source) => {
     const set = holds.get(button) ?? new Set();
-    if (set.size === 0) emulator.buttonPress(button);
+    if (set.size === 0) {
+      clearTimeout(unpressTimers.get(button));
+      emulator.buttonPress(button);
+      pressedAt.set(button, performance.now());
+    }
     set.add(source);
     holds.set(button, set);
   };
   const release = (button, source) => {
     const set = holds.get(button);
-    if (!set || !set.delete(source)) return;
-    if (set.size === 0) emulator.buttonUnpress(button);
+    if (!set || !set.delete(source) || set.size > 0) return;
+    const remaining = MIN_PRESS_MS - (performance.now() - pressedAt.get(button));
+    if (remaining <= 0) emulator.buttonUnpress(button);
+    else unpressTimers.set(button, setTimeout(() => {
+      if (!holds.get(button)?.size) emulator.buttonUnpress(button);
+    }, remaining));
   };
   const vibrate = () => navigator.vibrate?.(8);
 
@@ -97,17 +127,14 @@ export function setupControls(emulator) {
     dpad.addEventListener(type, (event) => setDirs(event.pointerId, new Set()));
   }
 
-  // Keyboard.
-  window.addEventListener('keydown', (event) => {
+  // Keyboard (see captureKeyboard).
+  keyHandler = (event) => {
     const button = KEYBOARD[event.code];
-    if (!button || event.target instanceof HTMLInputElement) return;
+    if (!button) return;
     event.preventDefault();
-    if (!event.repeat) press(button, `key${event.code}`);
-  });
-  window.addEventListener('keyup', (event) => {
-    const button = KEYBOARD[event.code];
-    if (button) release(button, `key${event.code}`);
-  });
+    if (event.type === 'keydown' && !event.repeat) press(button, `key${event.code}`);
+    else if (event.type === 'keyup') release(button, `key${event.code}`);
+  };
 
   // Don't leave buttons stuck when the app goes to the background.
   const releaseAll = () => {
