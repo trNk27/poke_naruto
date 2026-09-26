@@ -103,6 +103,25 @@ try {
   const aliceInBob = await remote(bob, 0);
   check(aliceInBob.active === 1 && aliceInBob.x === aStart.x, "Alice's position is written into Bob's game");
 
+  // Bob's name is shown above his character on Alice's screen.
+  const label = await alice.evaluate(() => {
+    const el = document.querySelector('#labels .name-label');
+    const pos = window.leafgreenOnline.bridge.readScreenPos(0);
+    if (!el || el.hidden) return null;
+    const wrap = document.getElementById('screen-wrap').getBoundingClientRect();
+    const box = el.getBoundingClientRect();
+    return {
+      text: el.textContent,
+      centerX: ((box.left + box.width / 2 - wrap.left) / wrap.width) * 240,
+      bottom: ((box.bottom - wrap.top) / wrap.height) * 160,
+      sprite: pos,
+    };
+  });
+  console.log('label', JSON.stringify(label));
+  check(label?.text === 'Bob', "Bob's name label is visible on Alice's screen");
+  check(label && Math.abs(label.centerX - label.sprite.x) < 2 && label.bottom <= label.sprite.y + 1,
+    'The label sits just above Bob');
+
   await alice.screenshot({ path: `${shotDir}/alice.png` });
   await bob.screenshot({ path: `${shotDir}/bob.png` });
   await alice.locator('#screen').screenshot({ path: `${shotDir}/alice-screen.png` });

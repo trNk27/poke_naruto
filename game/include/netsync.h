@@ -18,7 +18,7 @@
 // in the ROM image. Layout changes must bump NETSYNC_VERSION and be mirrored
 // in web/js/netsync.js.
 
-#define NETSYNC_VERSION 1
+#define NETSYNC_VERSION 2
 #define NETSYNC_MAGIC_LENGTH 16
 #define NETSYNC_MAX_REMOTE 4
 #define NETSYNC_NAME_LENGTH 8
@@ -42,6 +42,15 @@ struct NetSyncPlayer
     /*0x0C*/ u8 name[NETSYNC_NAME_LENGTH]; // game charset, EOS-terminated
 }; /*size = 0x14*/
 
+// Where a remote player's sprite is on screen, so the host can draw its name.
+struct NetSyncScreenPos
+{
+    /*0x00*/ s16 x;      // horizontal center, in GBA screen pixels
+    /*0x02*/ s16 y;      // top edge
+    /*0x04*/ u8 visible;
+    /*0x05*/ u8 padding[3];
+}; /*size = 0x08*/
+
 struct NetSync
 {
     /*0x00*/ u8 magic[NETSYNC_MAGIC_LENGTH];
@@ -50,7 +59,8 @@ struct NetSync
     /*0x18*/ u32 overworldFrame; // frameCounter at the last overworld update
     /*0x1C*/ struct NetSyncPlayer local;
     /*0x30*/ struct NetSyncPlayer remote[NETSYNC_MAX_REMOTE];
-}; /*size = 0x80*/
+    /*0x80*/ struct NetSyncScreenPos screen[NETSYNC_MAX_REMOTE]; // written by the game
+}; /*size = 0xA0*/
 
 extern struct NetSync gNetSync;
 

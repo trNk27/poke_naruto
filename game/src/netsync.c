@@ -220,6 +220,23 @@ static void StepTowardsRemote(struct ObjectEvent *objectEvent, const struct NetS
     }
 }
 
+static void PublishScreenPos(u8 slot, u8 objectEventId)
+{
+    struct NetSyncScreenPos *pos = &gNetSync.screen[slot];
+    struct Sprite *sprite;
+
+    if (objectEventId == OBJECT_EVENTS_COUNT)
+    {
+        pos->visible = FALSE;
+        return;
+    }
+    sprite = &gSprites[gObjectEvents[objectEventId].spriteId];
+    // Same position calculation as the OAM update in sprite.c.
+    pos->x = sprite->x + sprite->x2 + gSpriteCoordOffsetX;
+    pos->y = sprite->y + sprite->y2 + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
+    pos->visible = !sprite->invisible;
+}
+
 static void UpdateRemotePlayer(u8 slot)
 {
     const struct NetSyncPlayer *remote = &gNetSync.remote[slot];
@@ -243,13 +260,14 @@ static void UpdateRemotePlayer(u8 slot)
         }
     }
 
-    if (!visible)
-        return;
-
-    if (objectEventId == OBJECT_EVENTS_COUNT)
-        SpawnRemotePlayer(localId, remote);
-    else
-        StepTowardsRemote(&gObjectEvents[objectEventId], remote);
+    if (visible)
+    {
+        if (objectEventId == OBJECT_EVENTS_COUNT)
+            objectEventId = SpawnRemotePlayer(localId, remote);
+        else
+            StepTowardsRemote(&gObjectEvents[objectEventId], remote);
+    }
+    PublishScreenPos(slot, objectEventId);
 }
 
 // Called every frame from the overworld main callback.

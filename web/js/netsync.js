@@ -1,7 +1,7 @@
 // Bridge between the web client and the gNetSync block inside the running
 // game. Mirrors `struct NetSync` in game/include/netsync.h; keep both in sync.
 
-export const NETSYNC_VERSION = 1;
+export const NETSYNC_VERSION = 2;
 export const MAX_REMOTE = 4;
 const MAGIC = 'NARUTO-NETSYNC01';
 const MAGIC_BYTES = new TextEncoder().encode(MAGIC);
@@ -12,7 +12,9 @@ const OFFSET_FRAME_COUNTER = 0x14;
 const OFFSET_OVERWORLD_FRAME = 0x18;
 const OFFSET_LOCAL = 0x1c;
 const OFFSET_REMOTE = 0x30;
+const OFFSET_SCREEN = 0x80;
 const PLAYER_SIZE = 0x14;
+const SCREEN_POS_SIZE = 0x08;
 const NAME_LENGTH = 8;
 
 // Field offsets within struct NetSyncPlayer.
@@ -142,6 +144,17 @@ export class NetSyncBridge {
 
   readRemote(slot) {
     return this.readPlayer(this.base + OFFSET_REMOTE + slot * PLAYER_SIZE);
+  }
+
+  /** Where remote player `slot` is drawn, in GBA screen pixels. */
+  readScreenPos(slot) {
+    const offset = this.base + OFFSET_SCREEN + slot * SCREEN_POS_SIZE;
+    const view = this.view;
+    return {
+      x: view.getInt16(offset, true),
+      y: view.getInt16(offset + 2, true),
+      visible: this.bytes[offset + 4] !== 0,
+    };
   }
 
   readPlayer(offset) {

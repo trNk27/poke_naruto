@@ -155,7 +155,12 @@ function addPeer(id, name, state = null) {
   const slot = slots.indexOf(null);
   if (slot < 0) return; // the game can't show more players
   slots[slot] = id;
-  peers.set(id, { name, state, slot, dirty: true });
+  const label = document.createElement('span');
+  label.className = 'name-label';
+  label.textContent = name;
+  label.hidden = true;
+  $('labels').append(label);
+  peers.set(id, { name, state, slot, dirty: true, label });
   updateHud();
 }
 
@@ -163,6 +168,7 @@ function removePeer(id) {
   const peer = peers.get(id);
   if (!peer) return;
   if (bridge.attached) bridge.writeRemote(peer.slot, null);
+  peer.label.remove();
   slots[peer.slot] = null;
   peers.delete(id);
   updateHud();
@@ -234,6 +240,25 @@ function startGame(name, room) {
   });
 
   setInterval(syncTick, 16);
+  requestAnimationFrame(drawLabels);
+}
+
+// Names above other players, positioned where the game draws their sprites.
+function drawLabels() {
+  requestAnimationFrame(drawLabels);
+  const inOverworld = bridge.attached && bridge.inOverworld;
+  const wrap = $('screen-wrap');
+  const scaleX = wrap.clientWidth / 240;
+  const scaleY = wrap.clientHeight / 160;
+  for (const peer of peers.values()) {
+    const pos = inOverworld ? bridge.readScreenPos(peer.slot) : null;
+    const show = pos?.visible && pos.x > -16 && pos.x < 256 && pos.y > -8 && pos.y < 160;
+    peer.label.hidden = !show;
+    if (!show) continue;
+    const x = pos.x * scaleX - peer.label.offsetWidth / 2;
+    const y = pos.y * scaleY - peer.label.offsetHeight - 2;
+    peer.label.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+  }
 }
 
 let lastSentKey = null;

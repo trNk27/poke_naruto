@@ -107,6 +107,7 @@ button.link { background: none; color: var(--accent); padding: 0; text-decoratio
 #hud-players { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 #screen-wrap {
+  position: relative;
   width: 100%;
   max-width: 720px;
   aspect-ratio: 3 / 2;
@@ -120,6 +121,27 @@ button.link { background: none; color: var(--accent); padding: 0; text-decoratio
   height: 100%;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+}
+
+#labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.name-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.55);
+  color: #fff;
+  font-size: clamp(10px, 2.4vmin, 14px);
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  will-change: transform;
 }
 
 #toast {
