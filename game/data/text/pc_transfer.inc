@@ -34,6 +34,6 @@ Text_MonSentToBoxInPC::
     .string "{STR_VAR_2}を　てんそうした！$"
 
 Text_NoMoreRoomForPokemon::
-    .string "There's no more room for POKéMON!\p"
-    .string "The POKéMON BOXES are full and\n"
+    .string "There's no more room for NINJA!\p"
+    .string "The NINJA BOXES are full and\n"
     .string "can't accept any more!$"

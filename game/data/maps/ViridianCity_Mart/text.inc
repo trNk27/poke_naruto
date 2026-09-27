@@ -9,7 +9,7 @@ ViridianCity_Mart_Text_TakeThisToProfOak::
 
 ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::
     .string "{PLAYER} received HOKAGE'S PARCEL\n"
-    .string "from the POKéMON MART clerk.$"
+    .string "from the NINJA MART clerk.$"
 
 ViridianCity_Mart_Text_SayHiToOakForMe::
     .string "Okay, thanks! Please say hi to\n"
@@ -21,6 +21,6 @@ ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
 
 ViridianCity_Mart_Text_GotToBuySomePotions::
     .string "I've got to buy some POTIONS.\p"
-    .string "You never know when your POKéMON\n"
+    .string "You never know when your NINJA\n"
     .string "will need quick healing.$"
 

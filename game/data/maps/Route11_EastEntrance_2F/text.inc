@@ -8,11 +8,11 @@ Route11_EastEntrance_2F_Text_GiveItemfinderIfCaught30::
     .string "{STR_VAR_2} for you.\p"
     .string "So, {PLAYER}, let me ask you.\p"
     .string "Have you gathered data on at least\n"
-    .string "{STR_VAR_1} kinds of POKéMON?$"
+    .string "{STR_VAR_1} kinds of NINJA?$"
 
 Route11_EastEntrance_2F_Text_GreatHereYouGo::
     .string "Great! You have caught or owned\n"
-    .string "{STR_VAR_3} kinds of POKéMON!\p"
+    .string "{STR_VAR_3} kinds of NINJA!\p"
     .string "Congratulations!\n"
     .string "Here you go!$"
 
@@ -35,7 +35,7 @@ Route11_EastEntrance_2F_Text_ExplainItemfinder::
 Route11_EastEntrance_2F_Text_BigMonAsleepOnRoad::
     .string "Let's see what the binoculars have\n"
     .string "to show…\p"
-    .string "A big POKéMON is asleep on a road!$"
+    .string "A big NINJA is asleep on a road!$"
 
 Route11_EastEntrance_2F_Text_WhatABreathtakingView::
     .string "Let's see what the binoculars have\n"

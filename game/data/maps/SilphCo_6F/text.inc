@@ -23,7 +23,7 @@ SilphCo_6F_Text_NeedsMeToLookAfterHim::
 
 SilphCo_6F_Text_RocketsTryingToConquerWorld::
     .string "AKATSUKI is trying to conquer\n"
-    .string "the world with POKéMON.$"
+    .string "the world with NINJA.$"
 
 SilphCo_6F_Text_RocketsRanAwayBecauseOfYou::
     .string "AKATSUKI ran away, and it's all\n"
@@ -31,7 +31,7 @@ SilphCo_6F_Text_RocketsRanAwayBecauseOfYou::
 
 SilphCo_6F_Text_TargetedSilphForOurMonProducts::
     .string "They must have targeted SILPH for\n"
-    .string "our POKéMON products.$"
+    .string "our NINJA products.$"
 
 SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder::
     .string "Come work for SILPH when you\n"

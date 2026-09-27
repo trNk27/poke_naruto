@@ -533,6 +533,25 @@ def apply_trainer_names(already_written):
     return changed
 
 
+def apply_ninja_word():
+    """Says NINJA instead of POKéMON in every text string of the game (never in
+    identifiers or file names). Runs last, on the files as the steps above left them."""
+    names = [('POKéMON', 'NINJA'), ('Pokémon', 'Ninja')]
+    files = subprocess.check_output(['git', '-C', GAME, 'ls-files', '--', 'data', 'src', 'include'], text=True).split()
+    changed = 0
+    for rel in files:
+        if not rel.endswith(('.inc', '.c', '.h', '.s', '.json')):
+            continue
+        text = open(os.path.join(GAME, rel), encoding='utf-8').read()
+        new = rename_in_strings(text, names)
+        # Map section names become identifiers (sMapsecName_POK__MON_TOWER), see region_map_sections.json.
+        new = new.replace('sMapsecName_POK__MON_', 'sMapsecName_NINJA_')
+        if new != text:
+            write(rel, new)
+            changed += 1
+    print(f'POKéMON renamed to NINJA in {changed} files.')
+
+
 def apply_player_colors():
     for path, changes in R.PLAYER_COLORS.items():
         lines = pristine(path).replace('\r', '').split('\n')
@@ -558,6 +577,7 @@ def main():
     written = set(MANAGED) | {os.path.relpath(p, GAME) for p in MAP_SCRIPTS}
     apply_trainer_names(written)
     apply_player_colors()
+    apply_ninja_word()
     report(mapping)
 
 

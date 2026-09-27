@@ -15,11 +15,11 @@ LavenderTown_VolunteerPokemonHouse_Text_MrFujiLooksAfterOrphanedMons::
     .string "This is really MR. FUJI's house.\p"
     .string "He's really kind.\p"
     .string "He looks after abandoned and\n"
-    .string "orphaned POKéMON.$"
+    .string "orphaned NINJA.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MonsNiceToHug::
     .string "It's so warm!\n"
-    .string "POKéMON are so nice to hug.$"
+    .string "NINJA are so nice to hug.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_Nidorino::
     .string "NIDORINO: Gaoo!$"
@@ -31,7 +31,7 @@ LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis::
     .string "MR. FUJI: {PLAYER}…\p"
     .string "Your POKéDEX quest is one that\n"
     .string "requires strong dedication.\p"
-    .string "Without deep love for POKéMON,\n"
+    .string "Without deep love for NINJA,\n"
     .string "your quest may fail.\p"
     .string "I'm not sure if this will help you,\n"
     .string "but I'd like you to have it.$"
@@ -42,8 +42,8 @@ LavenderTown_VolunteerPokemonHouse_Text_ReceivedPokeFluteFromMrFuji::
 
 LavenderTown_VolunteerPokemonHouse_Text_ExplainPokeFlute::
     .string "Upon hearing the POKé FLUTE,\n"
-    .string "sleeping POKéMON will spring awake.\p"
-    .string "Try using it on POKéMON that are\n"
+    .string "sleeping NINJA will spring awake.\p"
+    .string "Try using it on NINJA that are\n"
     .string "sleeping obstacles.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MustMakeRoomForThis::
@@ -54,14 +54,14 @@ LavenderTown_VolunteerPokemonHouse_Text_HasPokeFluteHelpedYou::
     .string "helped you?$"
 
 LavenderTown_VolunteerPokemonHouse_Text_GrandPrizeDrawingClipped::
-    .string "POKéMON FAN MAGAZINE\n"
+    .string "NINJA FAN MAGAZINE\n"
     .string "Monthly Grand Prize Drawing!\p"
     .string "The application form is…\p"
     .string "Gone! It's been clipped out.\n"
     .string "Someone must have applied already.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_PokemonMagazinesLineShelf::
-    .string "POKéMON magazines line the shelf.\p"
-    .string "POKéMON INSIDER…\p"
-    .string "POKéMON FAN…$"
+    .string "NINJA magazines line the shelf.\p"
+    .string "NINJA INSIDER…\p"
+    .string "NINJA FAN…$"
 

@@ -6,14 +6,14 @@ PokedexRating_Text_HowIsPokedexComingAlong::
 PokedexRating_Text_SeenXOwnedY::
 	.string "The amount of progress you've made\n"
 	.string "on your POKéDEX is:\p"
-	.string "{STR_VAR_1} POKéMON seen and\n"
-	.string "{STR_VAR_2} POKéMON owned.\p"
+	.string "{STR_VAR_1} NINJA seen and\n"
+	.string "{STR_VAR_2} NINJA owned.\p"
 	.string "{FONT_NORMAL}HOKAGE's rating:$"
 
 PokedexRating_Text_LessThan10::
 	.string "You still have lots to do.\p"
 	.string "Go into every patch of grass you\n"
-	.string "see and look for POKéMON!$"
+	.string "see and look for NINJA!$"
 
 PokedexRating_Text_LessThan20::
 	.string "It looks as if you're getting on\n"
@@ -25,7 +25,7 @@ PokedexRating_Text_LessThan30::
 	.string "Your POKéDEX could use a bit more\n"
 	.string "volume still!\p"
 	.string "Try to catch other species of\n"
-	.string "POKéMON!$"
+	.string "NINJA!$"
 
 PokedexRating_Text_LessThan40::
 	.string "Good, it's apparent that you're\n"
@@ -52,7 +52,7 @@ PokedexRating_Text_LessThan70::
 PokedexRating_Text_LessThan80::
 	.string "Very good!\p"
 	.string "I think you'll collect even more\n"
-	.string "POKéMON by going fishing!$"
+	.string "NINJA by going fishing!$"
 
 PokedexRating_Text_LessThan90::
 	.string "Wonderful! Let me guess… You\n"
@@ -68,7 +68,7 @@ PokedexRating_Text_LessThan110::
 
 PokedexRating_Text_LessThan120::
 	.string "You even have the evolved forms\n"
-	.string "of POKéMON! Super!$"
+	.string "of NINJA! Super!$"
 
 PokedexRating_Text_LessThan130::
 	.string "Excellent! Trade with friends to\n"
@@ -80,7 +80,7 @@ PokedexRating_Text_LessThan140::
 
 PokedexRating_Text_LessThan150::
 	.string "I have nothing left to say!\n"
-	.string "You're the POKéMON PROFESSOR now!$"
+	.string "You're the NINJA PROFESSOR now!$"
 
 PokedexRating_Text_Complete::
 	.string "Your POKéDEX is entirely complete!\n"
@@ -88,8 +88,8 @@ PokedexRating_Text_Complete::
 
 PokedexRating_Text_NationalDexSeenXOwnedY::
 	.string "And your NATIONAL POKéDEX is:\p"
-	.string "{STR_VAR_1} POKéMON seen and\n"
-	.string "{STR_VAR_2} POKéMON owned.$"
+	.string "{STR_VAR_1} NINJA seen and\n"
+	.string "{STR_VAR_2} NINJA owned.$"
 
 PokedexRating_Text_LookForwardToFilledNationalDex::
 	.string "I'll be looking forward to seeing\n"

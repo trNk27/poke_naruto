@@ -100,15 +100,15 @@ SurfPichu_Slot5:
 sText_MysteryGiftEgg:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
-	.string "From the POKéMON CENTER we\n"
-	.string "have a gift - a POKéMON EGG!\p"
+	.string "From the NINJA CENTER we\n"
+	.string "have a gift - a NINJA EGG!\p"
 	.string "Please raise it with love and\n"
 	.string "kindness.$"
 
 sText_FullParty:
 	.string "Oh, your party appears to be full.\p"
 	.string "Please come see me after storing\n"
-	.string "a POKéMON on a PC.$"
+	.string "a NINJA on a PC.$"
 
 MysteryEventScript_VisitingTrainer::
 	setvaddress MysteryEventScript_VisitingTrainer
@@ -136,7 +136,7 @@ sText_MysteryGiftVisitingTrainer:
 	.string "GIFT System.\p"
 	.string "By holding this WONDER CARD, you\n"
 	.string "may take part in a survey at a\l"
-	.string "POKéMON MART.\p"
+	.string "NINJA MART.\p"
 	.string "Use these surveys to invite\n"
 	.string "TRAINERS to the SEVII ISLANDS.\p"
 	.string "…Let me give you a secret\n"
@@ -340,7 +340,7 @@ sText_MysteryGiftAlteringCave:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "Recently, there have been rumors\n"
-	.string "of rare POKéMON appearances.\p"
+	.string "of rare NINJA appearances.\p"
 	.string "The rumors are about ALTERING\n"
 	.string "CAVE on OUTCAST ISLAND.\p"
 	.string "Why not visit there and check if\n"

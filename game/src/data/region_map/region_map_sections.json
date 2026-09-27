@@ -645,7 +645,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_MANSION",
-      "name": "POKéMON MANSION",
+      "name": "NINJA MANSION",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -661,7 +661,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_LEAGUE",
-      "name": "POKéMON LEAGUE",
+      "name": "NINJA LEAGUE",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -685,7 +685,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_TOWER",
-      "name": "POKéMON TOWER",
+      "name": "NINJA TOWER",
       "x": 0,
       "y": 0,
       "width": 1,

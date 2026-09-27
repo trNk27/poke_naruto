@@ -14,7 +14,7 @@ Route24_Text_JoinTeamRocket::
     .string "By the way, how would you like to\n"
     .string "join AKATSUKI?\p"
     .string "We're a group of professional\n"
-    .string "criminals specializing in POKéMON!\p"
+    .string "criminals specializing in NINJA!\p"
     .string "Want to join?\p"
     .string "Are you sure?\p"
     .string "Come on, join us!\p"

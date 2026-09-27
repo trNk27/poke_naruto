@@ -1,6 +1,6 @@
 Route1_Text_WorkAtPokeMartTakeSample::
     .string "Hi!\n"
-    .string "I work at a POKéMON MART.\p"
+    .string "I work at a NINJA MART.\p"
     .string "It's part of a convenient chain\n"
     .string "selling all sorts of items.\p"
     .string "Please, visit us in VIRIDIAN CITY.\p"
@@ -9,7 +9,7 @@ Route1_Text_WorkAtPokeMartTakeSample::
 
 Route1_Text_ComeSeeUsIfYouNeedPokeBalls::
     .string "Please come see us if you need\n"
-    .string "POKé BALLS for catching POKéMON.$"
+    .string "POKé BALLS for catching NINJA.$"
 
 Route1_Text_PutPotionAway::
     .string "{PLAYER} put the POTION away in\n"

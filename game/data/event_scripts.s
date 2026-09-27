@@ -820,17 +820,17 @@ Text_WeHopeToSeeYouAgain2::
 
 @ Unused
 Text_WelcomeTradeCenter::
-	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "Welcome to the NINJA CABLE CLUB\n"
 	.string "TRADE CENTER.$"
 
 @ Unused
 Text_WelcomeColosseum::
-	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "Welcome to the NINJA CABLE CLUB\n"
 	.string "COLOSSEUM.$"
 
 @ Unused
 Text_WelcomeTimeCapsule::
-	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "Welcome to the NINJA CABLE CLUB\n"
 	.string "TIME CAPSULE.$"
 
 Text_PleaseComeAgain::
@@ -886,12 +886,12 @@ gText_PkmnFainted3::
 	.string "$"
 
 Text_WelcomeWantToHealPkmn::
-	.string "Welcome to our POKéMON CENTER!\p"
+	.string "Welcome to our NINJA CENTER!\p"
 	.string "Would you like me to heal your\n"
-	.string "POKéMON back to perfect health?$"
+	.string "NINJA back to perfect health?$"
 
 Text_TakeYourPkmnForFewSeconds::
-	.string "Okay, I'll take your POKéMON for a\n"
+	.string "Okay, I'll take your NINJA for a\n"
 	.string "few seconds.$"
 
 Text_WeHopeToSeeYouAgain::
@@ -899,7 +899,7 @@ Text_WeHopeToSeeYouAgain::
 
 Text_RestoredPkmnToFullHealth::
 	.string "Thank you for waiting.\n"
-	.string "We've restored your POKéMON to\l"
+	.string "We've restored your NINJA to\l"
 	.string "full health.$"
 
 	.include "data/text/surf.inc"
@@ -916,7 +916,7 @@ Text_BigHoleInTheWall::
 
 Text_WirelessClubUndergoingAdjustments::
 	.string "I'm terribly sorry.\n"
-	.string "The POKéMON WIRELESS CLUB is\l"
+	.string "The NINJA WIRELESS CLUB is\l"
 	.string "undergoing adjustments now.$"
 
 Text_AppearsToBeUndergoingAdjustments::

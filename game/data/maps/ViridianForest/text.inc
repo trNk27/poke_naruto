@@ -1,11 +1,11 @@
 ViridianForest_Text_FriendsItchingToBattle::
     .string "I came here with some friends to\n"
-    .string "catch us some BUG POKéMON!\p"
+    .string "catch us some BUG NINJA!\p"
     .string "They're all itching to get into\n"
-    .string "some POKéMON battles!$"
+    .string "some NINJA battles!$"
 
 ViridianForest_Text_RickIntro::
-    .string "Hey! You have POKéMON!\n"
+    .string "Hey! You have NINJA!\n"
     .string "Come on!\l"
     .string "Let's battle 'em!$"
 
@@ -19,11 +19,11 @@ ViridianForest_Text_RickPostBattle::
 ViridianForest_Text_DougIntro::
     .string "Yo!\n"
     .string "You can't jam out if you're a\l"
-    .string "POKéMON TRAINER!$"
+    .string "NINJA TRAINER!$"
 
 ViridianForest_Text_DougDefeat::
     .string "Huh?\n"
-    .string "I ran out of POKéMON!$"
+    .string "I ran out of NINJA!$"
 
 ViridianForest_Text_DougPostBattle::
     .string "That totally stinks! I'm going to\n"
@@ -55,31 +55,31 @@ ViridianForest_Text_AnthonyPostBattle::
     .string "I lost some of my allowance…$"
 
 ViridianForest_Text_CharlieIntro::
-    .string "Did you know that POKéMON evolve?$"
+    .string "Did you know that NINJA evolve?$"
 
 ViridianForest_Text_CharlieDefeat::
     .string "Oh!\n"
     .string "I lost!$"
 
 ViridianForest_Text_CharliePostBattle::
-    .string "BUG POKéMON evolve quickly.\n"
+    .string "BUG NINJA evolve quickly.\n"
     .string "They're a lot of fun!$"
 
 ViridianForest_Text_RanOutOfPokeBalls::
     .string "I was throwing POKé BALLS to\n"
-    .string "catch POKéMON, and I ran out.\p"
+    .string "catch NINJA, and I ran out.\p"
     .string "That's why you can never have too\n"
     .string "many POKé BALLS.$"
 
 ViridianForest_Text_AvoidGrassyAreasWhenWeak::
     .string "TRAINER TIPS\p"
-    .string "If your POKéMON are weak and you\n"
+    .string "If your NINJA are weak and you\n"
     .string "want to avoid battles, stay away\l"
     .string "from grassy areas!$"
 
 ViridianForest_Text_UseAntidoteForPoison::
     .string "For poison, use ANTIDOTE!\n"
-    .string "Get it at POKéMON MARTS!$"
+    .string "Get it at NINJA MARTS!$"
 
 ViridianForest_Text_ContactOakViaPCToRatePokedex::
     .string "TRAINER TIPS\p"
@@ -88,14 +88,14 @@ ViridianForest_Text_ContactOakViaPCToRatePokedex::
 
 ViridianForest_Text_CantCatchOwnedMons::
     .string "TRAINER TIPS\p"
-    .string "You can't catch a POKéMON that\n"
+    .string "You can't catch a NINJA that\n"
     .string "belongs to someone else.\p"
     .string "Throw POKé BALLS only at wild\n"
-    .string "POKéMON to catch them!$"
+    .string "NINJA to catch them!$"
 
 ViridianForest_Text_WeakenMonsBeforeCapture::
     .string "TRAINER TIPS\p"
-    .string "Weaken POKéMON before attempting\n"
+    .string "Weaken NINJA before attempting\n"
     .string "capture!\p"
     .string "When healthy, they may escape!$"
 

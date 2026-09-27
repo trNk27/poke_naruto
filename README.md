@@ -51,9 +51,9 @@ Not yet: players standing in a neighbouring map across a route border.
 
 Works exactly like with a link cable, just over the internet:
 
-1. Both players go upstairs in any Pokémon Center (it doesn't have to be the
+1. Both players go upstairs in any Ninja Center (it doesn't have to be the
    same one) and talk to the **receptionist on the right**. You need the
-   Pokédex from Professor Oak first.
+   Pokédex from the Hokage first.
 2. Both choose the same service: **Trade Center** or **Colosseum** (battle),
    and save when asked.
 3. The player who joined the room first confirms with **A** when the game says
@@ -70,7 +70,8 @@ The Pokémon are replaced by **40 ninjas** with new types, stats, jutsu and
 Pokédex entries. The starters are **Naruto**, **Sasuke** and **Sakura**, each
 evolving twice; wild areas have Academy Students, ninja dogs, toads, snakes and
 slugs, and famous ninjas appear as rare encounters and on trainers' teams
-(Brock, for example, now uses Gaara).
+(Brock, for example, now uses Gaara). The game's text says NINJA wherever it
+said POKéMON (NINJA CENTER, NINJA LEAGUE and so on).
 
 **Types.** Fire → Katon, Water → Suiton, Electric → Raiton, Ground → Doton,
 Flying → Futon, Ice → Hyoton, Grass → Mokuton (wood), Psychic → Genjutsu,
@@ -181,7 +182,7 @@ changes.
 
 The tests start two headless browsers in the same room and play through the
 game. They use a test ROM that skips Professor Oak's introduction and starts
-in front of a Cable Club receptionist with two Pokémon:
+in front of a Cable Club receptionist with two ninjas:
 
 ```sh
 tests/build-test-rom.sh /tmp/test.gba   # also writes /tmp/test.elf (symbols)

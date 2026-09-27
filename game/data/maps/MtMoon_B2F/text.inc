@@ -17,14 +17,14 @@ MtMoon_B2F_Text_ThenThisFossilIsMine::
 
 MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils::
     .string "Far away, on CINNABAR ISLAND,\n"
-    .string "there's a POKéMON LAB.\p"
+    .string "there's a NINJA LAB.\p"
     .string "They do research on regenerating\n"
     .string "fossils.$"
 
 MtMoon_B2F_Text_Grunt1Intro::
     .string "We, AKATSUKI, shall find the\n"
     .string "fossils!\p"
-    .string "Reviving POKéMON from them will\n"
+    .string "Reviving NINJA from them will\n"
     .string "earn us huge riches!$"
 
 MtMoon_B2F_Text_Grunt1Defeat::
@@ -36,7 +36,7 @@ MtMoon_B2F_Text_Grunt1PostBattle::
     .string "AKATSUKI will blacklist you!$"
 
 MtMoon_B2F_Text_Grunt2Intro::
-    .string "We, AKATSUKI, are POKéMON\n"
+    .string "We, AKATSUKI, are NINJA\n"
     .string "gangsters!\l"
     .string "We strike fear with our strength!$"
 
@@ -67,7 +67,7 @@ MtMoon_B2F_Text_Grunt4Defeat::
     .string "I'm steamed!$"
 
 MtMoon_B2F_Text_Grunt4PostBattle::
-    .string "POKéMON lived here long before\n"
+    .string "NINJA lived here long before\n"
     .string "people came.$"
 
 MtMoon_B2F_Text_YouWantDomeFossil::

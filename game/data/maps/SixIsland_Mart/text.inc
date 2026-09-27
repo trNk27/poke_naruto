@@ -1,5 +1,5 @@
 SixIsland_Mart_Text_AgathaOldestEverEliteFourMember::
-    .string "Play with POKéMON lots and live\n"
+    .string "Play with NINJA lots and live\n"
     .string "a long life!\p"
     .string "Take CHIYO, for example.\p"
     .string "She set a record for being the\n"

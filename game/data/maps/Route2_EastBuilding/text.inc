@@ -8,11 +8,11 @@ Route2_EastBuilding_Text_GiveHM05IfSeen10Mons::
     .string "HM05 for you.\p"
     .string "So, {PLAYER}, let me ask you.\p"
     .string "Have you gathered data on at least\n"
-    .string "ten kinds of POKéMON?$"
+    .string "ten kinds of NINJA?$"
 
 Route2_EastBuilding_Text_GreatHereYouGo::
     .string "Great! You have caught or owned\n"
-    .string "{STR_VAR_3} kinds of POKéMON!\p"
+    .string "{STR_VAR_3} kinds of NINJA!\p"
     .string "Congratulations!\n"
     .string "Here you go!$"
 
@@ -27,6 +27,6 @@ Route2_EastBuilding_Text_ExplainHM05::
     .string "of caves and dungeons.$"
 
 Route2_EastBuilding_Text_CanGetThroughRockTunnel::
-    .string "Once a POKéMON learns FLASH, you\n"
+    .string "Once a NINJA learns FLASH, you\n"
     .string "can get through ROCK TUNNEL.$"
 

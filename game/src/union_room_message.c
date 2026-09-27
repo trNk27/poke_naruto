@@ -305,8 +305,8 @@ const u8 *const gTexts_UR_StartActivity[][GENDER_COUNT][3] = {
     }
 };
 
-ALIGNED(4) static const u8 sText_BattleDeclinedMale[] = _("Sorry! My POKéMON don't seem to\nbe feeling too well right now.\lLet me battle you another time.\p");
-ALIGNED(4) static const u8 sText_BattleDeclinedFemale[] = _("I'm terribly sorry, but my POKéMON\naren't feeling well…\pLet's battle another time.\p");
+ALIGNED(4) static const u8 sText_BattleDeclinedMale[] = _("Sorry! My NINJA don't seem to\nbe feeling too well right now.\lLet me battle you another time.\p");
+ALIGNED(4) static const u8 sText_BattleDeclinedFemale[] = _("I'm terribly sorry, but my NINJA\naren't feeling well…\pLet's battle another time.\p");
 
 const u8 *const gTexts_UR_BattleDeclined[GENDER_COUNT] = {
     sText_BattleDeclinedMale,
@@ -330,8 +330,8 @@ const u8 *const gTexts_UR_IfYouWantToDoSomething[GENDER_COUNT] = {
 };
 
 ALIGNED(4) const u8 gText_UR_TrainerBattleBusy[] = _("Whoops! Sorry, but I have to do\nsomething else.\lAnother time, okay?\p");
-ALIGNED(4) const u8 gText_UR_NeedTwoMonsOfLevel30OrLower1[] = _("If you want to battle, you need\ntwo POKéMON that are below\lLv. 30.\p");
-ALIGNED(4) const u8 gText_UR_NeedTwoMonsOfLevel30OrLower2[] = _("For a battle, you need two\nPOKéMON that are below Lv. 30.\p");
+ALIGNED(4) const u8 gText_UR_NeedTwoMonsOfLevel30OrLower1[] = _("If you want to battle, you need\ntwo NINJA that are below\lLv. 30.\p");
+ALIGNED(4) const u8 gText_UR_NeedTwoMonsOfLevel30OrLower2[] = _("For a battle, you need two\nNINJA that are below Lv. 30.\p");
 
 ALIGNED(4) static const u8 sText_DeclineChatMale[] = _("Oh, all right.\nCome see me anytime, okay?\p");
 ALIGNED(4) static const u8 stext_DeclineChatFemale[] = _("Oh…\nPlease come by anytime.\p");
@@ -354,11 +354,11 @@ const u8 *const gTexts_UR_ChatDeclined[GENDER_COUNT] = {
 ALIGNED(4) static const u8 sText_YoureToughMale[] = _("Whoa!\nI can tell you're pretty tough!\p");
 ALIGNED(4) static const u8 sText_UsedGoodMoveMale[] = _("You used that move?\nThat's good strategy!\p");
 ALIGNED(4) static const u8 sText_BattleSurpriseMale[] = _("Way to go!\nThat was an eye-opener!\p");
-ALIGNED(4) static const u8 sText_SwitchedMonsMale[] = _("Oh! How could you use that\nPOKéMON in that situation?\p");
-ALIGNED(4) static const u8 sText_YoureToughFemale[] = _("That POKéMON…\nIt's been raised really well!\p");
+ALIGNED(4) static const u8 sText_SwitchedMonsMale[] = _("Oh! How could you use that\nNINJA in that situation?\p");
+ALIGNED(4) static const u8 sText_YoureToughFemale[] = _("That NINJA…\nIt's been raised really well!\p");
 ALIGNED(4) static const u8 sText_UsedGoodMoveFemale[] = _("That's it!\nThis is the right move now!\p");
 ALIGNED(4) static const u8 sText_BattleSurpriseFemale[] = _("That's awesome!\nYou can battle that way?\p");
-ALIGNED(4) static const u8 sText_SwitchedMonsFemale[] = _("You have exquisite timing for\nswitching POKéMON!\p");
+ALIGNED(4) static const u8 sText_SwitchedMonsFemale[] = _("You have exquisite timing for\nswitching NINJA!\p");
 
 const u8 *const gTexts_UR_BattleReaction[GENDER_COUNT][4] = {
     {
@@ -412,10 +412,10 @@ const u8 *const gTexts_UR_TrainerCardReaction[GENDER_COUNT][2] = {
     }
 };
 
-ALIGNED(4) static const u8 sText_MaleTraded1[] = _("Yeahah!\nI really wanted this POKéMON!\p");
-ALIGNED(4) static const u8 sText_MaleTraded2[] = _("Finally, a trade got me that\nPOKéMON I'd wanted a long time.\p");
-ALIGNED(4) static const u8 sText_FemaleTraded1[] = _("I'm trading POKéMON right now.\p");
-ALIGNED(4) static const u8 sText_FemaleTraded2[] = _("I finally got that POKéMON I\nwanted in a trade!\p");
+ALIGNED(4) static const u8 sText_MaleTraded1[] = _("Yeahah!\nI really wanted this NINJA!\p");
+ALIGNED(4) static const u8 sText_MaleTraded2[] = _("Finally, a trade got me that\nNINJA I'd wanted a long time.\p");
+ALIGNED(4) static const u8 sText_FemaleTraded1[] = _("I'm trading NINJA right now.\p");
+ALIGNED(4) static const u8 sText_FemaleTraded2[] = _("I finally got that NINJA I\nwanted in a trade!\p");
 
 const u8 *const gTexts_UR_TradeReaction[GENDER_COUNT][4] = {
     {
@@ -428,22 +428,22 @@ const u8 *const gTexts_UR_TradeReaction[GENDER_COUNT][4] = {
 };
 
 const u8 gText_UR_XCheckedTradingBoard[] = _("{STR_VAR_1} checked the\nTRADING BOARD.\p");
-ALIGNED(4) const u8 gText_UR_RegisterMonAtTradingBoard[] = _("Welcome to the TRADING BOARD.\pYou may register your POKéMON\nand offer it up for a trade.\pWould you like to register one of\nyour POKéMON?");
+ALIGNED(4) const u8 gText_UR_RegisterMonAtTradingBoard[] = _("Welcome to the TRADING BOARD.\pYou may register your NINJA\nand offer it up for a trade.\pWould you like to register one of\nyour NINJA?");
 ALIGNED(4) const u8 gText_UR_TradingBoardInfo[] = _("This TRADING BOARD is used for\n"
-                                                    "offering a POKéMON for a trade.\p"
+                                                    "offering a NINJA for a trade.\p"
                                                     "All you need to do is register a\n"
-                                                    "POKéMON for a trade.\p"
+                                                    "NINJA for a trade.\p"
                                                     "Another TRAINER may offer a party\n"
-                                                    "POKéMON in return for the trade.\p"
-                                                    "We hope you will register POKéMON\n"
+                                                    "NINJA in return for the trade.\p"
+                                                    "We hope you will register NINJA\n"
                                                     "and trade them with many, many\l"
                                                     "other TRAINERS.\p"
                                                     "Would you like to register one of\n"
-                                                    "your POKéMON?");
+                                                    "your NINJA?");
 ALIGNED(4) static const u8 sText_ThankYouForRegistering[] = _("こうかんけいじばん の とうろくが\nかんりょう しました\pごりよう ありがとう\nございました！\p");
 ALIGNED(4) static const u8 sText_NobodyHasRegistered[] = _("けいじばんに だれも ポケモンを\nとうろく していません\p\n");
-ALIGNED(4) const u8 gText_UR_ChooseRequestedMonType[] = _("Please choose the type of POKéMON\nthat you would like in the trade.\n");
-ALIGNED(4) const u8 gText_UR_WhichMonWillYouOffer[] = _("Which of your party POKéMON will\nyou offer in trade?\p");
+ALIGNED(4) const u8 gText_UR_ChooseRequestedMonType[] = _("Please choose the type of NINJA\nthat you would like in the trade.\n");
+ALIGNED(4) const u8 gText_UR_WhichMonWillYouOffer[] = _("Which of your party NINJA will\nyou offer in trade?\p");
 ALIGNED(4) const u8 gText_UR_RegistrationCanceled[] = _("Registration has been canceled.\p");
 ALIGNED(4) const u8 gText_UR_RegistraionCompleted[] = _("Registration has been completed.\p");
 ALIGNED(4) const u8 gText_UR_TradeCanceled[] = _("The trade has been canceled.\p");
@@ -455,11 +455,11 @@ ALIGNED(4) static const u8 sText_ChooseTrainerToTradeWith2[] = _("こうかん �
 ALIGNED(4) const u8 gText_UR_AskTrainerToMakeTrade[] = _("Would you like to ask {STR_VAR_1} to\nmake a trade?");
 ALIGNED(4) static const u8 sText_AwaitingResponseFromTrainer2[] = _("……\nあいての へんじを まっています");
 ALIGNED(4) static const u8 sText_NotRegisteredAMonForTrade[] = _("あなたが こうかんにだす\nポケモンが とうろくされていません\p");
-ALIGNED(4) const u8 gText_UR_DontHaveTypeTrainerWants[] = _("You don't have a {STR_VAR_2}-type\nPOKéMON that {STR_VAR_1} wants.\p");
+ALIGNED(4) const u8 gText_UR_DontHaveTypeTrainerWants[] = _("You don't have a {STR_VAR_2}-type\nNINJA that {STR_VAR_1} wants.\p");
 ALIGNED(4) const u8 gText_UR_DontHaveEggTrainerWants[] = _("You don't have an EGG that\n{STR_VAR_1} wants.\p");
 
-ALIGNED(4) static const u8 sText_PlayerCantTradeForYourMon[] = _("{STR_VAR_1} can't make a trade for\nyour POKéMON right now.\p");
-ALIGNED(4) static const u8 sText_CantTradeForPartnersMon[] = _("You can't make a trade for\n{STR_VAR_1}'s POKéMON right now.\p");
+ALIGNED(4) static const u8 sText_PlayerCantTradeForYourMon[] = _("{STR_VAR_1} can't make a trade for\nyour NINJA right now.\p");
+ALIGNED(4) static const u8 sText_CantTradeForPartnersMon[] = _("You can't make a trade for\n{STR_VAR_1}'s NINJA right now.\p");
 
 // Unused
 static const u8 *const sCantTradeMonTexts[] = {
@@ -477,7 +477,7 @@ ALIGNED(4) static const u8 sText_ChooseLeaderMultiBattle[] = _("Please choose th
 ALIGNED(4) static const u8 sText_ChooseTrainerToTradeWith[] = _("Please choose the TRAINER to\ntrade with.");
 ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderCards[] = _("Please choose the TRAINER who is\nsharing WONDER CARDS.");
 ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderNews[] = _("Please choose the TRAINER who is\nsharing WONDER NEWS.");
-ALIGNED(4) static const u8 sText_ChooseLeaderPokemonJump[] = _("Jump with mini POKéMON!\nPlease choose the LEADER.");
+ALIGNED(4) static const u8 sText_ChooseLeaderPokemonJump[] = _("Jump with mini NINJA!\nPlease choose the LEADER.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryCrush[] = _("BERRY CRUSH!\nPlease choose the LEADER.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryPicking[] = _("DODRIO BERRY-PICKING!\nPlease choose the LEADER.");
 
@@ -520,12 +520,12 @@ ALIGNED(4) const u8 gText_UR_NameWantedOfferLv[] = _("NAME{CLEAR_TO 0x3C}WANTED{
 ALIGNED(4) const u8 gText_UR_SingleBattle[] = _("SINGLE BATTLE");
 ALIGNED(4) const u8 gText_UR_DoubleBattle[] = _("DOUBLE BATTLE");
 ALIGNED(4) const u8 gText_UR_MultiBattle[] = _("MULTI BATTLE");
-ALIGNED(4) const u8 gText_UR_PokemonTrades[] = _("POKéMON TRADES");
+ALIGNED(4) const u8 gText_UR_PokemonTrades[] = _("NINJA TRADES");
 ALIGNED(4) const u8 gText_UR_Chat[] = _("CHAT");
 ALIGNED(4) const u8 gText_UR_Cards[] = _("CARDS");
 ALIGNED(4) const u8 gText_UR_WonderCards[] = _("WONDER CARDS");
 ALIGNED(4) const u8 gText_UR_WonderNews[] = _("WONDER NEWS");
-ALIGNED(4) const u8 gText_UR_PokemonJump[] = _("POKéMON JUMP");
+ALIGNED(4) const u8 gText_UR_PokemonJump[] = _("NINJA JUMP");
 ALIGNED(4) const u8 gText_UR_BerryCrush[] = _("BERRY CRUSH");
 ALIGNED(4) const u8 gText_UR_BerryPicking[] = _("BERRY-PICKING");
 ALIGNED(4) const u8 gText_UR_Search[] = _("SEARCH");
