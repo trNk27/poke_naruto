@@ -78,6 +78,8 @@ export class NetSyncBridge {
     this.base = -1;
     this.candidates = [];
     this.lastScan = 0;
+    this.lastCounter = 0;
+    this.lastCounterChange = 0;
   }
 
   get bytes() {
@@ -107,33 +109,57 @@ export class NetSyncBridge {
   }
 
   /**
-   * Keeps `base` pointing at the live gNetSync block. Save states and similar
-   * snapshots also contain the magic, so a candidate is only accepted once its
-   * frame counter is seen advancing. Returns true when attached.
+   * Keeps `base` pointing at the live gNetSync block. Save states and other
+   * snapshots of the game's memory also contain the magic, so a candidate is
+   * only accepted once its frame counter has advanced steadily, like a
+   * running game's, over several checks. Returns true when attached.
    */
   update(now = performance.now()) {
+    const view = this.view;
     if (this.base >= 0) {
-      if (this.hasMagicAt(this.base)) return true;
+      const counter = this.hasMagicAt(this.base) ? view.getUint32(this.base + OFFSET_FRAME_COUNTER, true) : null;
+      if (counter !== null && counter !== this.lastCounter) {
+        this.lastCounter = counter;
+        this.lastCounterChange = now;
+      }
+      // Detach if the block vanished or stopped counting for long (a copy
+      // rather than the running game; a paused game is found again later).
+      if (counter !== null && now - this.lastCounterChange < 10000) return true;
       this.base = -1;
     }
 
-    const view = this.view;
-    for (const candidate of this.candidates) {
-      if (!this.hasMagicAt(candidate.offset)) continue;
-      const counter = view.getUint32(candidate.offset + OFFSET_FRAME_COUNTER, true);
-      if (counter !== candidate.counter) {
-        this.base = candidate.offset;
+    for (const c of this.candidates) {
+      if (now - c.time < 50) continue;
+      if (!this.hasMagicAt(c.offset)) {
+        c.dead = true;
+        continue;
+      }
+      const counter = view.getUint32(c.offset + OFFSET_FRAME_COUNTER, true);
+      const frames = (counter - c.counter) >>> 0;
+      const expected = ((now - c.time) / 1000) * 60;
+      // A running game advances by about one per frame; allow slowdowns.
+      c.hits = frames > 0 && frames <= expected * 2 + 10 ? c.hits + 1 : 0;
+      c.counter = counter;
+      c.time = now;
+      if (c.hits >= 3) {
+        this.base = c.offset;
+        this.lastCounter = counter;
+        this.lastCounterChange = now;
         this.candidates = [];
         return true;
       }
     }
+    this.candidates = this.candidates.filter((c) => !c.dead);
 
     if (now - this.lastScan > 1000) {
       this.lastScan = now;
-      this.candidates = this.scan().map((offset) => ({
+      const known = new Map(this.candidates.map((c) => [c.offset, c]));
+      this.candidates = this.scan().map((offset) => known.get(offset) ?? {
         offset,
         counter: view.getUint32(offset + OFFSET_FRAME_COUNTER, true),
-      }));
+        time: now,
+        hits: 0,
+      });
     }
     return false;
   }

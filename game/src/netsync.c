@@ -86,7 +86,9 @@ static bool8 IsOverworldSyncAllowed(void)
 {
     if (gMain.callback1 != CB1_Overworld)
         return FALSE;
-    if (QL_GetPlaybackState() != QL_PLAYBACK_STATE_STOPPED || gQuestLogState == QL_STATE_PLAYBACK)
+    // Not while the Quest Log replays earlier events ("Previously on your
+    // quest..."). Recording new events is part of normal play.
+    if (QL_GetPlaybackState() == QL_PLAYBACK_STATE_RUNNING || gQuestLogState == QL_STATE_PLAYBACK)
         return FALSE;
     if (InUnionRoom() || IsUpdateLinkStateCBActive())
         return FALSE;

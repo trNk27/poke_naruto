@@ -59,7 +59,7 @@ async function tradeCursor(player) {
 }
 
 async function linkState(player) {
-  return (await player.state()).link;
+  return (await player.state())?.link ?? -1;
 }
 
 // Talks to the Cable Club receptionist and opens a link to the Trade Center
@@ -67,6 +67,14 @@ async function linkState(player) {
 async function openLink(player, choice) {
   await player.reachOverworld();
   await sleep(1000);
+  // Close any message still on screen (e.g. the goodbye after a trade).
+  await player.pressUntil('B', 'messages to close', async () => {
+    const tasks = await player.memory.tasks();
+    return !tasks.includes('Task_DrawFieldMessageBox') && !tasks.includes('ScriptMovement_MoveObjects');
+  });
+  // The receptionist stands behind the counter at (10,2); the counter is row 3.
+  await player.walkTo(10, 4, { verticalFirst: true });
+  await sleep(300);
   await player.press('Up');
   await sleep(400);
   await player.pressUntil('A', 'the service menu', () => player.hasTask('Task_MultichoiceMenu_HandleInput'));
@@ -115,6 +123,10 @@ async function leaveLinkRoom(game, doorX) {
   }));
   await sleep(3000);
   for (const p of game.players) {
+    if (process.env.DEBUG_LINK) {
+      const cb1 = p.memory.functionName(await p.memory.u32('gMain', 0));
+      console.log(p.name, 'cb1', cb1, 'state', JSON.stringify(await p.state()), 'tasks', (await p.memory.tasks()).join(','));
+    }
     const cb2 = await p.callback2();
     check(cb2 === 'CB2_Overworld', `${p.name} is back in the Pokémon Center without a link error (${cb2})`);
   }

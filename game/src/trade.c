@@ -2116,7 +2116,7 @@ static void CB_HandleTradeCanceled(void)
 
 static void CB_InitExitCanceledTrade(void)
 {
-#if REVISION >= 0xA
+#if REVISION >= 0xA || NETLINK_LINK_FIXES
     if (IsLinkTaskFinished() && !gPaletteFade.active)
 #else
     if (!gPaletteFade.active)

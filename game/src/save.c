@@ -888,7 +888,7 @@ void Task_LinkFullSave(u8 taskId)
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
-#if REVISION >= 0xA
+#if REVISION >= 0xA || NETLINK_LINK_FIXES
         if (!IsLinkTaskFinished()) break;
 #endif
         SetLinkStandbyCallback();
@@ -924,7 +924,7 @@ void Task_LinkFullSave(u8 taskId)
         gTasks[taskId].data[0] = 7;
         break;
     case 7:
-#if REVISION >= 0xA
+#if REVISION >= 0xA || NETLINK_LINK_FIXES
         if (!IsLinkTaskFinished()) break;
 #endif
         ClearContinueGameWarpStatus2();
@@ -942,7 +942,7 @@ void Task_LinkFullSave(u8 taskId)
         }
         break;
     case 9:
-#if REVISION >= 0xA
+#if REVISION >= 0xA || NETLINK_LINK_FIXES
         if (!IsLinkTaskFinished()) break;
 #endif
         SetLinkStandbyCallback();

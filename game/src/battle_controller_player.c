@@ -826,7 +826,7 @@ void SetBattleEndCallbacks(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-#if REVISION >= 0xA
+#if REVISION >= 0xA || NETLINK_LINK_FIXES
             if (!IsLinkTaskFinished() || gPaletteFade.active) return;
 #endif
             if (gWirelessCommType == 0)

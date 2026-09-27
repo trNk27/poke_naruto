@@ -73,4 +73,11 @@
 #endif // UBFIX
 #endif // MODERN
 
+// The link cable is replaced by NetLink (src/link.c), which adds network
+// latency. The Switch revision (REVISION 0xA) fixed several races where the
+// game asks the link to close or synchronize while a transfer is still in
+// progress and the request is silently dropped, hanging both players; enable
+// those fixes for every revision.
+#define NETLINK_LINK_FIXES 1
+
 #endif // GUARD_CONFIG_H

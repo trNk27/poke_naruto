@@ -12,5 +12,10 @@ export async function startEmulator(canvas) {
   }
   await Module.FSInit();
   if (!capture.memory) throw new Error('Could not access emulator memory');
+  // Progress is kept by saving in the game. Rewind and automatic save states
+  // would keep snapshots of the game's memory around (confusing the NetSync
+  // bridge), cost battery, and could restore a snapshot from an older ROM
+  // version after an update.
+  Module.setCoreSettings({ rewindEnable: false, autoSaveStateEnable: false, restoreAutoSaveStateOnLoad: false });
   return { Module, memory: capture.memory };
 }

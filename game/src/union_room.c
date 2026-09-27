@@ -1992,7 +1992,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
         }
         break;
     case 2:
-#if REVISION >= 0xA
+#if REVISION >= 0xA || NETLINK_LINK_FIXES
         if (IsLinkTaskFinished() && !gPaletteFade.active)
 #else
         if (!gPaletteFade.active)
