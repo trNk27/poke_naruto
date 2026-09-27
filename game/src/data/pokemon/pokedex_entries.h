@@ -15,9 +15,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BULBASAUR] =
     {
-        .categoryName = _("SEED"),
-        .height = 7,
-        .weight = 69,
+        .categoryName = _("HYPERACTIVE"),
+        .height = 14,
+        .weight = 400,
         .description = gBulbasaurPokedexText,
         .unusedDescription = gBulbasaurPokedexTextUnused,
         .pokemonScale = 356,
@@ -28,9 +28,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_IVYSAUR] =
     {
-        .categoryName = _("SEED"),
-        .height = 10,
-        .weight = 130,
+        .categoryName = _("SAGE"),
+        .height = 17,
+        .weight = 600,
         .description = gIvysaurPokedexText,
         .unusedDescription = gIvysaurPokedexTextUnused,
         .pokemonScale = 332,
@@ -41,9 +41,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VENUSAUR] =
     {
-        .categoryName = _("SEED"),
-        .height = 20,
-        .weight = 1000,
+        .categoryName = _("JINCHURIKI"),
+        .height = 17,
+        .weight = 600,
         .description = gVenusaurPokedexText,
         .unusedDescription = gVenusaurPokedexTextUnused,
         .pokemonScale = 256,
@@ -54,9 +54,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHARMANDER] =
     {
-        .categoryName = _("LIZARD"),
-        .height = 6,
-        .weight = 85,
+        .categoryName = _("AVENGER"),
+        .height = 15,
+        .weight = 440,
         .description = gCharmanderPokedexText,
         .unusedDescription = gCharmanderPokedexTextUnused,
         .pokemonScale = 410,
@@ -67,9 +67,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHARMELEON] =
     {
-        .categoryName = _("FLAME"),
-        .height = 11,
-        .weight = 190,
+        .categoryName = _("CURSE MARK"),
+        .height = 16,
+        .weight = 500,
         .description = gCharmeleonPokedexText,
         .unusedDescription = gCharmeleonPokedexTextUnused,
         .pokemonScale = 294,
@@ -80,9 +80,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHARIZARD] =
     {
-        .categoryName = _("FLAME"),
+        .categoryName = _("MANGEKYO"),
         .height = 17,
-        .weight = 905,
+        .weight = 600,
         .description = gCharizardPokedexText,
         .unusedDescription = gCharizardPokedexTextUnused,
         .pokemonScale = 271,
@@ -93,9 +93,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SQUIRTLE] =
     {
-        .categoryName = _("TINY TURTLE"),
-        .height = 5,
-        .weight = 90,
+        .categoryName = _("KUNOICHI"),
+        .height = 16,
+        .weight = 450,
         .description = gSquirtlePokedexText,
         .unusedDescription = gSquirtlePokedexTextUnused,
         .pokemonScale = 412,
@@ -106,9 +106,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WARTORTLE] =
     {
-        .categoryName = _("TURTLE"),
-        .height = 10,
-        .weight = 225,
+        .categoryName = _("MEDIC NINJA"),
+        .height = 16,
+        .weight = 460,
         .description = gWartortlePokedexText,
         .unusedDescription = gWartortlePokedexTextUnused,
         .pokemonScale = 334,
@@ -119,9 +119,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BLASTOISE] =
     {
-        .categoryName = _("SHELLFISH"),
+        .categoryName = _("BYAKUGO"),
         .height = 16,
-        .weight = 855,
+        .weight = 470,
         .description = gBlastoisePokedexText,
         .unusedDescription = gBlastoisePokedexTextUnused,
         .pokemonScale = 256,
@@ -132,9 +132,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CATERPIE] =
     {
-        .categoryName = _("WORM"),
-        .height = 3,
-        .weight = 29,
+        .categoryName = _("ACADEMY"),
+        .height = 12,
+        .weight = 300,
         .description = gCaterpiePokedexText,
         .unusedDescription = gCaterpiePokedexTextUnused,
         .pokemonScale = 549,
@@ -145,9 +145,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_METAPOD] =
     {
-        .categoryName = _("COCOON"),
-        .height = 7,
-        .weight = 99,
+        .categoryName = _("GENIN"),
+        .height = 15,
+        .weight = 500,
         .description = gMetapodPokedexText,
         .unusedDescription = gMetapodPokedexTextUnused,
         .pokemonScale = 350,
@@ -158,9 +158,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BUTTERFREE] =
     {
-        .categoryName = _("BUTTERFLY"),
-        .height = 11,
-        .weight = 320,
+        .categoryName = _("ELITE"),
+        .height = 18,
+        .weight = 750,
         .description = gButterfreePokedexText,
         .unusedDescription = gButterfreePokedexTextUnused,
         .pokemonScale = 312,
@@ -171,9 +171,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WEEDLE] =
     {
-        .categoryName = _("HAIRY BUG"),
-        .height = 3,
-        .weight = 32,
+        .categoryName = _("NINJA DOG"),
+        .height = 5,
+        .weight = 90,
         .description = gWeedlePokedexText,
         .unusedDescription = gWeedlePokedexTextUnused,
         .pokemonScale = 455,
@@ -184,9 +184,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KAKUNA] =
     {
-        .categoryName = _("COCOON"),
-        .height = 6,
-        .weight = 100,
+        .categoryName = _("NINJA DOG"),
+        .height = 4,
+        .weight = 80,
         .description = gKakunaPokedexText,
         .unusedDescription = gKakunaPokedexTextUnused,
         .pokemonScale = 424,
@@ -197,9 +197,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BEEDRILL] =
     {
-        .categoryName = _("POISON BEE"),
-        .height = 10,
-        .weight = 295,
+        .categoryName = _("SUMMON"),
+        .height = 4,
+        .weight = 50,
         .description = gBeedrillPokedexText,
         .unusedDescription = gBeedrillPokedexTextUnused,
         .pokemonScale = 366,
@@ -210,9 +210,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PIDGEY] =
     {
-        .categoryName = _("TINY BIRD"),
-        .height = 3,
-        .weight = 18,
+        .categoryName = _("SUMMON"),
+        .height = 10,
+        .weight = 300,
         .description = gPidgeyPokedexText,
         .unusedDescription = gPidgeyPokedexTextUnused,
         .pokemonScale = 492,
@@ -223,9 +223,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PIDGEOTTO] =
     {
-        .categoryName = _("BIRD"),
-        .height = 11,
-        .weight = 300,
+        .categoryName = _("BOSS TOAD"),
+        .height = 150,
+        .weight = 9999,
         .description = gPidgeottoPokedexText,
         .unusedDescription = gPidgeottoPokedexTextUnused,
         .pokemonScale = 334,
@@ -236,9 +236,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PIDGEOT] =
     {
-        .categoryName = _("BIRD"),
-        .height = 15,
-        .weight = 395,
+        .categoryName = _("SUMMON"),
+        .height = 20,
+        .weight = 100,
         .description = gPidgeotPokedexText,
         .unusedDescription = gPidgeotPokedexTextUnused,
         .pokemonScale = 269,
@@ -249,9 +249,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RATTATA] =
     {
-        .categoryName = _("MOUSE"),
-        .height = 3,
-        .weight = 35,
+        .categoryName = _("SNAKE BOSS"),
+        .height = 200,
+        .weight = 9999,
         .description = gRattataPokedexText,
         .unusedDescription = gRattataPokedexTextUnused,
         .pokemonScale = 481,
@@ -262,9 +262,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RATICATE] =
     {
-        .categoryName = _("MOUSE"),
-        .height = 7,
-        .weight = 185,
+        .categoryName = _("SUMMON"),
+        .height = 3,
+        .weight = 20,
         .description = gRaticatePokedexText,
         .unusedDescription = gRaticatePokedexTextUnused,
         .pokemonScale = 401,
@@ -275,9 +275,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SPEAROW] =
     {
-        .categoryName = _("TINY BIRD"),
-        .height = 3,
-        .weight = 20,
+        .categoryName = _("SLUG QUEEN"),
+        .height = 180,
+        .weight = 9999,
         .description = gSpearowPokedexText,
         .unusedDescription = gSpearowPokedexTextUnused,
         .pokemonScale = 571,
@@ -288,9 +288,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FEAROW] =
     {
-        .categoryName = _("BEAK"),
-        .height = 12,
-        .weight = 380,
+        .categoryName = _("TAIJUTSU"),
+        .height = 17,
+        .weight = 580,
         .description = gFearowPokedexText,
         .unusedDescription = gFearowPokedexTextUnused,
         .pokemonScale = 282,
@@ -301,9 +301,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_EKANS] =
     {
-        .categoryName = _("SNAKE"),
-        .height = 20,
-        .weight = 69,
+        .categoryName = _("BYAKUGAN"),
+        .height = 17,
+        .weight = 560,
         .description = gEkansPokedexText,
         .unusedDescription = gEkansPokedexTextUnused,
         .pokemonScale = 298,
@@ -314,9 +314,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARBOK] =
     {
-        .categoryName = _("COBRA"),
-        .height = 35,
-        .weight = 650,
+        .categoryName = _("BYAKUGAN"),
+        .height = 16,
+        .weight = 450,
         .description = gArbokPokedexText,
         .unusedDescription = gArbokPokedexTextUnused,
         .pokemonScale = 256,
@@ -327,9 +327,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PIKACHU] =
     {
-        .categoryName = _("MOUSE"),
-        .height = 4,
-        .weight = 60,
+        .categoryName = _("STRATEGIST"),
+        .height = 17,
+        .weight = 550,
         .description = gPikachuPokedexText,
         .unusedDescription = gPikachuPokedexTextUnused,
         .pokemonScale = 479,
@@ -340,9 +340,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RAICHU] =
     {
-        .categoryName = _("MOUSE"),
-        .height = 8,
-        .weight = 300,
+        .categoryName = _("BEAST NINJA"),
+        .height = 17,
+        .weight = 560,
         .description = gRaichuPokedexText,
         .unusedDescription = gRaichuPokedexTextUnused,
         .pokemonScale = 426,
@@ -353,9 +353,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SANDSHREW] =
     {
-        .categoryName = _("MOUSE"),
-        .height = 6,
-        .weight = 120,
+        .categoryName = _("PUPPET"),
+        .height = 18,
+        .weight = 700,
         .description = gSandshrewPokedexText,
         .unusedDescription = gSandshrewPokedexTextUnused,
         .pokemonScale = 370,
@@ -366,9 +366,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SANDSLASH] =
     {
-        .categoryName = _("MOUSE"),
-        .height = 10,
-        .weight = 295,
+        .categoryName = _("WIND"),
+        .height = 17,
+        .weight = 500,
         .description = gSandslashPokedexText,
         .unusedDescription = gSandslashPokedexTextUnused,
         .pokemonScale = 341,
@@ -379,9 +379,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDORAN_F] =
     {
-        .categoryName = _("POISON PIN"),
-        .height = 4,
-        .weight = 70,
+        .categoryName = _("SAND"),
+        .height = 16,
+        .weight = 480,
         .description = gNidoranFPokedexText,
         .unusedDescription = gNidoranFPokedexTextUnused,
         .pokemonScale = 488,
@@ -392,9 +392,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDORINA] =
     {
-        .categoryName = _("POISON PIN"),
-        .height = 8,
-        .weight = 200,
+        .categoryName = _("ICE MIRROR"),
+        .height = 16,
+        .weight = 430,
         .description = gNidorinaPokedexText,
         .unusedDescription = gNidorinaPokedexTextUnused,
         .pokemonScale = 381,
@@ -405,9 +405,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDOQUEEN] =
     {
-        .categoryName = _("DRILL"),
-        .height = 13,
-        .weight = 600,
+        .categoryName = _("DEMON MIST"),
+        .height = 18,
+        .weight = 800,
         .description = gNidoqueenPokedexText,
         .unusedDescription = gNidoqueenPokedexTextUnused,
         .pokemonScale = 283,
@@ -418,9 +418,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDORAN_M] =
     {
-        .categoryName = _("POISON PIN"),
-        .height = 5,
-        .weight = 90,
+        .categoryName = _("COPY NINJA"),
+        .height = 18,
+        .weight = 670,
         .description = gNidoranMPokedexText,
         .unusedDescription = gNidoranMPokedexTextUnused,
         .pokemonScale = 480,
@@ -431,9 +431,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDORINO] =
     {
-        .categoryName = _("POISON PIN"),
-        .height = 9,
-        .weight = 195,
+        .categoryName = _("GREEN BEAST"),
+        .height = 18,
+        .weight = 760,
         .description = gNidorinoPokedexText,
         .unusedDescription = gNidorinoPokedexTextUnused,
         .pokemonScale = 408,
@@ -444,9 +444,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDOKING] =
     {
-        .categoryName = _("DRILL"),
-        .height = 14,
-        .weight = 620,
+        .categoryName = _("HOKAGE"),
+        .height = 16,
+        .weight = 520,
         .description = gNidokingPokedexText,
         .unusedDescription = gNidokingPokedexTextUnused,
         .pokemonScale = 304,
@@ -457,9 +457,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CLEFAIRY] =
     {
-        .categoryName = _("FAIRY"),
-        .height = 6,
-        .weight = 75,
+        .categoryName = _("TOAD SAGE"),
+        .height = 19,
+        .weight = 880,
         .description = gClefairyPokedexText,
         .unusedDescription = gClefairyPokedexTextUnused,
         .pokemonScale = 425,
@@ -470,9 +470,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CLEFABLE] =
     {
-        .categoryName = _("FAIRY"),
-        .height = 13,
-        .weight = 400,
+        .categoryName = _("SANNIN"),
+        .height = 18,
+        .weight = 600,
         .description = gClefablePokedexText,
         .unusedDescription = gClefablePokedexTextUnused,
         .pokemonScale = 256,
@@ -483,9 +483,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VULPIX] =
     {
-        .categoryName = _("FOX"),
-        .height = 6,
-        .weight = 99,
+        .categoryName = _("AKATSUKI"),
+        .height = 17,
+        .weight = 520,
         .description = gVulpixPokedexText,
         .unusedDescription = gVulpixPokedexTextUnused,
         .pokemonScale = 497,
@@ -496,9 +496,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NINETALES] =
     {
-        .categoryName = _("FOX"),
-        .height = 11,
-        .weight = 199,
+        .categoryName = _("AKATSUKI"),
+        .height = 19,
+        .weight = 950,
         .description = gNinetalesPokedexText,
         .unusedDescription = gNinetalesPokedexTextUnused,
         .pokemonScale = 339,
@@ -509,9 +509,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_JIGGLYPUFF] =
     {
-        .categoryName = _("BALLOON"),
-        .height = 5,
-        .weight = 55,
+        .categoryName = _("AKATSUKI"),
+        .height = 18,
+        .weight = 580,
         .description = gJigglypuffPokedexText,
         .unusedDescription = gJigglypuffPokedexTextUnused,
         .pokemonScale = 419,
@@ -522,9 +522,9 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WIGGLYTUFF] =
     {
-        .categoryName = _("BALLOON"),
-        .height = 10,
-        .weight = 120,
+        .categoryName = _("NINE TAILS"),
+        .height = 500,
+        .weight = 9999,
         .description = gWigglytuffPokedexText,
         .unusedDescription = gWigglytuffPokedexTextUnused,
         .pokemonScale = 328,

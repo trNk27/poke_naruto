@@ -45,8 +45,8 @@ Route4_PokemonCenter_1F_EventScript_TryBuyMagikarp::
 	checkmoney MAGIKARP_PRICE
 	goto_if_eq VAR_RESULT, FALSE, Route4_PokemonCenter_1F_EventScript_NotEnoughMoney
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	setvar VAR_TEMP_1, SPECIES_MAGIKARP
-	givemon SPECIES_MAGIKARP, 5
+	setvar VAR_TEMP_1, SPECIES_NJ_TOAD
+	givemon SPECIES_NJ_TOAD, 5
 	goto_if_eq VAR_RESULT, 0, Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty
 	goto_if_eq VAR_RESULT, 1, Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC
 	goto_if_eq VAR_RESULT, 2, Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp
@@ -104,7 +104,7 @@ Route4_PokemonCenter_1F_EventScript_PayForMagikarp::
 	message Route4_PokemonCenter_1F_Text_PaidOutrageouslyForMagikarp
 	waitmessage
 	waitfanfare
-	bufferspeciesname STR_VAR_1, SPECIES_MAGIKARP
+	bufferspeciesname STR_VAR_1, SPECIES_NJ_TOAD
 	return
 
 Route4_PokemonCenter_1F_EventScript_DeclineMagikarp::

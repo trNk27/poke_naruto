@@ -21,8 +21,8 @@ SaffronCity_Dojo_EventScript_HitmonleeBall::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
-	showmonpic SPECIES_HITMONLEE, 10, 3
-	setvar VAR_TEMP_1, SPECIES_HITMONLEE
+	showmonpic SPECIES_NJ_ROCK_LEE, 10, 3
+	setvar VAR_TEMP_1, SPECIES_NJ_ROCK_LEE
 	applymovement LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_MALE
@@ -42,8 +42,8 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
-	showmonpic SPECIES_HITMONCHAN, 10, 3
-	setvar VAR_TEMP_1, SPECIES_HITMONCHAN
+	showmonpic SPECIES_NJ_NEJI, 10, 3
+	setvar VAR_TEMP_1, SPECIES_NJ_NEJI
 	applymovement LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_MALE

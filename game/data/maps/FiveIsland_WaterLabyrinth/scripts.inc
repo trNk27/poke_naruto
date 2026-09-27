@@ -30,7 +30,7 @@ FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg::
 	getpartysize
 	goto_if_eq VAR_RESULT, PARTY_SIZE, FiveIsland_WaterLabyrinth_EventScript_NoRoomForEgg
 	setflag FLAG_GOT_TOGEPI_EGG
-	giveegg SPECIES_TOGEPI
+	giveegg SPECIES_NJ_SLUG
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message FiveIsland_WaterLabyrinth_Text_ReceivedEggFromMan
@@ -43,12 +43,12 @@ FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg::
 @ If the player has a Togepi/Togetic from this game (assumed to be the one the man gave you) then comment on it
 @ Otherwise make normal comment
 FiveIsland_WaterLabyrinth_EventScript_PostEggComment::
-	bufferspeciesname STR_VAR_2, SPECIES_TOGEPI
-	setvar VAR_0x8004, SPECIES_TOGEPI
+	bufferspeciesname STR_VAR_2, SPECIES_NJ_SLUG
+	setvar VAR_0x8004, SPECIES_NJ_SLUG
 	specialvar VAR_RESULT, PlayerPartyContainsSpeciesWithPlayerID
 	goto_if_eq VAR_RESULT, TRUE, FiveIsland_WaterLabyrinth_EventScript_MonDaisyComment
-	bufferspeciesname STR_VAR_2, SPECIES_TOGETIC
-	setvar VAR_0x8004, SPECIES_TOGETIC
+	bufferspeciesname STR_VAR_2, SPECIES_NJ_KATSUYU
+	setvar VAR_0x8004, SPECIES_NJ_KATSUYU
 	specialvar VAR_RESULT, PlayerPartyContainsSpeciesWithPlayerID
 	goto_if_eq VAR_RESULT, TRUE, FiveIsland_WaterLabyrinth_EventScript_MonDaisyComment
 	msgbox FiveIsland_WaterLabyrinth_Text_GladIMetSomeoneLikeYou

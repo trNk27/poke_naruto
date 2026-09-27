@@ -243,37 +243,37 @@ Route25_SeaCottage_EventScript_BillsMonList::
 	end
 
 Route25_SeaCottage_EventScript_ViewEevee::
-	showmonpic SPECIES_EEVEE, 10, 3
+	showmonpic SPECIES_NJ_HINATA, 10, 3
 	waitbuttonpress
 	hidemonpic
-	setvar VAR_0x8004, SPECIES_EEVEE
+	setvar VAR_0x8004, SPECIES_NJ_HINATA
 	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
 Route25_SeaCottage_EventScript_ViewFlareon::
-	showmonpic SPECIES_FLAREON, 10, 3
+	showmonpic SPECIES_NJ_HINATA, 10, 3
 	waitbuttonpress
 	hidemonpic
-	setvar VAR_0x8004, SPECIES_FLAREON
+	setvar VAR_0x8004, SPECIES_NJ_HINATA
 	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
 Route25_SeaCottage_EventScript_ViewJolteon::
-	showmonpic SPECIES_JOLTEON, 10, 3
+	showmonpic SPECIES_NJ_HINATA, 10, 3
 	waitbuttonpress
 	hidemonpic
-	setvar VAR_0x8004, SPECIES_JOLTEON
+	setvar VAR_0x8004, SPECIES_NJ_HINATA
 	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
 Route25_SeaCottage_EventScript_ViewVaporeon::
-	showmonpic SPECIES_VAPOREON, 10, 3
+	showmonpic SPECIES_NJ_HINATA, 10, 3
 	waitbuttonpress
 	hidemonpic
-	setvar VAR_0x8004, SPECIES_VAPOREON
+	setvar VAR_0x8004, SPECIES_NJ_HINATA
 	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end

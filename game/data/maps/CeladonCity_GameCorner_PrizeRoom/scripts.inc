@@ -40,11 +40,11 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_Abra::
 	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_ABRA
+	setvar VAR_TEMP_1, SPECIES_NJ_SHIKAMARU
 	setvar VAR_TEMP_2, 180
 	.else
 	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_ABRA
+	setvar VAR_TEMP_1, SPECIES_NJ_SHIKAMARU
 	setvar VAR_TEMP_2, 120
 	.endif
 	.endif
@@ -53,11 +53,11 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_Abra::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy::
 	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_CLEFAIRY
+	setvar VAR_TEMP_1, SPECIES_NJ_SLUG
 	setvar VAR_TEMP_2, 500
 	.else
 	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_CLEFAIRY
+	setvar VAR_TEMP_1, SPECIES_NJ_SLUG
 	setvar VAR_TEMP_2, 750
 	.endif
 	.endif
@@ -66,11 +66,11 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir::
 	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_DRATINI
+	setvar VAR_TEMP_1, SPECIES_NJ_SNAKE
 	setvar VAR_TEMP_2, 2800
 	.else
 	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_PINSIR
+	setvar VAR_TEMP_1, SPECIES_NJ_KANKURO
 	setvar VAR_TEMP_2, 2500
 	.endif
 	.endif
@@ -79,11 +79,11 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_ScytherDratini::
 	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_SCYTHER
+	setvar VAR_TEMP_1, SPECIES_NJ_ZABUZA
 	setvar VAR_TEMP_2, 5500
 	.else
 	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_DRATINI
+	setvar VAR_TEMP_1, SPECIES_NJ_SNAKE
 	setvar VAR_TEMP_2, 4600
 	.endif
 	.endif
@@ -92,11 +92,11 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ScytherDratini::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon::
 	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_PORYGON
+	setvar VAR_TEMP_1, SPECIES_NJ_KANKURO
 	setvar VAR_TEMP_2, 9999
 	.else
 	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_PORYGON
+	setvar VAR_TEMP_1, SPECIES_NJ_KANKURO
 	setvar VAR_TEMP_2, 6500
 	.endif
 	.endif
@@ -111,12 +111,12 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon::
 	goto_if_lt VAR_RESULT, VAR_TEMP_2, CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	switch VAR_TEMP_1
-	case SPECIES_ABRA,     CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra
-	case SPECIES_CLEFAIRY, CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy
-	case SPECIES_DRATINI,  CeladonCity_GameCorner_PrizeRoom_EventScript_GiveDratini
-	case SPECIES_SCYTHER,  CeladonCity_GameCorner_PrizeRoom_EventScript_GiveScyther
-	case SPECIES_PORYGON,  CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon
-	case SPECIES_PINSIR,   CeladonCity_GameCorner_PrizeRoom_EventScript_GivePinsir
+	case SPECIES_NJ_SHIKAMARU,     CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra
+	case SPECIES_NJ_SLUG, CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy
+	case SPECIES_NJ_SNAKE,  CeladonCity_GameCorner_PrizeRoom_EventScript_GiveDratini
+	case SPECIES_NJ_ZABUZA,  CeladonCity_GameCorner_PrizeRoom_EventScript_GiveScyther
+	case SPECIES_NJ_KANKURO,  CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon
+	case SPECIES_NJ_KANKURO,   CeladonCity_GameCorner_PrizeRoom_EventScript_GivePinsir
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra::

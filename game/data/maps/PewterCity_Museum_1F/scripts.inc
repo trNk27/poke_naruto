@@ -168,7 +168,7 @@ PewterCity_Museum_1F_EventScript_OldAmber::
 
 PewterCity_Museum_1F_EventScript_AerodactylFossil::
 	lockall
-	setvar VAR_0x8004, SPECIES_AERODACTYL
+	setvar VAR_0x8004, SPECIES_NJ_DEIDARA
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
 	special OpenMuseumFossilPic
@@ -179,7 +179,7 @@ PewterCity_Museum_1F_EventScript_AerodactylFossil::
 
 PewterCity_Museum_1F_EventScript_KabutopsFossil::
 	lockall
-	setvar VAR_0x8004, SPECIES_KABUTOPS
+	setvar VAR_0x8004, SPECIES_NJ_ZABUZA
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
 	special OpenMuseumFossilPic

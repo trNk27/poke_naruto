@@ -117,8 +117,8 @@ SilphCo_7F_EventScript_LaprasGuy::
 	faceplayer
 	goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, SilphCo_7F_EventScript_AlreadyGotLapras
 	msgbox SilphCo_7F_Text_HaveMonForSavingUs
-	setvar VAR_TEMP_1, SPECIES_LAPRAS
-	givemon SPECIES_LAPRAS, 25
+	setvar VAR_TEMP_1, SPECIES_NJ_KISAME
+	givemon SPECIES_NJ_KISAME, 25
 	goto_if_eq VAR_RESULT, 0, SilphCo_7F_EventScript_ReceiveLaprasParty
 	goto_if_eq VAR_RESULT, 1, SilphCo_7F_EventScript_ReceiveLaprasPC
 	goto_if_eq VAR_RESULT, 2, EventScript_NoMoreRoomForPokemon
@@ -131,7 +131,7 @@ SilphCo_7F_EventScript_ReceiveLaprasParty::
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
-	bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
+	bufferspeciesname STR_VAR_1, SPECIES_NJ_KISAME
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SilphCo_7F_EventScript_EndReceiveLapras
 	call EventScript_GetGiftMonPartySlot
@@ -145,7 +145,7 @@ SilphCo_7F_EventScript_ReceiveLaprasPC::
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
-	bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
+	bufferspeciesname STR_VAR_1, SPECIES_NJ_KISAME
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SilphCo_7F_EventScript_LaprasTransferredToPC
 	call EventScript_NameReceivedBoxMon

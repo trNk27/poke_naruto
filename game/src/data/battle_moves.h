@@ -134,7 +134,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_HIT,
         .power = 40,
-        .type = TYPE_NORMAL,
+        .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 35,
         .secondaryEffectChance = 0,
@@ -550,7 +550,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_MULTI_HIT,
         .power = 14,
-        .type = TYPE_BUG,
+        .type = TYPE_POISON,
         .accuracy = 85,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -823,7 +823,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_RECHARGE,
         .power = 150,
-        .type = TYPE_NORMAL,
+        .type = TYPE_GHOST,
         .accuracy = 90,
         .pp = 5,
         .secondaryEffectChance = 0,
@@ -1681,7 +1681,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ALWAYS_HIT,
         .power = 60,
-        .type = TYPE_NORMAL,
+        .type = TYPE_POISON,
         .accuracy = 0,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -2123,7 +2123,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_HIGH_CRITICAL,
         .power = 70,
-        .type = TYPE_NORMAL,
+        .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -2760,7 +2760,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_MEAN_LOOK,
         .power = 0,
-        .type = TYPE_NORMAL,
+        .type = TYPE_DARK,
         .accuracy = 100,
         .pp = 5,
         .secondaryEffectChance = 0,
@@ -4125,7 +4125,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_SPEED_DOWN_HIT,
         .power = 50,
-        .type = TYPE_ROCK,
+        .type = TYPE_GROUND,
         .accuracy = 80,
         .pp = 10,
         .secondaryEffectChance = 100,

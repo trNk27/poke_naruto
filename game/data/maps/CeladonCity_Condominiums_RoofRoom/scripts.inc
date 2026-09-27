@@ -8,8 +8,8 @@ CeladonCity_Condominiums_RoofRoom_EventScript_BlackBelt::
 CeladonCity_Condominiums_RoofRoom_EventScript_EeveeBall::
 	lock
 	faceplayer
-	setvar VAR_TEMP_1, SPECIES_EEVEE
-	givemon SPECIES_EEVEE, 25
+	setvar VAR_TEMP_1, SPECIES_NJ_HINATA
+	givemon SPECIES_NJ_HINATA, 25
 	goto_if_eq VAR_RESULT, 0, CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveeParty
 	goto_if_eq VAR_RESULT, 1, CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveePC
 	goto_if_eq VAR_RESULT, 2, EventScript_NoMoreRoomForPokemon
@@ -22,7 +22,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveeParty::
 	message CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee
 	waitmessage
 	waitfanfare
-	bufferspeciesname STR_VAR_1, SPECIES_EEVEE
+	bufferspeciesname STR_VAR_1, SPECIES_NJ_HINATA
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee
 	call EventScript_GetGiftMonPartySlot
@@ -36,7 +36,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveePC::
 	message CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee
 	waitmessage
 	waitfanfare
-	bufferspeciesname STR_VAR_1, SPECIES_EEVEE
+	bufferspeciesname STR_VAR_1, SPECIES_NJ_HINATA
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, CeladonCity_Condominiums_RoofRoom_EventScript_TransferEeveeToPC
 	call EventScript_NameReceivedBoxMon

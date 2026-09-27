@@ -450,4 +450,6 @@
 #define SPECIES_UNOWN_EMARK (NUM_SPECIES + 26)
 #define SPECIES_UNOWN_QMARK (NUM_SPECIES + 27)
 
+#include "constants/ninjas.h"
+
 #endif  // GUARD_CONSTANTS_SPECIES_H

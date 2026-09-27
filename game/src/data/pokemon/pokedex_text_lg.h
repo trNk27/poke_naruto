@@ -6,285 +6,285 @@ const u8 gDummyPokedexText[] = _(
 const u8 gDummyPokedexTextUnused[] = _("");
 
 const u8 gBulbasaurPokedexText[] = _(
-    "A strange seed was planted on its back at\n"
-    "birth. The plant sprouts and grows with\n"
-    "this POKéMON.");
+    "A loud genin who never gives up. He\n"
+    "can make hundreds of shadow clones\n"
+    "and dreams of becoming HOKAGE.");
 
 const u8 gBulbasaurPokedexTextUnused[] = _("");
 
 const u8 gIvysaurPokedexText[] = _(
-    "When the bulb on its back grows large, it\n"
-    "appears to lose the ability to stand on\n"
-    "its hind legs.");
+    "Trained by the toads of MT. MYOBOKU.\n"
+    "In SAGE MODE he senses nature energy\n"
+    "and his eyes become like a toad's.");
 
 const u8 gIvysaurPokedexTextUnused[] = _("");
 
 const u8 gVenusaurPokedexText[] = _(
-    "Its plant blooms when it is absorbing\n"
-    "solar energy. It stays on the move to\n"
-    "seek sunlight.");
+    "Working together with the nine-tailed\n"
+    "fox KURAMA, his whole body glows with\n"
+    "golden chakra.");
 
 const u8 gVenusaurPokedexTextUnused[] = _(
     " ");
 
 const u8 gCharmanderPokedexText[] = _(
-    "It has a preference for hot things.\n"
-    "When it rains, steam is said to spout from\n"
-    "the tip of its tail.");
+    "The last of the UCHIHA clan. A cool\n"
+    "genius who masters fire style and\n"
+    "awakens the SHARINGAN.");
 
 const u8 gCharmanderPokedexTextUnused[] = _("");
 
 const u8 gCharmeleonPokedexText[] = _(
-    "When it swings its burning tail, it\n"
-    "elevates the air temperature to \n"
-    "unbearably high levels.");
+    "The curse mark spreads black flames\n"
+    "over his skin. He channels lightning\n"
+    "into the CHIDORI.");
 
 const u8 gCharmeleonPokedexTextUnused[] = _("");
 
 const u8 gCharizardPokedexText[] = _(
-    "It spits fire that is hot enough to melt\n"
-    "boulders. It may cause forest fires by\n"
-    "blowing flames.");
+    "His MANGEKYO SHARINGAN summons black\n"
+    "flames that never go out and a giant\n"
+    "warrior of purple chakra.");
 
 const u8 gCharizardPokedexTextUnused[] = _("");
 
 const u8 gSquirtlePokedexText[] = _(
-    "After birth, its back swells and hardens\n"
-    "into a shell. It powerfully sprays foam \n"
-    "from its mouth.");
+    "A clever kunoichi with perfect chakra\n"
+    "control. Her punches are strong enough\n"
+    "to shatter the ground.");
 
 const u8 gSquirtlePokedexTextUnused[] = _("");
 
 const u8 gWartortlePokedexText[] = _(
-    "It often hides in water to stalk unwary\n"
-    "prey. For fast swimming, it moves its\n"
-    "ears to maintain balance.");
+    "A medical ninja trained by TSUNADE.\n"
+    "She heals allies with glowing hands\n"
+    "and fights with monstrous strength.");
 
 const u8 gWartortlePokedexTextUnused[] = _("");
 
 const u8 gBlastoisePokedexText[] = _(
-    "The pressurized water jets on this brutal\n"
-    "POKéMON's shell are used for high-\n"
-    "speed tackles.");
+    "The diamond seal on her forehead is\n"
+    "released, covering her in black lines.\n"
+    "No wound can stop her anymore.");
 
 const u8 gBlastoisePokedexTextUnused[] = _("");
 
 const u8 gCaterpiePokedexText[] = _(
-    "Its short feet are tipped with suction\n"
-    "pads that enable it to tirelessly climb\n"
-    "slopes and walls.");
+    "A young student of the NINJA ACADEMY.\n"
+    "It practices throwing kunai at trees\n"
+    "from morning until night.");
 
 const u8 gCaterpiePokedexTextUnused[] = _("");
 
 const u8 gMetapodPokedexText[] = _(
-    "This POKéMON is vulnerable to attack\n"
-    "while its shell is soft, exposing its weak\n"
-    "and tender body.");
+    "A ninja who graduated from the\n"
+    "ACADEMY. It works in teams of three\n"
+    "on simple missions.");
 
 const u8 gMetapodPokedexTextUnused[] = _(
     " ");
 
 const u8 gButterfreePokedexText[] = _(
-    "In battle, it flaps its wings at great\n"
-    "speed to release highly toxic dust into\n"
-    "the air.");
+    "An elite ninja trusted with dangerous\n"
+    "missions. It leads teams of GENIN\n"
+    "and knows many jutsu.");
 
 const u8 gButterfreePokedexTextUnused[] = _(
     " ");
 
 const u8 gWeedlePokedexText[] = _(
-    "Often found in forests, eating leaves.\n"
-    "It has a sharp stinger on its head that\n"
-    "injects poison.");
+    "A ninja puppy with a sharp nose. It\n"
+    "can follow a scent for days and loves\n"
+    "to chew on kunai handles.");
 
 const u8 gWeedlePokedexTextUnused[] = _("");
 
 const u8 gKakunaPokedexText[] = _(
-    "Almost incapable of moving, this POKéMON\n"
-    "can only harden its shell to protect\n"
-    "itself when it is in danger.");
+    "A small pug with a grumpy face and a\n"
+    "human voice. It leads a pack of eight\n"
+    "tracking hounds.");
 
 const u8 gKakunaPokedexTextUnused[] = _("");
 
 const u8 gBeedrillPokedexText[] = _(
-    "It flies at high speed and attacks using \n"
-    "the large venomous stingers on its\n"
-    "forelegs and tail.");
+    "A small summoned toad from MT.\n"
+    "MYOBOKU. It spits water bullets at\n"
+    "anything that bothers it.");
 
 const u8 gBeedrillPokedexTextUnused[] = _("");
 
 const u8 gPidgeyPokedexText[] = _(
-    "A common sight in forests and woods.\n"
-    "It flaps its wings at ground level to kick\n"
-    "up blinding sand.");
+    "A cheeky orange toad and son of the\n"
+    "boss toad. It loves sweets and spits\n"
+    "burning oil when it gets angry.");
 
 const u8 gPidgeyPokedexTextUnused[] = _("");
 
 const u8 gPidgeottoPokedexText[] = _(
-    "Very protective of its sprawling\n"
-    "territorial area, this POKéMON will\n"
-    "fiercely peck at any intruder.");
+    "The chief toad of MT. MYOBOKU. It\n"
+    "smokes a huge pipe and fights with a\n"
+    "short sword on its hip.");
 
 const u8 gPidgeottoPokedexTextUnused[] = _("");
 
 const u8 gPidgeotPokedexText[] = _(
-    "When hunting, it skims the surface of\n"
-    "water at high speed to pick off unwary\n"
-    "prey such as MAGIKARP.");
+    "A summoned snake that hides in tall\n"
+    "grass. Its bite carries a weak poison\n"
+    "that numbs its prey.");
 
 const u8 gPidgeotPokedexTextUnused[] = _("");
 
 const u8 gRattataPokedexText[] = _(
-    "Bites anything when it attacks. Small and\n"
-    "very quick, it is a common sight in many\n"
-    "places.");
+    "A giant snake boss summoned by\n"
+    "OROCHIMARU. It demands a hundred\n"
+    "sacrifices for every summoning.");
 
 const u8 gRattataPokedexTextUnused[] = _("");
 
 const u8 gRaticatePokedexText[] = _(
-    "It uses its whiskers to maintain its\n"
-    "balance. It apparently slows down if\n"
-    "they are cut off.");
+    "A tiny summoned slug. It splits into\n"
+    "many pieces and uses its slime to heal\n"
+    "wounded ninja.");
 
 const u8 gRaticatePokedexTextUnused[] = _("");
 
 const u8 gSpearowPokedexText[] = _(
-    "Eats bugs in grassy areas. It has to flap\n"
-    "its short wings at high speed to stay\n"
-    "airborne.");
+    "The giant slug summoned by TSUNADE.\n"
+    "It sprays acid and can heal an entire\n"
+    "village at once.");
 
 const u8 gSpearowPokedexTextUnused[] = _("");
 
 const u8 gFearowPokedexText[] = _(
-    "With its huge and magnificent wings, it can\n"
-    "keep aloft without ever having to land\n"
-    "for rest.");
+    "He can't use ninjutsu or genjutsu, so\n"
+    "he trains taijutsu every single day.\n"
+    "His weights hide incredible speed.");
 
 const u8 gFearowPokedexTextUnused[] = _("");
 
 const u8 gEkansPokedexText[] = _(
-    "Moving silently and stealthily, it eats\n"
-    "the eggs of birds, such as PIDGEY\n"
-    "and SPEAROW, whole.");
+    "A genius of the HYUGA clan. His\n"
+    "BYAKUGAN sees chakra points, and his\n"
+    "ROTATION deflects any attack.");
 
 const u8 gEkansPokedexTextUnused[] = _("");
 
 const u8 gArbokPokedexText[] = _(
-    "It is rumored that the ferocious warning\n"
-    "markings on its belly differ from area to\n"
-    "area.");
+    "A shy heiress of the HYUGA clan. She\n"
+    "fights with the GENTLE FIST and\n"
+    "twin lion fists of chakra.");
 
 const u8 gArbokPokedexTextUnused[] = _("");
 
 const u8 gPikachuPokedexText[] = _(
-    "When several of these POKéMON gather,\n"
-    "their electricity can build and cause\n"
-    "lightning storms.");
+    "A lazy genius with an IQ over 200. He\n"
+    "catches enemies with his shadow and\n"
+    "plans every move in advance.");
 
 const u8 gPikachuPokedexTextUnused[] = _("");
 
 const u8 gRaichuPokedexText[] = _(
-    "Its long tail serves as a ground to\n"
-    "protect itself from its own high-voltage\n"
-    "power.");
+    "He fights side by side with his dog\n"
+    "AKAMARU. Together they spin into a\n"
+    "FANG OVER FANG drill attack.");
 
 const u8 gRaichuPokedexTextUnused[] = _("");
 
 const u8 gSandshrewPokedexText[] = _(
-    "Burrows deep underground in arid locations\n"
-    "far from water. It only emerges to hunt\n"
-    "for prey.");
+    "A puppet master of the SAND VILLAGE.\n"
+    "He controls puppets full of hidden\n"
+    "poisoned blades with chakra threads.");
 
 const u8 gSandshrewPokedexTextUnused[] = _("");
 
 const u8 gSandslashPokedexText[] = _(
-    "Curls up into a spiny ball when\n"
-    "threatened. It can roll while curled up\n"
-    "to attack or escape.");
+    "A kunoichi of the SAND VILLAGE. One\n"
+    "swing of her giant iron fan creates a\n"
+    "whirlwind of blades.");
 
 const u8 gSandslashPokedexTextUnused[] = _("");
 
 const u8 gNidoranFPokedexText[] = _(
-    "Although small, its venomous barbs render\n"
-    "this POKéMON dangerous. The female has\n"
-    "smaller horns.");
+    "The host of the one-tailed SHUKAKU.\n"
+    "A shield of sand protects him from\n"
+    "every attack on its own.");
 
 const u8 gNidoranFPokedexTextUnused[] = _("");
 
 const u8 gNidorinaPokedexText[] = _(
-    "The female's horns develop slowly.\n"
-    "Prefers physical attacks such as clawing\n"
-    "and biting.");
+    "A gentle boy with the ICE RELEASE.\n"
+    "He traps enemies in a dome of ice\n"
+    "mirrors and strikes with senbon.");
 
 const u8 gNidorinaPokedexTextUnused[] = _("");
 
 const u8 gNidoqueenPokedexText[] = _(
-    "Its hard scales provide strong protection.\n"
-    "It uses its hefty bulk to execute\n"
-    "powerful moves.");
+    "The DEMON OF THE HIDDEN MIST. He\n"
+    "hides in thick fog and cuts with his\n"
+    "huge executioner's blade.");
 
 const u8 gNidoqueenPokedexTextUnused[] = _("");
 
 const u8 gNidoranMPokedexText[] = _(
-    "It stiffens its ears to sense danger.\n"
-    "The larger its horns, the more \n"
-    "powerful its secreted venom.");
+    "The COPY NINJA who has copied more\n"
+    "than a thousand jutsu with his\n"
+    "SHARINGAN. Always late.");
 
 const u8 gNidoranMPokedexTextUnused[] = _("");
 
 const u8 gNidorinoPokedexText[] = _(
-    "An aggressive POKéMON that is quick to\n"
-    "attack. The horn on its head secretes a\n"
-    "powerful venom.");
+    "KONOHA's handsome green beast. By\n"
+    "opening the EIGHT GATES his body\n"
+    "bursts with blinding power.");
 
 const u8 gNidorinoPokedexTextUnused[] = _("");
 
 const u8 gNidokingPokedexText[] = _(
-    "It uses its powerful tail in battle to\n"
-    "smash, constrict, then break the prey's\n"
-    "bones.");
+    "The legendary medical ninja and FIFTH\n"
+    "HOKAGE. One flick of her finger can\n"
+    "crack a mountain in half.");
 
 const u8 gNidokingPokedexTextUnused[] = _("");
 
 const u8 gClefairyPokedexText[] = _(
-    "With its magical and cute appeal, it has \n"
-    "many admirers. It is rare and found only\n"
-    "in certain areas.");
+    "One of the LEGENDARY SANNIN and\n"
+    "NARUTO's teacher. A toad sage and\n"
+    "the author of famous novels.");
 
 const u8 gClefairyPokedexTextUnused[] = _("");
 
 const u8 gClefablePokedexText[] = _(
-    "A timid fairy POKéMON that is rarely seen,\n"
-    "it will run and hide the moment it senses\n"
-    "people.");
+    "A SANNIN obsessed with learning every\n"
+    "jutsu. He sheds his skin like a snake\n"
+    "to escape death.");
 
 const u8 gClefablePokedexTextUnused[] = _("");
 
 const u8 gVulpixPokedexText[] = _(
-    "When it is born, it has just one snow-\n"
-    "white tail. The tail splits from its tip as\n"
-    "it grows older.");
+    "A member of AKATSUKI who molds\n"
+    "exploding clay with the mouths on his\n"
+    "hands. For him, art is an explosion.");
 
 const u8 gVulpixPokedexTextUnused[] = _("");
 
 const u8 gNinetalesPokedexText[] = _(
-    "Very smart and very vengeful. Grabbing\n"
-    "one of its many tails could result in a\n"
-    "1,000-year curse.");
+    "A shark-like swordsman of AKATSUKI.\n"
+    "His bandaged sword SAMEHADA eats the\n"
+    "chakra of anyone it touches.");
 
 const u8 gNinetalesPokedexTextUnused[] = _("");
 
 const u8 gJigglypuffPokedexText[] = _(
-    "When its huge eyes waver, it sings a\n"
-    "mysteriously soothing melody that lulls\n"
-    "its enemies to sleep.");
+    "A prodigy of the UCHIHA clan who\n"
+    "joined AKATSUKI. His TSUKUYOMI traps\n"
+    "enemies in an illusion of days.");
 
 const u8 gJigglypuffPokedexTextUnused[] = _("");
 
 const u8 gWigglytuffPokedexText[] = _(
-    "The body is soft and rubbery. When\n"
-    "angered, it will suck in air and inflate\n"
-    "itself to an enormous size.");
+    "The strongest of the nine tailed\n"
+    "beasts. A single swing of its tails\n"
+    "can raise tsunamis and flatten hills.");
 
 const u8 gWigglytuffPokedexTextUnused[] = _("");
 

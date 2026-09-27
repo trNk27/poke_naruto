@@ -26,9 +26,9 @@ MtEmber_Summit_EventScript_Moltres::
 	special QuestLog_CutRecording
 	lock
 	faceplayer
-	setwildbattle SPECIES_MOLTRES, 50
+	setwildbattle SPECIES_NJ_ITACHI, 50
 	waitse
-	playmoncry SPECIES_MOLTRES, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_NJ_ITACHI, CRY_MODE_ENCOUNTER
 	message Text_Gyaoo
 	waitmessage
 	waitmoncry
@@ -53,6 +53,6 @@ MtEmber_Summit_EventScript_DefeatedMoltres::
 	end
 
 MtEmber_Summit_EventScript_RanFromMoltres::
-	setvar VAR_0x8004, SPECIES_MOLTRES
+	setvar VAR_0x8004, SPECIES_NJ_ITACHI
 	goto EventScript_MonFlewAway
 	end

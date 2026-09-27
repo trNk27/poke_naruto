@@ -324,7 +324,7 @@ void StartMarowakBattle(void)
     if (CheckBagHasItem(ITEM_SILPH_SCOPE, 1))
     {
         gBattleTypeFlags = BATTLE_TYPE_GHOST | BATTLE_TYPE_GHOST_UNVEILED;
-        CreateMonWithGenderNatureLetter(gEnemyParty, SPECIES_MAROWAK, 30, 31, MON_FEMALE, NATURE_SERIOUS, 0);
+        CreateMonWithGenderNatureLetter(gEnemyParty, SPECIES_NJ_GENIN, 30, 31, MON_FEMALE, NATURE_SERIOUS, 0);
     }
     else
     {
@@ -356,17 +356,16 @@ void StartLegendaryBattle(void)
     species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
     switch (species)
     {
-    case SPECIES_MEWTWO:
+    case SPECIES_NJ_KURAMA:
         CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_MEWTWO);
         break;
-    case SPECIES_DEOXYS:
+    case SPECIES_NJ_OROCHIMARU:
         CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_DEOXYS);
         break;
-    case SPECIES_MOLTRES:
-    case SPECIES_ARTICUNO:
-    case SPECIES_ZAPDOS:
-    case SPECIES_HO_OH:
-    case SPECIES_LUGIA:
+    case SPECIES_NJ_HAKU:
+    case SPECIES_NJ_ITACHI:
+    case SPECIES_NJ_JIRAIYA:
+    case SPECIES_NJ_KAKASHI:
         CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_LEGEND);
         break;
     default:

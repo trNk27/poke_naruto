@@ -61,6 +61,29 @@ Works exactly like with a link cable, just over the internet:
 With more than two players waiting at the receptionist at the same time,
 players are paired in the order they joined the room.
 
+## Naruto theme
+
+The Pokémon are replaced by **40 ninjas** with new types, stats, jutsu and
+Pokédex entries. The starters are **Naruto**, **Sasuke** and **Sakura**, each
+evolving twice; wild areas have Academy Students, ninja dogs, toads, snakes and
+slugs, and famous ninjas appear as rare encounters and on trainers' teams
+(Brock, for example, now uses Gaara).
+
+**Types.** Fire → Katon, Water → Suiton, Electric → Raiton, Ground → Doton,
+Flying → Futon, Ice → Hyoton, Grass → Mokuton (wood), Psychic → Genjutsu,
+Dark → Yin, Dragon → Yang, Fighting → Taijutsu, Normal → Ninja, Poison → Buki
+(weapons), Rock → Puppet, Bug → Beast, Ghost → Biju (tailed beasts),
+Steel → Sage. Each keeps the mechanics of the type it replaces (for example
+rain boosts Suiton). The five chakra natures beat each other in a circle as in
+the series: Katon > Futon > Raiton > Doton > Suiton > Katon. The full chart is in
+`tools/naruto/roster.py`.
+
+Everything comes from `tools/naruto/roster.py`; after editing it run
+`python3 tools/naruto/apply.py`, rebuild and regenerate the patches.
+`tools/naruto/generate_art.py` and `tools/naruto/sprites.py` create the battle
+sprites from generated artwork (until then the ninjas still look like the
+Pokémon whose slots they use).
+
 ## Hosting
 
 The server needs Node.js 18 or later.

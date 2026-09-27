@@ -53,7 +53,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_Nidorino::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_NIDORINO, CRY_MODE_NORMAL
+	playmoncry SPECIES_NJ_GENIN, CRY_MODE_NORMAL
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_Nidorino
 	waitmoncry
 	release
@@ -63,7 +63,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_Psyduck::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_PSYDUCK, CRY_MODE_NORMAL
+	playmoncry SPECIES_NJ_TOAD, CRY_MODE_NORMAL
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_Psyduck
 	waitmoncry
 	release

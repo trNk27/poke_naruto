@@ -74,7 +74,7 @@ SaffronCity_EventScript_Pidgeot::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_PIDGEOT, CRY_MODE_NORMAL
+	playmoncry SPECIES_NJ_TEMARI, CRY_MODE_NORMAL
 	msgbox SaffronCity_Text_Pidgeot
 	waitmoncry
 	release

@@ -13,7 +13,7 @@ ViridianCity_House_EventScript_Speary::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_SPEAROW, CRY_MODE_NORMAL
+	playmoncry SPECIES_NJ_STUDENT, CRY_MODE_NORMAL
 	msgbox ViridianCity_House_Text_Speary
 	waitmoncry
 	release
