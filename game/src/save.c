@@ -817,6 +817,7 @@ u8 LoadGameSave(u8 saveType)
     default:
         result = TryLoadSaveSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
         LoadSerializedGame();
+        RenameOldSpeciesNicknames();
         gSaveFileStatus = result;
         gGameContinueCallback = NULL;
         break;

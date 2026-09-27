@@ -12,6 +12,9 @@
 #include "overworld.h"
 #include "quest_log.h"
 #include "sloopsvc.h"
+#include "data.h"
+#include "string_util.h"
+#include "data/text/original_species_names.h"
 
 #define SAVEBLOCK_MOVE_RANGE    128
 
@@ -208,6 +211,41 @@ void LoadSerializedGame(void)
 {
     LoadPlayerParty();
     LoadObjectEvents();
+}
+
+// Naruto theme: a Pokémon caught before the theme keeps its old species name
+// as its nickname ("PIDGEY"). Give such Pokémon the name of their ninja.
+static void RenameIfOldSpeciesName(struct BoxPokemon *boxMon)
+{
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u16 species;
+
+    if (!GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES)
+     || GetBoxMonData(boxMon, MON_DATA_SANITY_IS_EGG)
+     || GetBoxMonData(boxMon, MON_DATA_LANGUAGE) != GAME_LANGUAGE)
+        return;
+    species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    if (species == SPECIES_NONE || species >= NUM_SPECIES)
+        return;
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, nickname);
+    if (StringCompare(nickname, gOriginalSpeciesNames[species]) == 0
+     && StringCompare(nickname, gSpeciesNames[species]) != 0)
+        SetBoxMonData(boxMon, MON_DATA_NICKNAME, gSpeciesNames[species]);
+}
+
+void RenameOldSpeciesNicknames(void)
+{
+    int i, j;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        RenameIfOldSpeciesName(&gPlayerParty[i].box);
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (j = 0; j < IN_BOX_COUNT; j++)
+            RenameIfOldSpeciesName(&gPokemonStoragePtr->boxes[i][j]);
+    }
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
+        RenameIfOldSpeciesName(&gSaveBlock1Ptr->daycare.mons[i].mon);
 }
 
 void LoadPlayerBag(void)
