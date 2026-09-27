@@ -11,7 +11,7 @@ shared through normal.pal), shiny.pal, icon.png (two 32x32 frames in one of
 the three shared icon palettes), plus the sprite coordinates and icon
 palette index in the source tables.
 
-Requires Pillow.
+Requires Pillow and NumPy.
 """
 
 import colorsys
@@ -19,7 +19,8 @@ import os
 import re
 import sys
 
-from PIL import Image, ImageFilter
+import numpy as np
+from PIL import Image, ImageDraw
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GAME = os.path.join(HERE, '..', '..', 'game')
@@ -56,89 +57,104 @@ def gba_color(c):
 
 def remove_background(im):
     """Makes the flat background transparent by flooding it from the edges."""
-    im = im.convert('RGBA')
-    w, h = im.size
-    px = im.load()
+    rgb = im.convert('RGB')
+    w, h = rgb.size
+    px = rgb.load()
     corners = [px[0, 0], px[w - 1, 0], px[0, h - 1], px[w - 1, h - 1]]
     bg = tuple(sorted(c[i] for c in corners)[1] for i in range(3))
-    tolerance = 60
-
-    def is_bg(c):
-        return sum(abs(c[i] - bg[i]) for i in range(3)) <= tolerance
-
-    seen = bytearray(w * h)
-    stack = [(x, y) for x in range(w) for y in (0, h - 1)] + [(x, y) for y in range(h) for x in (0, w - 1)]
-    while stack:
-        x, y = stack.pop()
-        i = y * w + x
-        if seen[i]:
-            continue
-        seen[i] = 1
-        if not is_bg(px[x, y]):
-            continue
-        px[x, y] = (0, 0, 0, 0)
-        if x > 0: stack.append((x - 1, y))
-        if x < w - 1: stack.append((x + 1, y))
-        if y > 0: stack.append((x, y - 1))
-        if y < h - 1: stack.append((x, y + 1))
-    return im
+    marker = (255, 0, 254)
+    for x, y in [(x, y) for x in range(0, w, 4) for y in (0, h - 1)] + [(x, y) for y in range(0, h, 4) for x in (0, w - 1)]:
+        c = px[x, y]
+        if c != marker and sum(abs(c[i] - bg[i]) for i in range(3)) <= 60:
+            ImageDraw.floodfill(rgb, (x, y), marker, thresh=40)
+    a = np.asarray(rgb)
+    alpha = np.where((a == marker).all(-1), 0, 255).astype(np.uint8)
+    out = rgb.convert('RGBA')
+    out.putalpha(Image.fromarray(alpha, 'L'))
+    return out
 
 
-def fit(im, target_height, max_width=SIZE - 2):
-    """Crops to the subject and scales it to `target_height`, feet at the bottom."""
-    box = im.getchannel('A').point(lambda a: 255 if a > 128 else 0).getbbox()
-    im = im.crop(box)
-    scale = min(target_height / im.height, max_width / im.width)
-    w, h = max(1, round(im.width * scale)), max(1, round(im.height * scale))
-    small = im.resize((w, h), Image.LANCZOS)
-    canvas = Image.new('RGBA', (SIZE, SIZE), (0, 0, 0, 0))
-    canvas.paste(small, ((SIZE - w) // 2, SIZE - 1 - h), small)
-    # Hard edges: GBA sprites have no partial transparency.
-    alpha = canvas.getchannel('A').point(lambda a: 255 if a >= 110 else 0)
-    canvas.putalpha(alpha)
+def crop_subject(im):
+    return im.crop(im.getchannel('A').point(lambda a: 255 if a > 128 else 0).getbbox())
+
+
+def flat_pixels(im):
+    """Colours of pixels inside flat areas (skipping anti-aliased edges)."""
+    a = np.asarray(im.convert('RGBA')).astype(np.int16)
+    rgb, alpha = a[..., :3], a[..., 3]
+    same = (np.abs(rgb[:-1, :-1] - rgb[1:, :-1]).sum(-1) < 24) & (np.abs(rgb[:-1, :-1] - rgb[:-1, 1:]).sum(-1) < 24)
+    keep = same & (alpha[:-1, :-1] > 200) & (alpha[1:, :-1] > 200) & (alpha[:-1, 1:] > 200)
+    return rgb[:-1, :-1][keep]
+
+
+def make_palette(views, colors=15):
+    """15 colours for the flat areas of all views, darkest (the outline) first."""
+    samples = np.concatenate([flat_pixels(v) for v in views]).astype(np.uint8)
+    sample = Image.fromarray(samples.reshape(1, -1, 3), 'RGB')
+    q = sample.quantize(colors=colors, method=Image.Quantize.MEDIANCUT, kmeans=4)
+    pal = [gba_color(tuple(q.getpalette()[i * 3:i * 3 + 3])) for i in range(colors)]
+    pal.sort(key=lambda c: 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2])
+    return pal
+
+
+def nearest(rgb, pal):
+    """Index into `pal` of the closest colour for every pixel."""
+    p = np.array(pal, dtype=np.int32)
+    d = ((rgb[..., None, :].astype(np.int32) - p) ** 2).sum(-1)
+    return d.argmin(-1)
+
+
+def shrink(im, pal, height, max_width, outline=0.35):
+    """Scales `im` down to `height` pixels. Each output pixel takes the most
+    common palette colour of the source pixels it covers, so flat areas stay
+    flat instead of blending; outline pixels win once they cover a good part
+    of the block, so lines survive. Returns palette indices, -1 = transparent."""
+    a = np.asarray(im.convert('RGBA'))
+    h, w = a.shape[:2]
+    scale = min(height / h, max_width / w)
+    oh, ow = max(1, round(h * scale)), max(1, round(w * scale))
+    idx = nearest(a[..., :3], pal) + 1
+    idx[a[..., 3] < 128] = 0
+    by = np.minimum((np.arange(h) * oh) // h, oh - 1)
+    bx = np.minimum((np.arange(w) * ow) // w, ow - 1)
+    counts = np.zeros((oh, ow, len(pal) + 1), dtype=np.int32)
+    np.add.at(counts, (by[:, None], bx[None, :], idx), 1)
+    total = counts.sum(-1)
+    opaque = total - counts[..., 0]
+    out = counts[..., 1:].argmax(-1)
+    out[counts[..., 1] >= outline * np.maximum(opaque, 1)] = 0
+    out[counts[..., 0] * 2 > total] = -1
+    return out
+
+
+def outline_edges(ix):
+    """Gives the silhouette a closed outline in the darkest colour."""
+    solid = ix >= 0
+    padded = np.pad(solid, 1)
+    edge = solid & ~(padded[:-2, 1:-1] & padded[2:, 1:-1] & padded[1:-1, :-2] & padded[1:-1, 2:])
+    ix = ix.copy()
+    ix[edge] = 0
+    return ix
+
+
+def place(ix, size=SIZE):
+    """Centres the sprite horizontally with its feet at the bottom of the canvas."""
+    canvas = np.full((size, size), -1, dtype=np.int32)
+    h, w = ix.shape
+    top, left = size - h, (size - w) // 2
+    canvas[top:top + h, left:left + w] = ix
     return canvas
 
 
-def add_outline(im):
-    """A 1-pixel dark outline around the silhouette, like the original sprites."""
-    alpha = im.getchannel('A')
-    grown = alpha.filter(ImageFilter.MaxFilter(3))
-    outline = Image.new('RGBA', im.size, (24, 24, 32, 255))
-    result = Image.new('RGBA', im.size, (0, 0, 0, 0))
-    result.paste(outline, (0, 0), grown)
-    result.paste(im, (0, 0), alpha)
-    return result
+def to_png(canvas, pal):
+    im = Image.fromarray((canvas + 1).astype(np.uint8), 'P')
+    im.putpalette([v for c in [(128, 160, 128)] + pal for v in c] + [0] * (768 - 3 * (len(pal) + 1)))
+    return im
 
 
-def quantize_pair(front, back):
-    """Gives both sprites one 16-colour palette (index 0 = transparent)."""
-    both = Image.new('RGBA', (SIZE * 2, SIZE))
-    both.paste(front, (0, 0))
-    both.paste(back, (SIZE, 0))
-    opaque = [p[:3] for p in pixels(both) if p[3]]
-    sample = Image.new('RGB', (len(opaque), 1))
-    sample.putdata(opaque)
-    q = sample.quantize(colors=15, method=Image.Quantize.MEDIANCUT)
-    colors = [gba_color(tuple(q.getpalette()[i * 3:i * 3 + 3])) for i in range(15)]
-    palette = [(128, 160, 128)] + colors  # index 0: transparent
-
-    def to_indexed(im):
-        out = Image.new('P', (SIZE, SIZE), 0)
-        out.putpalette([v for c in palette for v in c] + [0] * (768 - 48))
-        src, dst = im.load(), out.load()
-        cache = {}
-        for y in range(SIZE):
-            for x in range(SIZE):
-                p = src[x, y]
-                if not p[3]:
-                    continue
-                c = p[:3]
-                if c not in cache:
-                    cache[c] = 1 + min(range(15), key=lambda i: sum((c[k] - colors[i][k]) ** 2 for k in range(3)))
-                dst[x, y] = cache[c]
-        return out
-
-    return palette, to_indexed(front), to_indexed(back)
+def bbox(canvas):
+    ys, xs = np.nonzero(canvas >= 0)
+    return xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
 
 
 def shiny_palette(palette):
@@ -150,46 +166,63 @@ def shiny_palette(palette):
     return out
 
 
-def make_icon(front_rgba):
-    """Two 32x32 frames (the second one hop higher) in the best shared icon palette."""
-    box = front_rgba.getchannel('A').getbbox()
-    subject = front_rgba.crop(box)
-    scale = min(28 / subject.height, 30 / subject.width)
-    small = subject.resize((max(1, round(subject.width * scale)), max(1, round(subject.height * scale))), Image.LANCZOS)
-    small.putalpha(small.getchannel('A').point(lambda a: 255 if a >= 110 else 0))
-    best = None
-    for index in range(3):
-        pal = read_jasc(os.path.join(GAME, f'graphics/pokemon/icon_palettes/icon_palette_{index}.pal'))
-        error = 0
-        mapped = {}
-        for p in pixels(small):
-            if not p[3]:
-                continue
-            c = p[:3]
-            if c not in mapped:
-                i = 1 + min(range(15), key=lambda i: sum((c[k] - pal[1 + i][k]) ** 2 for k in range(3)))
-                mapped[c] = i
-            error += sum((c[k] - pal[mapped[c]][k]) ** 2 for k in range(3))
-        if best is None or error < best[0]:
-            best = (error, index, pal, mapped)
-    _error, index, pal, mapped = best
-    icon = Image.new('P', (ICON, ICON * 2), 0)
-    icon.putpalette([v for c in pal for v in c] + [0] * (768 - 48))
-    dst = icon.load()
-    src = small.load()
-    ox = (ICON - small.width) // 2
-    for frame, oy in ((0, ICON - 1 - small.height), (1, ICON - 2 - small.height)):
-        for y in range(small.height):
-            for x in range(small.width):
-                p = src[x, y]
-                if p[3]:
-                    dst[ox + x, frame * ICON + oy + y] = mapped[p[:3]]
-    return icon, index
+ICON_PALETTES = os.path.join(GAME, 'graphics/pokemon/icon_palettes')
+FIXED_ICON_PALETTES = 3  # the game's own palettes (0-2); 3-5 are made for the ninjas
+
+
+def icon_error(colors, counts, icon_pal):
+    d = ((colors[:, None, :].astype(np.int32) - np.array(icon_pal, dtype=np.int32)) ** 2).sum(-1)
+    return int((d.min(-1) * counts).sum())
+
+
+def design_icon_palettes(icons, rounds=6):
+    """Picks three extra 15-colour icon palettes that suit the ninjas and
+    assigns every ninja the best of all six palettes. `icons` maps a key to
+    (colors, counts) of its icon. Returns (palettes, assignment)."""
+    fixed = [read_jasc(os.path.join(ICON_PALETTES, f'icon_palette_{i}.pal'))[1:16] for i in range(FIXED_ICON_PALETTES)]
+    keys = sorted(icons)
+
+    def hue(k):
+        colors, counts = icons[k]
+        bright = colors.max(-1) > 80
+        c = (colors[bright] * counts[bright, None]).sum(0) / max(1, counts[bright].sum())
+        return colorsys.rgb_to_hsv(*(c / 255))[0]
+    by_hue = sorted(keys, key=hue)
+    assign = {k: FIXED_ICON_PALETTES + i * 3 // len(by_hue) for i, k in enumerate(by_hue)}
+    palettes = list(fixed)
+    for _ in range(rounds):
+        palettes = list(fixed)
+        for p in range(3):
+            members = [k for k in keys if assign[k] == FIXED_ICON_PALETTES + p] or by_hue[p::3]
+            pixels = np.concatenate([np.repeat(icons[k][0], icons[k][1], axis=0) for k in members]).astype(np.uint8)
+            q = Image.fromarray(pixels.reshape(1, -1, 3), 'RGB').quantize(colors=15, method=Image.Quantize.MEDIANCUT, kmeans=4)
+            pal = [gba_color(tuple(q.getpalette()[i * 3:i * 3 + 3])) for i in range(15)]
+            palettes.append(pal)
+        assign = {k: min(range(len(palettes)), key=lambda i: icon_error(*icons[k], palettes[i])) for k in keys}
+    return palettes, assign
+
+
+def icon_colors(ix, pal):
+    used, counts = np.unique(ix[ix >= 0], return_counts=True)
+    return np.array([pal[i] for i in used]), counts
+
+
+def make_icon(ix, pal, icon_pal):
+    """Two 32x32 frames, the second one a hop higher."""
+    mapping = nearest(np.array(pal), icon_pal)
+    mapped = np.where(ix >= 0, mapping[np.maximum(ix, 0)], -1)
+    frames = np.full((ICON * 2, ICON), -1, dtype=np.int32)
+    h, w = mapped.shape
+    left = (ICON - w) // 2
+    frames[ICON - 1 - h:ICON - 1, left:left + w] = mapped
+    frames[2 * ICON - 2 - h:2 * ICON - 2, left:left + w] = mapped
+    return to_png(frames, icon_pal)
 
 
 def target_height(ninja):
     h = ninja['height']
-    return 34 if h <= 5 else 46 if h <= 12 else 58 if h <= 20 else 62
+    # Children are a bit smaller than adults; giant summons fill the frame.
+    return 36 if h <= 5 else 46 if h <= 12 else 52 if h <= 16 else 56 if h <= 20 else 62
 
 
 def set_coords(text, slot, box):
@@ -204,21 +237,26 @@ def slot_dir(slot):
     return os.path.join(GAME, 'graphics/pokemon', slot.lower())
 
 
-def process(ninja):
+def load_views(ninja):
     sheet = Image.open(os.path.join(ART, f'{ninja["key"]}.png')).convert('RGBA')
     w, h = sheet.size
-    views = [sheet.crop((0, 0, w // 2, h)), sheet.crop((w // 2, 0, w, h))]
-    views = [remove_background(v) for v in views]
-    front, back = (add_outline(fit(v, target_height(ninja))) for v in views)
-    palette, front_p, back_p = quantize_pair(front, back)
+    front, back = (crop_subject(remove_background(sheet.crop(box)))
+                   for box in ((0, 0, w // 2, h), (w // 2, 0, w, h)))
+    return front, back, make_palette([front, back])
+
+
+def write_sprites(ninja, front, back, pal):
+    height = target_height(ninja)
+    front_ix = place(outline_edges(shrink(front, pal, height, SIZE - 2)))
+    # The player's own fighter is seen up close, so the back view is larger.
+    back_ix = place(outline_edges(shrink(back, pal, min(SIZE, round(height * 1.15)), SIZE - 2)))
     d = slot_dir(ninja['slot'])
-    front_p.save(os.path.join(d, 'front.png'))
-    back_p.save(os.path.join(d, 'back.png'))
+    to_png(front_ix, pal).save(os.path.join(d, 'front.png'))
+    to_png(back_ix, pal).save(os.path.join(d, 'back.png'))
+    palette = [(128, 160, 128)] + pal
     write_jasc(os.path.join(d, 'normal.pal'), palette)
     write_jasc(os.path.join(d, 'shiny.pal'), shiny_palette(palette))
-    icon, icon_palette = make_icon(front)
-    icon.save(os.path.join(d, 'icon.png'))
-    return front_p.getbbox(), back_p.getbbox(), icon_palette
+    return bbox(front_ix), bbox(back_ix)
 
 
 def main():
@@ -228,21 +266,36 @@ def main():
     icon_path = os.path.join(GAME, 'src/pokemon_icon.c')
     front_coords, back_coords, icons = (open(p).read() for p in (front_coords_path, back_coords_path, icon_path))
     done = []
-    for ninja in R.ROSTER:
+    icon_data = {}
+    ninjas = [n for n in R.ROSTER if os.path.exists(os.path.join(ART, f'{n["key"]}.png'))]
+    for ninja in ninjas:
+        front, back, pal = load_views(ninja)
+        # Icons are always redone for every ninja: they share the palettes.
+        ix = outline_edges(shrink(front, pal, 28, 30))
+        icon_data[ninja['key']] = (ix, pal)
         if keys and ninja['key'] not in keys:
             continue
-        if not os.path.exists(os.path.join(ART, f'{ninja["key"]}.png')):
-            continue
-        front_box, back_box, icon_palette = process(ninja)
+        front_box, back_box = write_sprites(ninja, front, back, pal)
         front_coords = set_coords(front_coords, ninja['slot'], front_box)
         back_coords = set_coords(back_coords, ninja['slot'], back_box)
-        icons = re.sub(r'(gMonIconPaletteIndices\[\] = \{.*?\[SPECIES_' + ninja['slot'] + r'\]\s*=\s*)\d',
-                       lambda m: m.group(1) + str(icon_palette), icons, count=1, flags=re.S)
         done.append(ninja['key'])
+
+    palettes, assign = design_icon_palettes({k: icon_colors(ix, pal) for k, (ix, pal) in icon_data.items()})
+    for i in range(FIXED_ICON_PALETTES, len(palettes)):
+        write_jasc(os.path.join(ICON_PALETTES, f'icon_palette_{i}.pal'), [(98, 156, 131)] + palettes[i])
+    for ninja in ninjas:
+        ix, pal = icon_data[ninja['key']]
+        index = assign[ninja['key']]
+        make_icon(ix, pal, palettes[index]).save(os.path.join(slot_dir(ninja['slot']), 'icon.png'))
+        icons = re.sub(r'(gMonIconPaletteIndices\[\] = \{.*?\[SPECIES_' + ninja['slot'] + r'\]\s*=\s*)\d',
+                       lambda m: m.group(1) + str(index), icons, count=1, flags=re.S)
+
     for path, text in ((front_coords_path, front_coords), (back_coords_path, back_coords), (icon_path, icons)):
         with open(path, 'w') as f:
             f.write(text)
     print(f'Sprites written for {len(done)} ninjas: {", ".join(done)}')
+    print(f'Icons written for {len(ninjas)} ninjas; palette use:',
+          {i: sum(1 for v in assign.values() if v == i) for i in range(len(palettes))})
 
 
 if __name__ == '__main__':

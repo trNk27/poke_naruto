@@ -5,13 +5,13 @@
       "base": "Pokémon LeafGreen (USA)",
       "baseSha1": "574fa542ffebb14be69902d1d36f1ec0a4afd71e",
       "file": "leafgreen.bps",
-      "targetSha1": "24ae279398841331001dd8de4292bb5ab0e58de8"
+      "targetSha1": "3a2384c3cd2d48f865d61f429f75ff8f856251ea"
     },
     {
       "base": "Pokémon LeafGreen (USA, Rev 1)",
       "baseSha1": "7862c67bdecbe21d1d69ce082ce34327e1c6ed5e",
       "file": "leafgreen_rev1.bps",
-      "targetSha1": "7939b81090d01c56c18eb1eb87fdfc45031da96c"
+      "targetSha1": "31b619bbc548a6a6d1d2e0a44e927ade987f99ae"
     }
   ]
 }

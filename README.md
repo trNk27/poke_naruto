@@ -80,9 +80,13 @@ the series: Katon > Futon > Raiton > Doton > Suiton > Katon. The full chart is i
 
 Everything comes from `tools/naruto/roster.py`; after editing it run
 `python3 tools/naruto/apply.py`, rebuild and regenerate the patches.
-`tools/naruto/generate_art.py` and `tools/naruto/sprites.py` create the battle
-sprites from generated artwork (until then the ninjas still look like the
-Pokémon whose slots they use).
+The battle sprites and menu icons come from artwork in `tools/naruto/art/`
+(one image per ninja: front view on the left, back view on the right), made
+with Black Forest Labs' FLUX.2 [pro] by `tools/naruto/generate_art.py` (about
+3 credits per image; needs `BFL_API_KEY`). `python3 tools/naruto/sprites.py`
+turns the artwork into 64×64 16-colour sprites, a shiny palette, the menu
+icons (with three extra icon palettes made for the ninjas) and the sprite
+positions. To redo a ninja, delete its artwork, run both scripts and rebuild.
 
 ## Hosting
 

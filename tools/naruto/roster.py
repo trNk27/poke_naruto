@@ -248,7 +248,7 @@ ROSTER = [
                 (46, 'PSYCHIC'), (52, 'OVERHEAT'), (59, 'THUNDER')],
          category='MANGEKYO', height=17, weight=600,
          dex='His MANGEKYO SHARINGAN summons black\nflames that never go out and a giant\nwarrior of purple chakra.',
-         look='black spiky hair, red mangekyo sharingan eyes, grey high-collar robe with rope belt, sword on his back, surrounded by purple flame aura'),
+         look='black spiky hair, glowing red eyes with a black pinwheel pattern, grey high-collar robe with purple rope belt, sword in a sheath on his back, purple chakra aura'),
 
     dict(key='SAKURA', slot='SQUIRTLE', name='SAKURA', types=['DOTON'],
          stats=(48, 55, 55, 43, 45, 60), abilities=['NATURAL_CURE'], gender='F', growth='MEDIUM_SLOW',
@@ -334,7 +334,7 @@ ROSTER = [
                 (23, 'WATER_PULSE'), (30, 'MIST'), (36, 'WHIRLPOOL'), (44, 'SURF')],
          category='SUMMON', height=10, weight=300,
          dex='A cheeky orange toad and son of the\nboss toad. It loves sweets and spits\nburning oil when it gets angry.',
-         look='orange cartoon toad with a blue vest, cheeky expression'),
+         look='small orange frog with smooth skin, big round eyes on top of its head, wide frog mouth, no hair, no ears, wearing a small blue vest, standing upright, cheeky expression'),
     dict(key='GAMABUNTA', slot='PIDGEOTTO', name='GAMABUNTA', types=['SUITON', 'SAGE'],
          stats=(100, 95, 90, 55, 90, 85), abilities=['SWIFT_SWIM'], gender='M', growth='MEDIUM_SLOW',
          catch=45, exp=210, color='RED',
@@ -490,7 +490,7 @@ ROSTER = [
                 (33, 'SURF'), (41, 'FIRE_BLAST'), (49, 'IRON_TAIL'), (57, 'HYPER_BEAM')],
          category='TOAD SAGE', height=19, weight=880,
          dex='One of the LEGENDARY SANNIN and\nNARUTO\'s teacher. A toad sage and\nthe author of famous novels.',
-         look='long spiky white hair, red lines running down from his eyes, horned forehead protector with oil kanji, red vest over green kimono'),
+         look='older man with long spiky white hair, red face-paint stripes under his eyes, horned forehead protector, red vest over green kimono, wooden sandals, cheerful grin'),
     dict(key='OROCHIMARU', slot='CLEFABLE', name='OROCHIMARU', types=['YIN', 'BEAST'],
          stats=(85, 90, 80, 90, 110, 95), abilities=['SHED_SKIN'], gender='M', growth='SLOW',
          catch=25, exp=220, color='WHITE',
@@ -522,7 +522,7 @@ ROSTER = [
                 (33, 'WILL_O_WISP'), (41, 'PSYCHIC'), (49, 'OVERHEAT'), (57, 'FIRE_BLAST')],
          category='AKATSUKI', height=18, weight=580,
          dex='A prodigy of the UCHIHA clan who\njoined AKATSUKI. His TSUKUYOMI traps\nenemies in an illusion of days.',
-         look='long black hair in a low ponytail, tear-trough lines under red sharingan eyes, black cloak with red clouds, scratched leaf forehead protector'),
+         look='calm young man with long black hair in a low ponytail, red eyes, black high-collared cloak with red cloud pattern, forehead protector with a scratch through the leaf symbol'),
     dict(key='KURAMA', slot='WIGGLYTUFF', name='KURAMA', types=['BIJU', 'KATON'],
          stats=(110, 130, 95, 100, 130, 95), abilities=['PRESSURE'], gender=None, growth='SLOW',
          catch=3, exp=255, color='RED',
@@ -530,7 +530,7 @@ ROSTER = [
                 (40, 'SHADOW_BALL'), (50, 'OVERHEAT'), (60, 'EARTHQUAKE'), (70, 'HYPER_BEAM')],
          category='NINE TAILS', height=500, weight=9999,
          dex='The strongest of the nine tailed\nbeasts. A single swing of its tails\ncan raise tsunamis and flatten hills.',
-         look='gigantic orange nine-tailed fox with red eyes, black markings around the eyes, nine huge swirling tails'),
+         look='gigantic wild orange fox beast standing on all four legs, no clothes, red eyes, black markings around the eyes, long rabbit-like ears, nine huge swirling fox tails'),
 ]
 
 # How every original Pokémon maps to a ninja. Wild encounters, trainer
