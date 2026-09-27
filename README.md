@@ -16,10 +16,14 @@ It is made of three parts:
 
 1. Open the website on your phone (see **Hosting** below for how to get it online).
 2. Enter your name and a room code, or tap **New** for a random one.
-3. Choose your own **Pokémon LeafGreen (USA)** ROM file (`.gba`). The original
+3. Pick a **Version**: **Naruto** (the Naruto theme, see below) or
+   **Classic** (regular Pokémon LeafGreen). Both have multiplayer, trading
+   and battling, and each has its own save, so you can switch back and forth
+   without losing progress. Invite links open in the same version.
+4. Choose your own **Pokémon LeafGreen (USA)** ROM file (`.gba`). The original
    release and Rev 1 are both supported. The website patches it on your
    device; the ROM is never uploaded. You only have to choose it once.
-4. Tap **Play**, then **Invite** to send the room link to your friends.
+5. Tap **Play**, then **Invite** to send the room link to your friends.
 
 Tips:
 
@@ -31,8 +35,8 @@ Tips:
   at normal speed, and your speed comes back afterwards.
 * On a computer: arrow keys, **X** = A, **Z** = B, **Enter** = Start,
   **Backspace** = Select, **A**/**S** = L/R, **Space** = speed.
-* Your save lives in the browser on that device. Save in the game as usual.
-  Clearing the browser's website data deletes it.
+* Your saves (one per version) live in the browser on that device. Save in
+  the game as usual. Clearing the browser's website data deletes them.
 
 ### What works
 
@@ -44,6 +48,9 @@ Tips:
 * **Trading and battling** each other, using the game's own Cable Club (see
   below).
 * Everyone plays their own game with their own save; progress isn't shared.
+* Naruto and Classic players are kept apart: with the same room code they end
+  up in two separate rooms, since their Pokémon can't be traded between the
+  two versions.
 
 Not yet: players standing in a neighbouring map across a route border.
 
@@ -151,6 +158,12 @@ This rebuilds the retail ROMs from the unmodified decompilation, builds the
 modified ROMs, and writes `web/patches/*.bps` and `manifest.json`. Commit
 them with your change.
 
+It builds two versions. **Naruto** is the current `game/`. **Classic** is
+`game/` as it was just before the Naruto theme, with the current multiplayer
+code (`netsync.h`, `netsync.c`, `link.c`) copied in so it keeps working with
+the website; `tools/classic_worktree.sh` sets that up. If a multiplayer
+change touches other files in `game/`, add them to the list in that script.
+
 ### How the multiplayer works
 
 The game has no network access, so the website talks to it through memory:
@@ -191,6 +204,10 @@ node tests/e2e.mjs /tmp/test.gba        # players see each other, names
 node tests/link-e2e.mjs /tmp/test.gba   # link up, trade, battle
 node tests/speed-e2e.mjs /tmp/test.gba  # fast-forward
 ```
+
+To test the classic version, build its test ROM with
+`tests/build-test-rom.sh /tmp/classic.gba classic` and run the tests with
+`GAME=classic`, e.g. `GAME=classic node tests/link-e2e.mjs /tmp/classic.gba`.
 
 They need Playwright (`npm i -g playwright`) and, for `link-e2e.mjs`,
 `arm-none-eabi-nm` to read the game's symbols (`tests/lib/game.mjs`).

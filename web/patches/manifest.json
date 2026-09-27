@@ -1,17 +1,41 @@
 {
-  "version": 1,
-  "patches": [
+  "version": 2,
+  "games": [
     {
-      "base": "Pokémon LeafGreen (USA)",
-      "baseSha1": "574fa542ffebb14be69902d1d36f1ec0a4afd71e",
-      "file": "leafgreen.bps",
-      "targetSha1": "649cd87e29bac586e34a24b28580d67b98588727"
+      "id": "naruto",
+      "name": "Naruto",
+      "patches": [
+        {
+          "base": "Pokémon LeafGreen (USA)",
+          "baseSha1": "574fa542ffebb14be69902d1d36f1ec0a4afd71e",
+          "file": "leafgreen.bps",
+          "targetSha1": "649cd87e29bac586e34a24b28580d67b98588727"
+        },
+        {
+          "base": "Pokémon LeafGreen (USA, Rev 1)",
+          "baseSha1": "7862c67bdecbe21d1d69ce082ce34327e1c6ed5e",
+          "file": "leafgreen_rev1.bps",
+          "targetSha1": "a39147a8d17dcb295a41ed42239477594f066321"
+        }
+      ]
     },
     {
-      "base": "Pokémon LeafGreen (USA, Rev 1)",
-      "baseSha1": "7862c67bdecbe21d1d69ce082ce34327e1c6ed5e",
-      "file": "leafgreen_rev1.bps",
-      "targetSha1": "a39147a8d17dcb295a41ed42239477594f066321"
+      "id": "classic",
+      "name": "Classic LeafGreen",
+      "patches": [
+        {
+          "base": "Pokémon LeafGreen (USA)",
+          "baseSha1": "574fa542ffebb14be69902d1d36f1ec0a4afd71e",
+          "file": "classic_leafgreen.bps",
+          "targetSha1": "cf24b369992757d62d9330560b50211d256efbe8"
+        },
+        {
+          "base": "Pokémon LeafGreen (USA, Rev 1)",
+          "baseSha1": "7862c67bdecbe21d1d69ce082ce34327e1c6ed5e",
+          "file": "classic_leafgreen_rev1.bps",
+          "targetSha1": "c96f5160d76ba462e25aa41df94076da96ffce5d"
+        }
+      ]
     }
   ]
 }

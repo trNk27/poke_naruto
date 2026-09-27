@@ -26,10 +26,10 @@ export async function startPlayers({ rom, elf, names, baseUrl = 'http://localhos
     await page.route('**/patches/manifest.json', async (route) => {
       const res = await route.fetch();
       const manifest = await res.json();
-      manifest.patches.push({ base: 'test ROM', baseSha1: 'none', file: 'none', targetSha1: romSha1 });
+      for (const game of manifest.games) game.patches.push({ base: 'test ROM', baseSha1: 'none', file: 'none', targetSha1: romSha1 });
       await route.fulfill({ response: res, json: manifest });
     });
-    await page.goto(`${baseUrl}/?room=${room}`);
+    await page.goto(`${baseUrl}/?room=${room}&game=${process.env.GAME ?? 'naruto'}`);
     await page.waitForFunction(() => window.leafgreenOnline, null, { timeout: 60000 });
     await page.fill('#player-name', name);
     await page.setInputFiles('#rom-file', { name: 'rom.gba', mimeType: 'application/octet-stream', buffer: romBytes });

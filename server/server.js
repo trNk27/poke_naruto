@@ -77,7 +77,11 @@ const httpServer = createServer((req, res) => {
   serveStatic(req, res);
 });
 
-/** @type {Map<string, Map<number, import('ws').WebSocket>>} */
+// Rooms are per game version: players of the Naruto and the classic ROM have
+// different Pokémon data, so they must never trade or battle each other.
+const GAMES = ['naruto', 'classic'];
+
+/** @type {Map<string, Map<number, import('ws').WebSocket>>} keyed by "game:code" */
 const rooms = new Map();
 let nextPlayerId = 1;
 
@@ -134,7 +138,7 @@ function sanitizePackets(p) {
 const wss = new WebSocketServer({ server: httpServer, path: '/ws', maxPayload: MAX_MESSAGE_BYTES });
 
 wss.on('connection', (ws) => {
-  let roomCode = null;
+  let roomKey = null;
   let playerId = null;
   ws.isAlive = true;
   ws.on('pong', () => { ws.isAlive = true; });
@@ -159,17 +163,19 @@ wss.on('connection', (ws) => {
         ws.close();
         return;
       }
-      const room = rooms.get(code) ?? new Map();
+      const game = GAMES.includes(msg.game) ? msg.game : 'naruto'; // older clients: Naruto only
+      const key = `${game}:${code}`;
+      const room = rooms.get(key) ?? new Map();
       if (room.size >= MAX_PLAYERS_PER_ROOM) {
         send(ws, { t: 'error', reason: 'full', message: `Room is full (max ${MAX_PLAYERS_PER_ROOM} players).` });
         ws.close();
         return;
       }
-      roomCode = code;
+      roomKey = key;
       playerId = nextPlayerId++;
       ws.playerName = sanitizeName(msg.name);
       ws.lastState = null;
-      rooms.set(code, room);
+      rooms.set(key, room);
 
       send(ws, {
         t: 'welcome',
@@ -184,7 +190,7 @@ wss.on('connection', (ws) => {
 
     // Virtual link cable traffic goes only to the linked partner.
     if (msg.t === 'link' && playerId !== null) {
-      const partner = rooms.get(roomCode)?.get(msg.to);
+      const partner = rooms.get(roomKey)?.get(msg.to);
       const packets = sanitizePackets(msg.p);
       if (!partner || !packets) return;
       send(partner, { t: 'link', from: playerId, p: packets, g: Number.isInteger(msg.g) ? msg.g : 0 });
@@ -195,16 +201,16 @@ wss.on('connection', (ws) => {
       const state = sanitizeState(msg.s);
       if (!state) return;
       ws.lastState = state;
-      broadcast(rooms.get(roomCode), { t: 'state', id: playerId, s: state }, playerId);
+      broadcast(rooms.get(roomKey), { t: 'state', id: playerId, s: state }, playerId);
     }
   });
 
   ws.on('close', () => {
     if (playerId === null) return;
-    const room = rooms.get(roomCode);
+    const room = rooms.get(roomKey);
     if (!room) return;
     room.delete(playerId);
-    if (room.size === 0) rooms.delete(roomCode);
+    if (room.size === 0) rooms.delete(roomKey);
     else broadcast(room, { t: 'leave', id: playerId });
   });
 });

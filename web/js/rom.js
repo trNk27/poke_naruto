@@ -1,6 +1,6 @@
-// Turns the player's own LeafGreen ROM into the multiplayer ROM by applying
-// the BPS patch published in patches/manifest.json. The ROM never leaves the
-// device.
+// Turns the player's own LeafGreen ROM into one of the multiplayer ROMs
+// (see GAMES) by applying the BPS patch published in patches/manifest.json.
+// The ROM never leaves the device.
 
 export async function sha1Hex(bytes) {
   const digest = await crypto.subtle.digest('SHA-1', bytes);
@@ -14,18 +14,23 @@ export async function loadManifest() {
 }
 
 /**
- * Returns the multiplayer ROM for the given file contents: either the file
- * itself if it is already patched, or the result of patching a supported
- * retail ROM. Throws with a readable message otherwise.
+ * Returns the given version of the multiplayer ROM ('naruto' or 'classic')
+ * for the given file contents: either the file itself if it is already that
+ * version, or the result of patching a supported retail ROM. Throws with a
+ * readable message otherwise.
  */
-export async function prepareRom(bytes, manifest) {
+export async function prepareRom(bytes, manifest, gameId) {
+  const game = manifest.games.find((g) => g.id === gameId);
+  if (!game) throw new Error('Unknown game version');
   const hash = await sha1Hex(bytes);
-  for (const patch of manifest.patches) {
-    if (hash === patch.targetSha1) return { rom: bytes, sha1: hash };
+  if (game.patches.some((p) => p.targetSha1 === hash)) return { rom: bytes, sha1: hash };
+  const other = manifest.games.find((g) => g.patches.some((p) => p.targetSha1 === hash));
+  if (other) {
+    throw new Error(`This ROM is already patched for ${other.name}. Please choose your original LeafGreen ROM to play ${game.name}.`);
   }
-  const patch = manifest.patches.find((p) => p.baseSha1 === hash);
+  const patch = game.patches.find((p) => p.baseSha1 === hash);
   if (!patch) {
-    const supported = manifest.patches.map((p) => p.base).join(' or ');
+    const supported = game.patches.map((p) => p.base).join(' or ');
     throw new Error(`This ROM isn't supported. Please use an unmodified ${supported} ROM (.gba).`);
   }
   const res = await fetch(`patches/${patch.file}`, { cache: 'no-cache' });

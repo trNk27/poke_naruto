@@ -30,6 +30,15 @@
       </div>
       <p class="hint">Everyone who enters the same room code plays together.</p>
 
+      <fieldset id="game-section">
+        <legend>Version</legend>
+        <div class="switch" role="radiogroup" aria-label="Game version">
+          <label><input type="radio" name="game" value="naruto" checked><span>Naruto</span></label>
+          <label><input type="radio" name="game" value="classic"><span>Classic</span></label>
+        </div>
+        <p id="game-hint" class="hint"></p>
+      </fieldset>
+
       <fieldset id="rom-section">
         <legend>Game ROM</legend>
         <p id="rom-saved" class="hint" hidden>Using the ROM saved on this device. <button type="button" id="rom-change" class="link">Change</button></p>

@@ -10,14 +10,16 @@ export class NetClient extends EventTarget {
     this.id = null;
     this.room = null;
     this.name = null;
+    this.game = null;
     this.retryDelay = 1000;
     this.closedByUser = false;
     this.reconnectTimer = null;
   }
 
-  connect(room, name) {
+  connect(room, name, game) {
     this.room = room;
     this.name = name;
+    this.game = game;
     this.closedByUser = false;
     this.open();
   }
@@ -27,7 +29,7 @@ export class NetClient extends EventTarget {
     this.ws = ws;
     ws.addEventListener('open', () => {
       this.retryDelay = 1000;
-      ws.send(JSON.stringify({ t: 'join', v: PROTOCOL_VERSION, room: this.room, name: this.name }));
+      ws.send(JSON.stringify({ t: 'join', v: PROTOCOL_VERSION, room: this.room, name: this.name, game: this.game }));
     });
     ws.addEventListener('message', (event) => {
       let msg;

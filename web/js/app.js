@@ -6,7 +6,21 @@ import { LinkGameState, MAX_REMOTE, NetSyncBridge } from './netsync.js';
 import { loadManifest, prepareRom } from './rom.js';
 import { setupSpeed } from './speed.js';
 
-const ROM_FILE_NAME = 'leafgreen-online.gba';
+// The two versions players can choose between. The emulator names the save
+// file after the ROM file, so each version keeps its own save. (Naruto keeps
+// the original file name so existing saves stay with it.)
+const GAMES = {
+  naruto: {
+    label: 'Naruto',
+    romFile: 'leafgreen-online.gba',
+    hint: 'LeafGreen with 40 ninjas in place of the Pokémon. Has its own save.',
+  },
+  classic: {
+    label: 'Classic',
+    romFile: 'leafgreen-classic.gba',
+    hint: 'Regular Pokémon LeafGreen. Has its own save.',
+  },
+};
 const SEND_INTERVAL_MS = 50;
 const KEEPALIVE_MS = 2000;
 
@@ -55,6 +69,20 @@ const params = new URLSearchParams(location.search);
 $('player-name').value = storage.get('name') ?? '';
 $('room-code').value = (params.get('room') ?? storage.get('room') ?? randomRoomCode()).toUpperCase();
 $('new-room').addEventListener('click', () => { $('room-code').value = randomRoomCode(); });
+
+const gameInputs = document.querySelectorAll('input[name="game"]');
+const selectedGame = () => [...gameInputs].find((input) => input.checked)?.value ?? 'naruto';
+function showGameHint() {
+  $('game-hint').textContent = GAMES[selectedGame()].hint;
+}
+{
+  const initial = [params.get('game'), storage.get('game')].find((id) => id in GAMES) ?? 'naruto';
+  for (const input of gameInputs) {
+    input.checked = input.value === initial;
+    input.addEventListener('change', showGameHint);
+  }
+  showGameHint();
+}
 
 let emulator;
 let bridge;
@@ -113,8 +141,10 @@ $('setup-form').addEventListener('submit', async (event) => {
     setStatus('Please enter a room code.', true);
     return;
   }
+  const gameId = selectedGame();
   storage.set('name', name);
   storage.set('room', room);
+  storage.set('game', gameId);
 
   // Browsers only allow sound after a tap, so resume audio here.
   emulator.SDL2?.audioContext?.resume?.();
@@ -132,10 +162,10 @@ $('setup-form').addEventListener('submit', async (event) => {
     }
 
     setStatus('Preparing game…');
-    const { rom } = await prepareRom(base, manifest);
+    const { rom } = await prepareRom(base, manifest, gameId);
     if (file) emulator.FS.writeFile(basePath, base);
 
-    const romPath = `${emulator.filePaths().gamePath}/${ROM_FILE_NAME}`;
+    const romPath = `${emulator.filePaths().gamePath}/${GAMES[gameId].romFile}`;
     emulator.FS.writeFile(romPath, rom);
     await emulator.FSSync();
     if (!emulator.loadGame(romPath)) throw new Error('The emulator could not load the game.');
@@ -147,7 +177,7 @@ $('setup-form').addEventListener('submit', async (event) => {
   }
 
   setStatus('');
-  startGame(name, room);
+  startGame(name, room, gameId);
 });
 
 // ---------------------------------------------------------------------------
@@ -188,7 +218,7 @@ function removeAllPeers() {
 }
 
 function updateHud() {
-  $('hud-room').textContent = net?.room ?? '';
+  $('hud-room').textContent = net ? `${net.room} · ${GAMES[net.game]?.label ?? ''}` : '';
   const names = [...peers.values()].map((p) => p.name);
   const connection = net?.connected ? '' : ' · connecting…';
   $('hud-players').textContent = names.length
@@ -196,10 +226,11 @@ function updateHud() {
     : `waiting for friends${connection}`;
 }
 
-function startGame(name, room) {
+function startGame(name, room, gameId) {
   $('setup').hidden = true;
   $('game').hidden = false;
-  history.replaceState(null, '', `?room=${encodeURIComponent(room)}`);
+  const query = `?room=${encodeURIComponent(room)}&game=${gameId}`;
+  history.replaceState(null, '', query);
 
   setupControls(emulator);
   setupSaving();
@@ -240,13 +271,13 @@ function startGame(name, room) {
   });
   const speed = setupSpeed(emulator, $('speed'), link, toast);
   onSpeedKey(speed.cycle);
-  net.connect(room, name);
+  net.connect(room, name, gameId);
   updateHud();
 
   $('share').addEventListener('click', async () => {
-    const url = `${location.origin}${location.pathname}?room=${encodeURIComponent(room)}`;
+    const url = `${location.origin}${location.pathname}${query}`;
     try {
-      if (navigator.share) await navigator.share({ title: 'LeafGreen Online', text: `Join my room ${room}`, url });
+      if (navigator.share) await navigator.share({ title: 'LeafGreen Online', text: `Join my room ${room} (${GAMES[gameId].label})`, url });
       else {
         await navigator.clipboard.writeText(url);
         toast('Invite link copied');
