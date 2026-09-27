@@ -59,6 +59,10 @@ export class NetClient extends EventTarget {
     if (this.connected) this.ws.send(JSON.stringify({ t: 'state', s: state }));
   }
 
+  sendLink(to, packets, gameState) {
+    if (this.connected) this.ws.send(JSON.stringify({ t: 'link', to, p: packets, g: gameState }));
+  }
+
   close() {
     this.closedByUser = true;
     clearTimeout(this.reconnectTimer);

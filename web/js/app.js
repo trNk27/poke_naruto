@@ -1,7 +1,8 @@
 import { captureKeyboard, setupControls } from './controls.js';
 import { startEmulator } from './emulator.js';
 import { NetClient } from './net.js';
-import { MAX_REMOTE, NetSyncBridge } from './netsync.js';
+import { LinkManager } from './link.js';
+import { LinkGameState, MAX_REMOTE, NetSyncBridge } from './netsync.js';
 import { loadManifest, prepareRom } from './rom.js';
 
 const ROM_FILE_NAME = 'leafgreen-online.gba';
@@ -94,7 +95,13 @@ async function init() {
   $('start').textContent = 'Play';
 
   // Handy for debugging from the browser console and for automated tests.
-  window.leafgreenOnline = { emulator, bridge, peers };
+  window.leafgreenOnline = {
+    emulator,
+    bridge,
+    peers,
+    get net() { return net; },
+    get link() { return link; },
+  };
 }
 
 $('setup-form').addEventListener('submit', async (event) => {
@@ -149,6 +156,7 @@ $('setup-form').addEventListener('submit', async (event) => {
 const peers = new Map();
 const slots = new Array(MAX_REMOTE).fill(null);
 let net;
+let link;
 
 function addPeer(id, name, state = null) {
   if (peers.has(id)) return;
@@ -160,7 +168,7 @@ function addPeer(id, name, state = null) {
   label.textContent = name;
   label.hidden = true;
   $('labels').append(label);
-  peers.set(id, { name, state, slot, dirty: true, label });
+  peers.set(id, { name, state, slot, dirty: true, label, linkState: state?.link ?? 0 });
   updateHud();
 }
 
@@ -216,6 +224,7 @@ function startGame(name, room) {
     const peer = peers.get(e.detail.id);
     if (!peer) return;
     peer.state = e.detail.s;
+    peer.linkState = e.detail.s.link;
     peer.dirty = true;
   });
   net.addEventListener('disconnected', () => {
@@ -223,6 +232,11 @@ function startGame(name, room) {
     updateHud();
   });
   net.addEventListener('error', (e) => toast(e.detail.message));
+  link = new LinkManager(bridge, net, peers);
+  link.addEventListener('paired', (e) => toast(`Connecting to ${e.detail.name}…`));
+  link.addEventListener('statechange', (e) => {
+    if (e.detail === LinkGameState.ESTABLISHED) toast('Link established');
+  });
   net.connect(room, name);
   updateHud();
 
@@ -288,9 +302,12 @@ function syncTick() {
     peer.dirty = false;
   }
 
+  link.tick();
+
   const local = bridge.readLocal();
   if (!local.active) return;
-  const key = `${local.mapGroup}.${local.mapNum}.${local.x}.${local.y}.${local.facing}.${local.elevation}.${local.avatarFlags}`;
+  local.link = bridge.linkGameState;
+  const key = `${local.mapGroup}.${local.mapNum}.${local.x}.${local.y}.${local.facing}.${local.elevation}.${local.avatarFlags}.${local.link}`;
   if ((key !== lastSentKey && now - lastSentAt >= SEND_INTERVAL_MS) || now - lastSentAt >= KEEPALIVE_MS) {
     net.sendState(local);
     lastSentKey = key;

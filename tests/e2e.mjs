@@ -90,10 +90,10 @@ try {
   let bobInAlice = await remote(alice, 0);
   check(bobInAlice.active === 1 && bobInAlice.x === bStart.x && bobInAlice.y === bStart.y, "Bob's position is written into Alice's game");
 
-  // Bob walks left using the keyboard; Alice's copy of Bob should follow.
-  await bob.keyboard.down('ArrowLeft');
+  // Bob walks down using the keyboard; Alice's copy of Bob should follow.
+  await bob.keyboard.down('ArrowDown');
   await bob.waitForTimeout(600);
-  await bob.keyboard.up('ArrowLeft');
+  await bob.keyboard.up('ArrowDown');
   await bob.waitForTimeout(1500);
   const bMoved = await local(bob);
   bobInAlice = await remote(alice, 0);

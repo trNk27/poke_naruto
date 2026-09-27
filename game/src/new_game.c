@@ -29,6 +29,9 @@
 #include "berry_powder.h"
 #include "pokemon_jump.h"
 #include "event_scripts.h"
+#include "script_pokemon_util.h"
+#include "constants/items.h"
+#include "constants/species.h"
 
 // this file's functions
 static void ResetMiniGamesResults(void);
@@ -149,6 +152,16 @@ void NewGameInitData(void)
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
+#ifdef NETSYNC_QUICK_START
+    // Test builds: start in front of the Cable Club with two Pokémon.
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    VarSet(VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 2);
+    ScriptGiveMon(SPECIES_BULBASAUR, 5, ITEM_NONE, 0, 0, 0);
+    ScriptGiveMon(SPECIES_PIDGEY, 5, ITEM_NONE, 0, 0, 0);
+    SetWarpDestination(MAP_GROUP(MAP_VIRIDIAN_CITY_POKEMON_CENTER_2F), MAP_NUM(MAP_VIRIDIAN_CITY_POKEMON_CENTER_2F), -1, 10, 3);
+    WarpIntoMap();
+#endif
 }
 
 static void ResetMiniGamesResults(void)

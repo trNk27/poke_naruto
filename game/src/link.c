@@ -25,6 +25,10 @@
 #include "constants/battle.h"
 #include "constants/songs.h"
 #include "sloopsvc.h"
+#include "netsync.h"
+
+// Replace the serial cable hardware with NetLink (see LinkMain1).
+#define NETLINK 1
 
 extern u16 gHeldKeyCodeToSend;
 
@@ -966,6 +970,9 @@ u8 GetMultiplayerId(void)
 {
     if (gWirelessCommType == 1)
         return Rfu_GetMultiplayerId();
+#if NETLINK
+    return gLink.localId;
+#endif
 
     return SIO_MULTI_CNT->id;
 }
@@ -1581,6 +1588,9 @@ static void CB2_PrintErrorMessage(void)
 
 bool8 GetSioMultiSI(void)
 {
+#if NETLINK
+    return FALSE;
+#endif
     return (REG_SIOCNT & SIO_MULTI_SI) != 0;
 }
 
@@ -1765,11 +1775,191 @@ void ResetSerial(void)
     DisableSerial();
 }
 
+// ---------------------------------------------------------------------------
+// NetLink: a virtual link cable over the internet (see include/netsync.h).
+//
+// Browsers can't connect GBA serial ports, so the cable hardware below is
+// replaced: LinkMain1 exchanges commands through gNetSync.link, whose rings
+// the host relays to the paired player. Everything above LinkMain1 (block
+// transfers, the Cable Club, trading, link battles) runs unchanged.
+//
+// As with the real cable, the master drives the transfers. Each tick pairs
+// the master's next queued command with the slave's next one into an entry
+// that both games receive, so both process identical entry sequences.
+
+// How long a vanished partner is tolerated before reporting a link error.
+// Leaves time to finish processing a normal "close link" handshake.
+#define NETLINK_PARTNER_LOST_GRACE_FRAMES 60
+
+static EWRAM_DATA u8 sNetLinkPartnerLostFrames = 0;
+
+static void NetLink_PushRecvEntry(const struct NetLinkPacket *entry)
+{
+    u8 index = gLink.recvQueue.pos + gLink.recvQueue.count;
+    u8 i, j;
+
+    if (index >= QUEUE_CAPACITY)
+        index -= QUEUE_CAPACITY;
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < CMD_LENGTH; j++)
+            gLink.recvQueue.data[i][j][index] = entry->cmds[i][j];
+    }
+    gLink.recvQueue.count++;
+}
+
+// Master: form the next transfer entry from our queued command and the
+// slave's, deliver it locally and send it to the slave.
+static void NetLink_MasterTick(void)
+{
+    struct NetLinkRing *outbox = &gNetSync.link.outbox;
+    struct NetLinkRing *inbox = &gNetSync.link.inbox;
+    struct NetLinkPacket *entry;
+    const struct NetLinkPacket *fromSlave = NULL;
+    bool8 hasOwn = gLink.sendQueue.count != 0;
+    u8 i;
+
+    if (!NetLink_RingEmpty(inbox))
+        fromSlave = &inbox->packets[inbox->tail % NETLINK_RING_SIZE];
+    if ((!hasOwn && fromSlave == NULL)
+     || NetLink_RingFull(outbox)
+     || gLink.recvQueue.count >= QUEUE_CAPACITY)
+        return;
+
+    entry = &outbox->packets[outbox->head % NETLINK_RING_SIZE];
+    for (i = 0; i < CMD_LENGTH; i++)
+    {
+        entry->cmds[0][i] = hasOwn ? gLink.sendQueue.data[i][gLink.sendQueue.pos] : LINKCMD_NONE;
+        entry->cmds[1][i] = fromSlave != NULL ? fromSlave->cmds[0][i] : LINKCMD_NONE;
+    }
+    if (hasOwn)
+    {
+        gLink.sendQueue.count--;
+        if (++gLink.sendQueue.pos >= QUEUE_CAPACITY)
+            gLink.sendQueue.pos = 0;
+    }
+    if (fromSlave != NULL)
+        inbox->tail++;
+
+    NetLink_PushRecvEntry(entry);
+    outbox->head++;
+}
+
+// Slave: send our queued commands to the master and take the entries it sent.
+static void NetLink_SlaveExchange(void)
+{
+    struct NetLinkRing *outbox = &gNetSync.link.outbox;
+    struct NetLinkRing *inbox = &gNetSync.link.inbox;
+    struct NetLinkPacket *packet;
+    u8 i;
+
+    while (gLink.sendQueue.count != 0 && !NetLink_RingFull(outbox))
+    {
+        packet = &outbox->packets[outbox->head % NETLINK_RING_SIZE];
+        for (i = 0; i < CMD_LENGTH; i++)
+        {
+            packet->cmds[0][i] = gLink.sendQueue.data[i][gLink.sendQueue.pos];
+            packet->cmds[1][i] = LINKCMD_NONE;
+        }
+        gLink.sendQueue.count--;
+        if (++gLink.sendQueue.pos >= QUEUE_CAPACITY)
+            gLink.sendQueue.pos = 0;
+        outbox->head++;
+    }
+
+    while (!NetLink_RingEmpty(inbox) && gLink.recvQueue.count < QUEUE_CAPACITY)
+    {
+        NetLink_PushRecvEntry(&inbox->packets[inbox->tail % NETLINK_RING_SIZE]);
+        inbox->tail++;
+    }
+}
+
+static void NetLink_CheckPartnerLost(void)
+{
+    if (gNetSync.link.hostState == NETLINK_HOST_PARTNER_LOST
+     && gLink.recvQueue.count == 0
+     && NetLink_RingEmpty(&gNetSync.link.inbox))
+    {
+        if (++sNetLinkPartnerLostFrames >= NETLINK_PARTNER_LOST_GRACE_FRAMES)
+            gLink.hardwareError = TRUE;
+    }
+    else
+    {
+        sNetLinkPartnerLostFrames = 0;
+    }
+}
+
+static void NetLink_UpdateLinkState(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENGTH])
+{
+    struct NetLink *net = &gNetSync.link;
+    u8 hostState = net->hostState;
+
+    switch (gLink.state)
+    {
+    case LINK_STATE_START0:
+        DisableSerial();
+        gLink.state = LINK_STATE_START1;
+        break;
+    case LINK_STATE_START1:
+        if (*shouldAdvanceLinkState == 1)
+        {
+            EnableSerial();
+            NetLink_DrainInbox();
+            sNetLinkPartnerLostFrames = 0;
+            gLink.state = LINK_STATE_HANDSHAKE;
+        }
+        break;
+    case LINK_STATE_HANDSHAKE:
+        if (*shouldAdvanceLinkState == 2)
+        {
+            gLink.state = LINK_STATE_START0;
+            break;
+        }
+        if (hostState == NETLINK_HOST_PARTNER_SEARCHING || hostState == NETLINK_HOST_PARTNER_ESTABLISHED)
+        {
+            gLink.playerCount = 2;
+            gLink.isMaster = net->isMaster ? LINK_MASTER : LINK_SLAVE;
+            gLink.localId = net->isMaster ? 0 : 1;
+            // The master confirms (A button in the Cable Club); the slave
+            // follows once the master's connection is up.
+            if (gLink.isMaster ? *shouldAdvanceLinkState == 1 : hostState == NETLINK_HOST_PARTNER_ESTABLISHED)
+                gLink.state = LINK_STATE_CONN_ESTABLISHED;
+        }
+        else
+        {
+            gLink.playerCount = 0;
+            gLink.isMaster = LINK_SLAVE;
+        }
+        break;
+    case LINK_STATE_CONN_ESTABLISHED:
+        EnqueueSendCmd(sendCmd);
+        if (gLink.isMaster)
+            NetLink_MasterTick();
+        else
+            NetLink_SlaveExchange();
+        NetLink_CheckPartnerLost();
+        DequeueRecvCmds(recvCmds);
+        // Normally updated by the serial interrupt.
+        gLastRecvQueueCount = gLink.recvQueue.count;
+        break;
+    }
+
+    if (!sLinkOpen || gLink.state < LINK_STATE_HANDSHAKE)
+        net->gameState = NETLINK_GAME_CLOSED;
+    else if (gLink.state == LINK_STATE_CONN_ESTABLISHED)
+        net->gameState = NETLINK_GAME_ESTABLISHED;
+    else
+        net->gameState = NETLINK_GAME_SEARCHING;
+}
+
 u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENGTH])
 {
     u32 retVal;
     u32 retVal2;
 
+#if NETLINK
+    NetLink_UpdateLinkState(shouldAdvanceLinkState, sendCmd, recvCmds);
+#else
     switch (gLink.state)
     {
     case LINK_STATE_START0:
@@ -1808,6 +1998,7 @@ u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENG
         DequeueRecvCmds(recvCmds);
         break;
     }
+#endif
     *shouldAdvanceLinkState = 0;
     retVal = gLink.localId;
     retVal |= (gLink.playerCount << LINK_STAT_PLAYER_COUNT_SHIFT);
@@ -1948,6 +2139,9 @@ static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH])
 
 void LinkVSync(void)
 {
+#if NETLINK
+    return;
+#endif
     if (gLink.isMaster)
     {
         switch (gLink.state)
@@ -1989,12 +2183,18 @@ void LinkVSync(void)
 
 void Timer3Intr(void)
 {
+#if NETLINK
+    return;
+#endif
     StopTimer();
     StartTransfer();
 }
 
 void SerialCB(void)
 {
+#if NETLINK
+    return;
+#endif
     gLink.localId = SIO_MULTI_CNT->id;
     switch (gLink.state)
     {

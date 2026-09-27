@@ -13,7 +13,7 @@ import { WebSocketServer } from 'ws';
 const PORT = Number(process.env.PORT) || 8080;
 const WEB_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../web');
 const MAX_PLAYERS_PER_ROOM = 5; // the ROM shows up to 4 remote players
-const MAX_MESSAGE_BYTES = 1024;
+const MAX_MESSAGE_BYTES = 16 * 1024;
 const PING_INTERVAL_MS = 15000;
 const PROTOCOL_VERSION = 1;
 
@@ -114,8 +114,21 @@ function sanitizeState(s) {
     elevation: int(s.elevation, 0, 15),
     avatarFlags: int(s.avatarFlags, 0, 255),
     gender: int(s.gender, 0, 1),
+    link: int(s.link, 0, 2),
     name: Array.isArray(s.name) ? s.name.slice(0, 8).map((b) => int(b, 0, 255)) : [],
   };
+}
+
+const MAX_LINK_PACKETS = 64;
+const LINK_PACKET_WORDS = 16;
+
+function sanitizePackets(p) {
+  if (!Array.isArray(p) || p.length === 0 || p.length > MAX_LINK_PACKETS) return null;
+  for (const packet of p) {
+    if (!Array.isArray(packet) || packet.length !== LINK_PACKET_WORDS) return null;
+    if (!packet.every((w) => Number.isInteger(w) && w >= 0 && w <= 0xffff)) return null;
+  }
+  return p;
 }
 
 const wss = new WebSocketServer({ server: httpServer, path: '/ws', maxPayload: MAX_MESSAGE_BYTES });
@@ -166,6 +179,15 @@ wss.on('connection', (ws) => {
       });
       room.set(playerId, ws);
       broadcast(room, { t: 'join', id: playerId, name: ws.playerName }, playerId);
+      return;
+    }
+
+    // Virtual link cable traffic goes only to the linked partner.
+    if (msg.t === 'link' && playerId !== null) {
+      const partner = rooms.get(roomCode)?.get(msg.to);
+      const packets = sanitizePackets(msg.p);
+      if (!partner || !packets) return;
+      send(partner, { t: 'link', from: playerId, p: packets, g: Number.isInteger(msg.g) ? msg.g : 0 });
       return;
     }
 

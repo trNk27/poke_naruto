@@ -37,10 +37,29 @@ Tips:
   surfing show the matching sprite (tested less than walking so far).
 * Friends appear when they're on your screen and disappear when they leave the
   map or the room.
+* Names are shown above other players.
+* **Trading and battling** each other, using the game's own Cable Club (see
+  below).
 * Everyone plays their own game with their own save; progress isn't shared.
 
-Not yet: online trading and battling, showing names above players, and players
-standing in a neighbouring map across a route border.
+Not yet: players standing in a neighbouring map across a route border.
+
+### Trading and battling
+
+Works exactly like with a link cable, just over the internet:
+
+1. Both players go upstairs in any Pokémon Center (it doesn't have to be the
+   same one) and talk to the **receptionist on the right**. You need the
+   Pokédex from Professor Oak first.
+2. Both choose the same service: **Trade Center** or **Colosseum** (battle),
+   and save when asked.
+3. The player who joined the room first confirms with **A** when the game says
+   everyone is ready; the other player just waits.
+4. Walk to the chairs (trade) or the marked spots (battle). When you're done,
+   leave through the door; the link closes.
+
+With more than two players waiting at the receptionist at the same time,
+players are paired in the order they joined the room.
 
 ## Hosting
 
@@ -104,22 +123,34 @@ The game has no network access, so the website talks to it through memory:
 4. The game shows each remote player on the current map as a character that
    walks to the latest position.
 
+Trading and battling reuse the game's link cable code. The GBA serial
+hardware is replaced by a "virtual cable" (the NetLink section of
+`game/src/link.c`): the game puts its link commands into small queues inside
+`gNetSync`, and `web/js/link.js` pairs two players and relays the queues
+between them. Like the real cable, one game (the one whose player joined the
+room first) drives each transfer, so both games process exactly the same
+sequence of commands. Everything above the hardware layer (Cable Club, trade
+menu, link battles) runs unchanged.
+
 The memory layout is defined in `game/include/netsync.h` and mirrored in
 `web/js/netsync.js`. Keep them in sync and bump `NETSYNC_VERSION` when it
 changes.
 
 ### Testing
 
-`tests/e2e.mjs` starts two headless browsers in the same room and checks that
-each game shows the other player. It uses a test ROM that skips Professor
-Oak's introduction:
+The tests start two headless browsers in the same room and play through the
+game. They use a test ROM that skips Professor Oak's introduction and starts
+in front of a Cable Club receptionist with two Pokémon:
 
 ```sh
-make -C game leafgreen NETSYNC_QUICK_START=1
+tests/build-test-rom.sh /tmp/test.gba   # also writes /tmp/test.elf (symbols)
 (cd server && npm start) &
-node tests/e2e.mjs game/pokeleafgreen.gba
-make -C game leafgreen   # rebuild the normal ROM afterwards (touch src/oak_speech.c first)
+node tests/e2e.mjs /tmp/test.gba        # players see each other, names
+node tests/link-e2e.mjs /tmp/test.gba   # link up, trade, battle
 ```
+
+They need Playwright (`npm i -g playwright`) and, for `link-e2e.mjs`,
+`arm-none-eabi-nm` to read the game's symbols (`tests/lib/game.mjs`).
 
 ## Legal
 

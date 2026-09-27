@@ -1,7 +1,7 @@
 // Bridge between the web client and the gNetSync block inside the running
 // game. Mirrors `struct NetSync` in game/include/netsync.h; keep both in sync.
 
-export const NETSYNC_VERSION = 2;
+export const NETSYNC_VERSION = 3;
 export const MAX_REMOTE = 4;
 const MAGIC = 'NARUTO-NETSYNC01';
 const MAGIC_BYTES = new TextEncoder().encode(MAGIC);
@@ -15,6 +15,22 @@ const OFFSET_REMOTE = 0x30;
 const OFFSET_SCREEN = 0x80;
 const PLAYER_SIZE = 0x14;
 const SCREEN_POS_SIZE = 0x08;
+
+// struct NetLink (virtual link cable) at 0xA0.
+const OFFSET_LINK = 0xa0;
+const L_GAME_STATE = 0x00;
+const L_HOST_STATE = 0x01;
+const L_IS_MASTER = 0x02;
+const L_OUTBOX = 0x04;
+const L_INBOX = 0x108;
+const RING_HEAD = 0x00;
+const RING_TAIL = 0x01;
+const RING_PACKETS = 0x04;
+export const RING_SIZE = 8;
+export const PACKET_WORDS = 16; // u16 cmds[2][8]
+
+export const LinkGameState = { CLOSED: 0, SEARCHING: 1, ESTABLISHED: 2 };
+export const LinkHostState = { NO_PARTNER: 0, PARTNER_SEARCHING: 1, PARTNER_ESTABLISHED: 2, PARTNER_LOST: 3 };
 const NAME_LENGTH = 8;
 
 // Field offsets within struct NetSyncPlayer.
@@ -144,6 +160,56 @@ export class NetSyncBridge {
 
   readRemote(slot) {
     return this.readPlayer(this.base + OFFSET_REMOTE + slot * PLAYER_SIZE);
+  }
+
+  get linkGameState() {
+    return this.bytes[this.base + OFFSET_LINK + L_GAME_STATE];
+  }
+
+  /** Tells the game about its link partner (see NETLINK_HOST_* in netsync.h). */
+  setLinkHostState(state, isMaster) {
+    const bytes = this.bytes;
+    bytes[this.base + OFFSET_LINK + L_IS_MASTER] = isMaster ? 1 : 0;
+    bytes[this.base + OFFSET_LINK + L_HOST_STATE] = state;
+  }
+
+  /** Takes every packet the game queued for its link partner. */
+  takeOutbox() {
+    const ring = this.base + OFFSET_LINK + L_OUTBOX;
+    const bytes = this.bytes;
+    const view = this.view;
+    const packets = [];
+    let tail = bytes[ring + RING_TAIL];
+    const head = bytes[ring + RING_HEAD];
+    while (tail !== head) {
+      const offset = ring + RING_PACKETS + (tail % RING_SIZE) * PACKET_WORDS * 2;
+      const packet = new Array(PACKET_WORDS);
+      for (let i = 0; i < PACKET_WORDS; i++) packet[i] = view.getUint16(offset + i * 2, true);
+      packets.push(packet);
+      tail = (tail + 1) & 0xff;
+    }
+    bytes[ring + RING_TAIL] = tail;
+    return packets;
+  }
+
+  /** Queues packets from the link partner for the game; returns how many fit. */
+  fillInbox(packets) {
+    const ring = this.base + OFFSET_LINK + L_INBOX;
+    const bytes = this.bytes;
+    const view = this.view;
+    let head = bytes[ring + RING_HEAD];
+    const tail = bytes[ring + RING_TAIL];
+    let count = 0;
+    for (const packet of packets) {
+      if (((head - tail) & 0xff) >= RING_SIZE) break;
+      const offset = ring + RING_PACKETS + (head % RING_SIZE) * PACKET_WORDS * 2;
+      for (let i = 0; i < PACKET_WORDS; i++) view.setUint16(offset + i * 2, packet[i], true);
+      head = (head + 1) & 0xff;
+      count++;
+    }
+    // Publish the packets only after their contents are written.
+    bytes[ring + RING_HEAD] = head;
+    return count;
   }
 
   /** Where remote player `slot` is drawn, in GBA screen pixels. */

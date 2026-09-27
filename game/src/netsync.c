@@ -25,6 +25,11 @@
 
 EWRAM_DATA struct NetSync gNetSync = {0};
 
+// Marks IWRAM for debugging tools, which locate it like gNetSync (the text is
+// "NARUTO-IWRAM-DBG") and then read variables by their addresses in the map
+// file. Not used by the web client.
+u8 gNetSyncIwramMarker[NETSYNC_MAGIC_LENGTH];
+
 // "NARUTO-NETSYNC01" XORed with MAGIC_XOR. The real string is only ever
 // assembled in RAM so that scanning emulator memory finds gNetSync and not
 // a copy of this table in ROM.
@@ -35,14 +40,41 @@ static const u8 sMagicXored[NETSYNC_MAGIC_LENGTH] = {
     'N' ^ MAGIC_XOR, 'C' ^ MAGIC_XOR, '0' ^ MAGIC_XOR, '1' ^ MAGIC_XOR,
 };
 
+static const u8 sIwramMarkerXored[NETSYNC_MAGIC_LENGTH] = {
+    'N' ^ MAGIC_XOR, 'A' ^ MAGIC_XOR, 'R' ^ MAGIC_XOR, 'U' ^ MAGIC_XOR,
+    'T' ^ MAGIC_XOR, 'O' ^ MAGIC_XOR, '-' ^ MAGIC_XOR, 'I' ^ MAGIC_XOR,
+    'W' ^ MAGIC_XOR, 'R' ^ MAGIC_XOR, 'A' ^ MAGIC_XOR, 'M' ^ MAGIC_XOR,
+    '-' ^ MAGIC_XOR, 'D' ^ MAGIC_XOR, 'B' ^ MAGIC_XOR, 'G' ^ MAGIC_XOR,
+};
+
 void NetSync_Init(void)
 {
     u32 i;
 
     CpuFill32(0, &gNetSync, sizeof(gNetSync));
     for (i = 0; i < NETSYNC_MAGIC_LENGTH; i++)
+    {
         gNetSync.magic[i] = sMagicXored[i] ^ MAGIC_XOR;
+        gNetSyncIwramMarker[i] = sIwramMarkerXored[i] ^ MAGIC_XOR;
+    }
     gNetSync.version = NETSYNC_VERSION;
+}
+
+bool8 NetLink_RingFull(const struct NetLinkRing *ring)
+{
+    return (u8)(ring->head - ring->tail) >= NETLINK_RING_SIZE;
+}
+
+bool8 NetLink_RingEmpty(const struct NetLinkRing *ring)
+{
+    return ring->head == ring->tail;
+}
+
+// Discards packets left over from a previous connection. (The outbox is
+// drained by the host, which drops it whenever the link isn't established.)
+void NetLink_DrainInbox(void)
+{
+    gNetSync.link.inbox.tail = gNetSync.link.inbox.head;
 }
 
 void NetSync_FrameTick(void)
