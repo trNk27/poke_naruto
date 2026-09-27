@@ -65,6 +65,11 @@ export class NetClient extends EventTarget {
     if (this.connected) this.ws.send(JSON.stringify({ t: 'link', to, p: packets, g: gameState }));
   }
 
+  /** Relays a conversation step (see talk.js) to one other player. */
+  sendTalk(to, op, kind = 0) {
+    if (this.connected) this.ws.send(JSON.stringify({ t: 'talk', to, op, kind }));
+  }
+
   close() {
     this.closedByUser = true;
     clearTimeout(this.reconnectTimer);

@@ -1,10 +1,11 @@
 // End-to-end test of the virtual link cable: two browsers link up at the
 // Cable Club, trade Pokémon in the Trade Center, then battle in the
-// Colosseum.
+// Colosseum. The talk-* variants link up by talking to each other instead
+// of the receptionist.
 //
 //   tests/build-test-rom.sh /tmp/test.gba        # also writes /tmp/test.elf
 //   (cd server && npm start) &
-//   node tests/link-e2e.mjs /tmp/test.gba [trade|battle|all] [screenshot-dir]
+//   node tests/link-e2e.mjs /tmp/test.gba [trade|battle|all|talk-trade|talk-battle|talk] [screenshot-dir]
 //
 // Needs Playwright (npm i -g playwright), a Chromium it can launch, and
 // arm-none-eabi-nm (to read the game's symbols).
@@ -15,7 +16,7 @@ const rom = process.argv[2];
 const which = process.argv[3] ?? 'all';
 const shotDir = process.argv[4] ?? 'e2e-screenshots';
 if (!rom) {
-  console.error('usage: node tests/link-e2e.mjs ROM [trade|battle|all] [screenshot-dir]');
+  console.error('usage: node tests/link-e2e.mjs ROM [trade|battle|all|talk-trade|talk-battle|talk] [screenshot-dir]');
   process.exit(2);
 }
 const elf = rom.replace(/\.gba$/, '.elf');
@@ -103,6 +104,106 @@ async function linkUp(game, choice) {
   await sleep(3000);
 }
 
+function talkState(player) {
+  return player.page.evaluate(() => window.leafgreenOnline.bridge.readTalk().gameState);
+}
+const TALK_IDLE = 0;
+const TALK_INVITING = 1;
+const TALK_PROMPTING = 2;
+const TALK_DECLINED = 4;
+
+// Where the players stand when they talk: Bob at (7,5), Alice east of him.
+const TALK_SPOTS = [[8, 5], [7, 5]];
+
+// Alice walks up to Bob, talks to him and picks the Trade Center (choice 0)
+// or the Colosseum (choice 1), then saves: her game invites Bob.
+async function invite(game, choice) {
+  const [alice, bob] = game.players;
+  await Promise.all(game.players.map(async (p, i) => {
+    await p.reachOverworld();
+    await sleep(1000);
+    await p.pressUntil('B', 'messages to close', async () => {
+      const tasks = await p.memory.tasks();
+      return !tasks.includes('Task_DrawFieldMessageBox') && !tasks.includes('ScriptMovement_MoveObjects');
+    });
+    // Out of the way of each other: Bob first, then Alice.
+    if (i === 1) await p.walkTo(...TALK_SPOTS[1], { verticalFirst: true });
+  }));
+  await alice.walkTo(TALK_SPOTS[0][0], 4);
+  await alice.walkTo(...TALK_SPOTS[0]);
+  await sleep(1500);
+  await alice.press('Left'); // face Bob
+  await sleep(400);
+  await alice.pressUntil('A', 'the talk menu', () => alice.hasTask('Task_MultichoiceMenu_HandleInput'));
+  await sleep(300);
+  if (choice === 1) {
+    await alice.press('Down');
+    await sleep(300);
+  }
+  // Pick the service and save the game.
+  await alice.pressUntil('A', 'the invitation', async () => (await talkState(alice)) === TALK_INVITING, { timeout: 60000, gap: 800 });
+}
+
+async function closeMessages(player) {
+  await player.pressUntil('B', 'messages to close', async () => {
+    const tasks = await player.memory.tasks();
+    return (await talkState(player)) !== TALK_PROMPTING && !tasks.includes('Task_DrawFieldMessageBox')
+      && !tasks.includes('Task_YesNoMenu_HandleInput') && (await player.memory.read('sGlobalScriptContextStatus', 1))[0] === 2;
+  }, { timeout: 30000, gap: 700 });
+}
+
+// Bob says no; then Alice invites again and cancels while waiting.
+async function testTalkDeclineAndCancel(game) {
+  const [alice, bob] = game.players;
+  await invite(game, 0);
+  await until('Bob to be asked', async () => (await talkState(bob)) === TALK_PROMPTING, { timeout: 30000 });
+  await sleep(1500);
+  await bob.pressUntil('B', 'Bob to say no', async () => (await talkState(bob)) === TALK_DECLINED, { timeout: 20000, gap: 700 });
+  await until('Alice to hear the answer', async () => (await talkState(alice)) === TALK_IDLE, { timeout: 20000 });
+  await sleep(1500);
+  await game.screenshots('talk-declined');
+  check(true, 'Alice is told Bob said no');
+  await closeMessages(alice);
+
+  await invite(game, 1);
+  await until('Bob to be asked', async () => (await talkState(bob)) === TALK_PROMPTING, { timeout: 30000 });
+  await alice.pressUntil('B', 'Alice to stop waiting', async () => (await talkState(alice)) === TALK_IDLE, { timeout: 20000, gap: 700 });
+  await sleep(1500);
+  await bob.press('A'); // YES, too late
+  await sleep(2500);
+  await game.screenshots('talk-canceled');
+  check((await linkState(bob)) === 0, 'Bob does not link up after Alice canceled');
+  await Promise.all([closeMessages(alice), closeMessages(bob)]);
+  check(true, 'Both players can move on');
+}
+
+// Alice invites Bob and Bob accepts. Nobody has to confirm the link.
+async function talkUp(game, choice) {
+  const [alice, bob] = game.players;
+  await invite(game, choice);
+  check(true, 'Alice invited Bob by talking to him');
+  await until('Bob to be asked', async () => (await talkState(bob)) === TALK_PROMPTING, { timeout: 30000 });
+  check(true, 'Bob is asked');
+  await sleep(1500);
+  await game.screenshots(choice ? 'talk-invite-battle' : 'talk-invite-trade');
+  // YES, then save the game.
+  await bob.pressUntil('A', 'the link opening', async () => (await linkState(bob)) >= 1, { timeout: 60000, gap: 800 });
+  await until('the link to connect', async () => (await linkState(alice)) === 2 && (await linkState(bob)) === 2, { timeout: 30000 });
+  check(true, 'Link established between both players');
+  await until('both players to enter the room', async () =>
+    (await alice.callback2()) === 'CB2_Overworld' && (await bob.callback2()) === 'CB2_Overworld'
+    && (await alice.memory.linkPlayerPosition()) && (await bob.memory.linkPlayerPosition()), { timeout: 60000 });
+  await sleep(3000);
+}
+
+async function checkBackWhereTheyTalked(game) {
+  for (const [i, p] of game.players.entries()) {
+    const pos = await p.memory.playerPosition();
+    check(pos.x === TALK_SPOTS[i][0] && pos.y === TALK_SPOTS[i][1], `${p.name} is back where they talked (${pos.x},${pos.y})`);
+    await p.walk(['Up']); // can walk again: no leftover script
+  }
+}
+
 // Players enter Cable Club rooms on the door tiles; step inside, then walk.
 async function walkInRoomTo(player, x, y) {
   const pos = await until(`${player.name} to appear in the room`, () => player.memory.linkPlayerPosition());
@@ -132,9 +233,9 @@ async function leaveLinkRoom(game, doorX) {
   }
 }
 
-async function testTrade(game) {
+async function testTrade(game, byTalking = false) {
   const [alice, bob] = game.players;
-  await linkUp(game, 0);
+  await (byTalking ? talkUp : linkUp)(game, 0);
   const before = [await partySpecies(alice), await partySpecies(bob)];
   console.log('Parties before:', JSON.stringify(before));
   // Sit down on the chairs at (4,5) and (7,5).
@@ -179,11 +280,12 @@ async function testTrade(game) {
     (await alice.callback2()) === 'CB2_Overworld' && (await bob.callback2()) === 'CB2_Overworld', { timeout: 60000 });
   await sleep(3000);
   await leaveLinkRoom(game, [5, 6]);
+  if (byTalking) await checkBackWhereTheyTalked(game);
 }
 
-async function testBattle(game) {
+async function testBattle(game, byTalking = false) {
   const [alice, bob] = game.players;
-  await linkUp(game, 1);
+  await (byTalking ? talkUp : linkUp)(game, 1);
   // Step onto the battle spots at (3,5) and (10,5).
   await Promise.all([walkInRoomTo(alice, 3, 5), walkInRoomTo(bob, 10, 5)]);
   await until('the battle to start', async () =>
@@ -221,12 +323,16 @@ async function testBattle(game) {
   await sleep(3000);
   await game.screenshots('after-battle');
   await leaveLinkRoom(game, [6, 7]);
+  if (byTalking) await checkBackWhereTheyTalked(game);
 }
 
 const game = await startPlayers({ rom, elf, names: ['Alice', 'Bob'], shotDir });
 try {
   if (which === 'trade' || which === 'all') await testTrade(game);
   if (which === 'battle' || which === 'all') await testBattle(game);
+  if (which === 'talk') await testTalkDeclineAndCancel(game);
+  if (which === 'talk-trade' || which === 'talk') await testTrade(game, true);
+  if (which === 'talk-battle' || which === 'talk') await testBattle(game, true);
 } catch (err) {
   console.log('FAIL', err.message);
   await game.screenshots('failure').catch(() => {});

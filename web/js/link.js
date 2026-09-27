@@ -4,6 +4,8 @@
 // Two players are linked when both open the link at the same time, e.g. by
 // talking to the Cable Club receptionist in a Pokémon Center. With more
 // players waiting at once, they are paired in order of joining the room.
+// Players who agreed to link by talking to each other (talk.js) are
+// reserved for each other and only paired together.
 
 import { LinkGameState, LinkHostState } from './netsync.js';
 
@@ -19,6 +21,7 @@ export class LinkManager extends EventTarget {
     this.gameState = LinkGameState.CLOSED;
     this.hostState = null;
     this.isMaster = false;
+    this.reservedPartner = null; // set by TalkManager
     this.trace = null; // set to an array to record link traffic (debugging)
 
     net.addEventListener('link', (e) => {
@@ -35,9 +38,11 @@ export class LinkManager extends EventTarget {
   }
 
   choosePartner() {
+    if (this.reservedPartner !== null) return this.peers.has(this.reservedPartner) ? this.reservedPartner : null;
     const me = this.net.id;
     const waiting = [me];
     for (const [id, peer] of this.peers) {
+      if (peer.state?.pair) continue; // reserved for someone
       if ((peer.linkState ?? 0) >= LinkGameState.SEARCHING) waiting.push(id);
     }
     waiting.sort((a, b) => a - b);

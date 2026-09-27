@@ -119,9 +119,12 @@ function sanitizeState(s) {
     avatarFlags: int(s.avatarFlags, 0, 255),
     gender: int(s.gender, 0, 1),
     link: int(s.link, 0, 2),
+    pair: int(s.pair, 0, 0x7fffffff), // the player this one is linking with after talking
     name: Array.isArray(s.name) ? s.name.slice(0, 8).map((b) => int(b, 0, 255)) : [],
   };
 }
+
+const TALK_OPS = ['invite', 'accept', 'decline', 'busy', 'cancel'];
 
 const MAX_LINK_PACKETS = 64;
 const LINK_PACKET_WORDS = 16;
@@ -194,6 +197,14 @@ wss.on('connection', (ws) => {
       const packets = sanitizePackets(msg.p);
       if (!partner || !packets) return;
       send(partner, { t: 'link', from: playerId, p: packets, g: Number.isInteger(msg.g) ? msg.g : 0 });
+      return;
+    }
+
+    // Talking to another player (web/js/talk.js) goes only to that player.
+    if (msg.t === 'talk' && playerId !== null) {
+      const other = rooms.get(roomKey)?.get(msg.to);
+      if (!other || !TALK_OPS.includes(msg.op)) return;
+      send(other, { t: 'talk', from: playerId, op: msg.op, kind: Number.isInteger(msg.kind) ? msg.kind : 0 });
       return;
     }
 

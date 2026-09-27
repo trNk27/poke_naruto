@@ -1,7 +1,7 @@
 // Bridge between the web client and the gNetSync block inside the running
 // game. Mirrors `struct NetSync` in game/include/netsync.h; keep both in sync.
 
-export const NETSYNC_VERSION = 3;
+export const NETSYNC_VERSION = 4;
 export const MAX_REMOTE = 4;
 const MAGIC = 'NARUTO-NETSYNC01';
 const MAGIC_BYTES = new TextEncoder().encode(MAGIC);
@@ -29,8 +29,20 @@ const RING_PACKETS = 0x04;
 export const RING_SIZE = 8;
 export const PACKET_WORDS = 16; // u16 cmds[2][8]
 
+// struct NetTalk (players talking to each other) at 0x2AC.
+const OFFSET_TALK = 0x2ac;
+const T_GAME_STATE = 0x00;
+const T_SLOT = 0x01;
+const T_KIND = 0x02;
+const T_ANSWER = 0x03;
+const T_INVITE_SLOT = 0x04;
+const T_INVITE_KIND = 0x05;
+
 export const LinkGameState = { CLOSED: 0, SEARCHING: 1, ESTABLISHED: 2 };
 export const LinkHostState = { NO_PARTNER: 0, PARTNER_SEARCHING: 1, PARTNER_ESTABLISHED: 2, PARTNER_LOST: 3 };
+export const TalkKind = { TRADE: 1, BATTLE: 2 };
+export const TalkGameState = { IDLE: 0, INVITING: 1, PROMPTING: 2, ACCEPTED: 3, DECLINED: 4 };
+export const TalkAnswer = { NONE: 0, ACCEPTED: 1, DECLINED: 2, BUSY: 3, CANCELED: 4 };
 const NAME_LENGTH = 8;
 
 // Field offsets within struct NetSyncPlayer.
@@ -237,6 +249,30 @@ export class NetSyncBridge {
     // Publish the packets only after their contents are written.
     bytes[ring + RING_HEAD] = head;
     return count;
+  }
+
+  /** The game's side of a conversation with another player (see TalkManager). */
+  readTalk() {
+    const bytes = this.bytes;
+    const offset = this.base + OFFSET_TALK;
+    return {
+      gameState: bytes[offset + T_GAME_STATE],
+      slot: bytes[offset + T_SLOT],
+      kind: bytes[offset + T_KIND],
+    };
+  }
+
+  /** Answers the game's invitation, or tells it the inviter went away. */
+  setTalkAnswer(answer) {
+    this.bytes[this.base + OFFSET_TALK + T_ANSWER] = answer;
+  }
+
+  /** Passes another player's invitation to the game; slot -1 withdraws it. */
+  setInvite(slot, kind = 0) {
+    const bytes = this.bytes;
+    const offset = this.base + OFFSET_TALK;
+    bytes[offset + T_INVITE_KIND] = kind;
+    bytes[offset + T_INVITE_SLOT] = slot + 1;
   }
 
   /** Where remote player `slot` is drawn, in GBA screen pixels. */

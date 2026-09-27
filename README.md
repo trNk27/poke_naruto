@@ -56,7 +56,23 @@ Not yet: players standing in a neighbouring map across a route border.
 
 ### Trading and battling
 
-Works exactly like with a link cable, just over the internet:
+**Talk to each other.** Walk up to another player, face them and press
+**A**:
+
+1. Choose **Trade Center** (trade) or **Colosseum** (battle), and save when
+   asked. The game waits for the other player's answer (**B** cancels).
+2. The other player is asked "… would like to trade with you. Is that
+   okay?" as soon as they aren't busy (in a menu, a battle, …). They answer
+   **Yes** and save.
+3. Both of you go straight into the Trade Center or the Colosseum. Walk to
+   the chairs (trade) or the marked spots (battle). When you're done, leave
+   through the door, and each of you is back where you stood.
+
+Players don't block each other, so you can always walk up to someone, even
+in a corridor. You need at least two Pokémon (ninjas) to trade. Battles are single
+battles.
+
+**Or use the Cable Club**, exactly like with a link cable:
 
 1. Both players go upstairs in any Ninja Center (it doesn't have to be the
    same one) and talk to the **receptionist on the right**. You need the
@@ -160,8 +176,8 @@ them with your change.
 
 It builds two versions. **Naruto** is the current `game/`. **Classic** is
 `game/` as it was just before the Naruto theme, with the current multiplayer
-code (`netsync.h`, `netsync.c`, `link.c`) copied in so it keeps working with
-the website; `tools/classic_worktree.sh` sets that up. If a multiplayer
+code (`netsync.h`, `netsync.c`, `link.c`, the talk scripts and a few hooks)
+copied in so it keeps working with the website; `tools/classic_worktree.sh` sets that up. If a multiplayer
 change touches other files in `game/`, add them to the list in that script.
 
 ### How the multiplayer works
@@ -177,6 +193,12 @@ The game has no network access, so the website talks to it through memory:
    write it into the `remote` slots of their own game's `gNetSync`.
 4. The game shows each remote player on the current map as a character that
    walks to the latest position.
+
+Talking to another player (`data/netsync_scripts.s`, `web/js/talk.js`)
+works the same way: the game writes its invitation into `gNetSync.talk`,
+the website takes it to the other player's website, which hands it to that
+game and brings the answer back. Once both agree, the two players are
+reserved for each other and the link opens as below.
 
 Trading and battling reuse the game's link cable code. The GBA serial
 hardware is replaced by a "virtual cable" (the NetLink section of

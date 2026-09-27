@@ -17,12 +17,15 @@
 // GBA's serial port, so the Cable Club (trading and battles) works online:
 // see the NetLink section in src/link.c.
 //
+// Players can also talk to each other (`talk`) to start a trade or a battle
+// without going to the Cable Club: see data/netsync_scripts.s.
+//
 // The host locates the block by scanning emulator memory for `magic`. The
 // magic string is assembled at runtime, so it only exists in RAM and never
 // in the ROM image. Layout changes must bump NETSYNC_VERSION and be mirrored
 // in web/js/netsync.js.
 
-#define NETSYNC_VERSION 3
+#define NETSYNC_VERSION 4
 #define NETSYNC_MAGIC_LENGTH 16
 #define NETSYNC_MAX_REMOTE 4
 #define NETSYNC_NAME_LENGTH 8
@@ -103,6 +106,42 @@ struct NetLink
     /*0x108*/ struct NetLinkRing inbox;  // host -> game
 }; /*size = 0x20C*/
 
+// Talking to another player. The inviting game asks, the host takes the
+// question to the other player's game and brings back the answer; once both
+// players agree, both games open the link and are paired with each other.
+enum {
+    NETTALK_KIND_NONE,
+    NETTALK_KIND_TRADE,
+    NETTALK_KIND_BATTLE,
+};
+
+enum {
+    NETTALK_GAME_IDLE,
+    NETTALK_GAME_INVITING,  // invited remote[slot], waiting for the answer
+    NETTALK_GAME_PROMPTING, // asking the player about remote[slot]'s invitation
+    NETTALK_GAME_ACCEPTED,  // both agreed: linking up with remote[slot]
+    NETTALK_GAME_DECLINED,  // said no to remote[slot]'s invitation
+};
+
+enum {
+    NETTALK_ANSWER_NONE,
+    NETTALK_ANSWER_ACCEPTED,
+    NETTALK_ANSWER_DECLINED,
+    NETTALK_ANSWER_BUSY,     // the other player can't answer right now
+    NETTALK_ANSWER_CANCELED, // the other player canceled or left
+};
+
+struct NetTalk
+{
+    /*0x00*/ u8 gameState;   // NETTALK_GAME_*, written by the game
+    /*0x01*/ u8 slot;        // the other player (index into remote), written by the game
+    /*0x02*/ u8 kind;        // NETTALK_KIND_*, written by the game
+    /*0x03*/ vu8 answer;     // NETTALK_ANSWER_*, written by the host (the game clears it before inviting)
+    /*0x04*/ vu8 inviteSlot; // 1 + index into remote of a player inviting us, 0 = none; written by the host
+    /*0x05*/ vu8 inviteKind; // NETTALK_KIND_*, written by the host
+    /*0x06*/ u8 padding[2];
+}; /*size = 0x08*/
+
 struct NetSync
 {
     /*0x00*/ u8 magic[NETSYNC_MAGIC_LENGTH];
@@ -113,13 +152,17 @@ struct NetSync
     /*0x30*/ struct NetSyncPlayer remote[NETSYNC_MAX_REMOTE];
     /*0x80*/ struct NetSyncScreenPos screen[NETSYNC_MAX_REMOTE]; // written by the game
     /*0xA0*/ struct NetLink link;
-}; /*size = 0x2AC*/
+    /*0x2AC*/ struct NetTalk talk;
+}; /*size = 0x2B4*/
 
 extern struct NetSync gNetSync;
 
 void NetSync_Init(void);
 void NetSync_FrameTick(void);
 void NetSync_UpdateOverworld(void);
+u8 NetSync_GetRemotePlayerObjectAt(s16 x, s16 y);
+const u8 *NetSync_GetRemotePlayerScript(void);
+bool8 NetSync_ShouldAutoConfirmLink(void);
 
 bool8 NetLink_RingFull(const struct NetLinkRing *ring);
 bool8 NetLink_RingEmpty(const struct NetLinkRing *ring);

@@ -2,6 +2,7 @@ import { captureKeyboard, onSpeedKey, setupControls } from './controls.js';
 import { startEmulator } from './emulator.js';
 import { NetClient } from './net.js';
 import { LinkManager } from './link.js';
+import { TalkManager } from './talk.js';
 import { LinkGameState, MAX_REMOTE, NetSyncBridge } from './netsync.js';
 import { loadManifest, prepareRom } from './rom.js';
 import { setupSpeed } from './speed.js';
@@ -130,6 +131,7 @@ async function init() {
     peers,
     get net() { return net; },
     get link() { return link; },
+    get talk() { return talk; },
   };
 }
 
@@ -188,6 +190,7 @@ const peers = new Map();
 const slots = new Array(MAX_REMOTE).fill(null);
 let net;
 let link;
+let talk;
 
 function addPeer(id, name, state = null) {
   if (peers.has(id)) return;
@@ -269,6 +272,7 @@ function startGame(name, room, gameId) {
   link.addEventListener('statechange', (e) => {
     if (e.detail === LinkGameState.ESTABLISHED) toast('Link established');
   });
+  talk = new TalkManager(bridge, net, peers, link);
   const speed = setupSpeed(emulator, $('speed'), link, toast);
   onSpeedKey(speed.cycle);
   net.connect(room, name, gameId);
@@ -336,12 +340,14 @@ function syncTick() {
     peer.dirty = false;
   }
 
+  talk.tick(now);
   link.tick();
 
   const local = bridge.readLocal();
   if (!local.active) return;
   local.link = bridge.linkGameState;
-  const key = `${local.mapGroup}.${local.mapNum}.${local.x}.${local.y}.${local.facing}.${local.elevation}.${local.avatarFlags}.${local.link}`;
+  local.pair = link.reservedPartner ?? 0;
+  const key = `${local.mapGroup}.${local.mapNum}.${local.x}.${local.y}.${local.facing}.${local.elevation}.${local.avatarFlags}.${local.link}.${local.pair}`;
   if ((key !== lastSentKey && now - lastSentAt >= SEND_INTERVAL_MS) || now - lastSentAt >= KEEPALIVE_MS) {
     net.sendState(local);
     lastSentKey = key;

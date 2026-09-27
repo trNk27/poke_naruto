@@ -2516,7 +2516,7 @@ const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId)
 {
     // Remote players have no template to take a script from.
     if (IS_NETSYNC_LOCALID(gObjectEvents[objectEventId].localId))
-        return NULL;
+        return NetSync_GetRemotePlayerScript();
     return GetObjectEventScriptPointerByLocalIdAndMap(gObjectEvents[objectEventId].localId, gObjectEvents[objectEventId].mapNum, gObjectEvents[objectEventId].mapGroup);
 }
 

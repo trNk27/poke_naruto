@@ -14,7 +14,15 @@ REPO=$(cd "$(dirname "$0")/.." && pwd)
 CLASSIC_COMMIT=$(git -C "$REPO" log --format=%H --diff-filter=A -- tools/naruto/roster.py | tail -1)^
 # Multiplayer code that must match the website. Add files here when a
 # multiplayer change touches more of game/.
-MULTIPLAYER_FILES="game/include/netsync.h game/src/netsync.c game/src/link.c"
+MULTIPLAYER_FILES="
+  game/include/netsync.h
+  game/src/netsync.c
+  game/src/link.c
+  game/src/cable_club.c
+  game/src/event_object_movement.c
+  game/src/field_control_avatar.c
+  game/data/netsync_scripts.s
+"
 
 git -C "$REPO" worktree add --quiet --detach "$DIR" "$CLASSIC_COMMIT"
 cp -a "$REPO/game/tools/agbcc" "$DIR/game/tools/"

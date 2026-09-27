@@ -8,6 +8,7 @@
 #include "field_message_box.h"
 #include "field_weather.h"
 #include "link.h"
+#include "netsync.h"
 #include "load_save.h"
 #include "m4a.h"
 #include "mystery_gift.h"
@@ -218,6 +219,13 @@ static void Task_LinkupAwaitConnection(u8 taskId)
     if (IsLinkMaster() == TRUE)
     {
         PlaySE(SE_PIN);
+        if (NetSync_ShouldAutoConfirmLink())
+        {
+            // Both players agreed by talking to each other: nothing to ask.
+            gTasks[taskId].tNumPlayers = 0;
+            gTasks[taskId].func = Task_LinkupAwaitConfirmation;
+            return;
+        }
         ShowFieldAutoScrollMessage(CableClub_Text_WhenAllPlayersReadyAConfirmBCancel);
         gTasks[taskId].func = Task_LinkupConfirmWhenReady;
     }
@@ -254,10 +262,17 @@ static void Task_LinkupAwaitConfirmation(u8 taskId)
         return;
 
     UpdateLinkPlayerCountDisplay(taskId, linkPlayerCount);
-    if (JOY_NEW(A_BUTTON) && linkPlayerCount >= tMinPlayers)
+    // A link both players agreed to by talking starts without confirmation.
+    if ((JOY_NEW(A_BUTTON) || NetSync_ShouldAutoConfirmLink()) && linkPlayerCount >= tMinPlayers)
     {
         SaveLinkPlayers(linkPlayerCount);
         ClearLinkPlayerCountWindow(tWindowId);
+        if (NetSync_ShouldAutoConfirmLink())
+        {
+            CheckShouldAdvanceLinkState();
+            gTasks[taskId].func = Task_LinkupConfirm;
+            return;
+        }
         ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1);
         ShowFieldAutoScrollMessage(CableClub_Text_StartLinkWithXPlayersAConfirmBCancel);
         gTasks[taskId].func = Task_LinkupTryConfirmation;

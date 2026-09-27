@@ -1,12 +1,19 @@
 #include "global.h"
+#include "characters.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "help_system.h"
 #include "link.h"
+#include "main.h"
 #include "netsync.h"
 #include "overworld.h"
 #include "quest_log.h"
+#include "script.h"
 #include "string_util.h"
+#include "task.h"
+#include "constants/maps.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/trainer_types.h"
@@ -24,6 +31,19 @@
 #define MAGIC_XOR 0xA5
 
 EWRAM_DATA struct NetSync gNetSync = {0};
+
+// Set when a link started by talking takes the player to a Cable Club room;
+// cleared once they are back where they were (see FinishTalkLink).
+static EWRAM_DATA bool8 sReturningFromTalkLink = FALSE;
+
+// data/netsync_scripts.s
+extern const u8 NetSync_EventScript_TalkToPlayer[];
+extern const u8 NetSync_EventScript_Invited[];
+
+void QuestLog_StartRecordingInputsAfterDeferredEvent(void);
+
+static const u8 sText_Trade[] = _("trade");
+static const u8 sText_Battle[] = _("battle");
 
 // Marks IWRAM for debugging tools, which locate it like gNetSync (the text is
 // "NARUTO-IWRAM-DBG") and then read variables by their addresses in the map
@@ -52,6 +72,7 @@ void NetSync_Init(void)
     u32 i;
 
     CpuFill32(0, &gNetSync, sizeof(gNetSync));
+    sReturningFromTalkLink = FALSE;
     for (i = 0; i < NETSYNC_MAGIC_LENGTH; i++)
     {
         gNetSync.magic[i] = sMagicXored[i] ^ MAGIC_XOR;
@@ -304,6 +325,163 @@ static void UpdateRemotePlayer(u8 slot)
     PublishScreenPos(slot, objectEventId);
 }
 
+// ---------------------------------------------------------------------------
+// Talking to other players (scripts in data/netsync_scripts.s)
+
+// The remote player object standing at map coordinates (x, y) (with
+// MAP_OFFSET), or OBJECT_EVENTS_COUNT.
+u8 NetSync_GetRemotePlayerObjectAt(s16 x, s16 y)
+{
+    u8 i;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].active && IS_NETSYNC_LOCALID(gObjectEvents[i].localId)
+         && gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y)
+            return i;
+    }
+    return OBJECT_EVENTS_COUNT;
+}
+
+const u8 *NetSync_GetRemotePlayerScript(void)
+{
+    return NetSync_EventScript_TalkToPlayer;
+}
+
+bool8 NetSync_ShouldAutoConfirmLink(void)
+{
+    return gNetSync.talk.gameState == NETTALK_GAME_ACCEPTED;
+}
+
+// gStringVar1 = the name of remote player `slot`. FALSE if nobody is there.
+static bool8 BufferRemoteName(u8 slot)
+{
+    if (slot >= NETSYNC_MAX_REMOTE || !gNetSync.remote[slot].active)
+        return FALSE;
+    StringCopyN(gStringVar1, gNetSync.remote[slot].name, NETSYNC_NAME_LENGTH);
+    gStringVar1[NETSYNC_NAME_LENGTH] = EOS;
+    return TRUE;
+}
+
+// The player talked to a remote player (VAR_LAST_TALKED): gStringVar1 = their
+// name, VAR_RESULT = FALSE if they are gone.
+void NetSync_BufferTalkedPlayerName(void)
+{
+    gSpecialVar_Result = BufferRemoteName(gSpecialVar_LastTalked - NETSYNC_LOCALID_BASE);
+}
+
+// Invites the player talked to, to a trade or battle (VAR_0x8008 = NETTALK_KIND_*).
+void NetSync_SendInvite(void)
+{
+    struct NetTalk *talk = &gNetSync.talk;
+
+    talk->answer = NETTALK_ANSWER_NONE;
+    talk->slot = gSpecialVar_LastTalked - NETSYNC_LOCALID_BASE;
+    talk->kind = gSpecialVar_0x8008;
+    talk->gameState = NETTALK_GAME_INVITING;
+}
+
+static void Task_WaitForAnswer(u8 taskId)
+{
+    struct NetTalk *talk = &gNetSync.talk;
+    u8 answer = talk->answer;
+
+    if (answer == NETTALK_ANSWER_NONE && JOY_NEW(B_BUTTON))
+    {
+        talk->gameState = NETTALK_GAME_IDLE; // the host tells the other player
+    }
+    else if (answer != NETTALK_ANSWER_NONE)
+    {
+        talk->gameState = answer == NETTALK_ANSWER_ACCEPTED ? NETTALK_GAME_ACCEPTED : NETTALK_GAME_IDLE;
+    }
+    else
+    {
+        return;
+    }
+    gSpecialVar_Result = answer; // NETTALK_ANSWER_NONE if canceled with B
+    DestroyTask(taskId);
+    ScriptContext_Enable();
+}
+
+// Waits (with waitstate) for the answer to NetSync_SendInvite.
+void NetSync_WaitForAnswer(void)
+{
+    CreateTask(Task_WaitForAnswer, 80);
+}
+
+// For the invited player: gStringVar1 = who invites, gStringVar2 = "trade" or
+// "battle", VAR_0x8008 = NETTALK_KIND_*.
+void NetSync_BufferInvite(void)
+{
+    struct NetTalk *talk = &gNetSync.talk;
+
+    BufferRemoteName(talk->slot);
+    StringCopy(gStringVar2, talk->kind == NETTALK_KIND_BATTLE ? sText_Battle : sText_Trade);
+    gSpecialVar_0x8008 = talk->kind;
+}
+
+// VAR_RESULT = FALSE if the inviting player canceled or left meanwhile.
+void NetSync_CheckInviteOpen(void)
+{
+    gSpecialVar_Result = gNetSync.talk.answer != NETTALK_ANSWER_CANCELED
+                      && gNetSync.remote[gNetSync.talk.slot].active;
+}
+
+void NetSync_AcceptInvite(void)
+{
+    gNetSync.talk.gameState = NETTALK_GAME_ACCEPTED;
+}
+
+void NetSync_DeclineInvite(void)
+{
+    gNetSync.talk.gameState = NETTALK_GAME_DECLINED;
+}
+
+// Called once the link is up (or failed); the link keeps its partner.
+void NetSync_EndTalk(void)
+{
+    gNetSync.talk.gameState = NETTALK_GAME_IDLE;
+}
+
+// Makes leaving the Cable Club room bring the player back to this spot.
+void NetSync_SetTalkLinkReturnWarp(void)
+{
+    struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE,
+                             player->currentCoords.x - MAP_OFFSET, player->currentCoords.y - MAP_OFFSET);
+    sReturningFromTalkLink = TRUE;
+}
+
+// Back from the Cable Club room: undo what the Cable Club receptionist's exit
+// script would.
+static void FinishTalkLink(void)
+{
+    sReturningFromTalkLink = FALSE;
+    HelpSystem_Enable();
+    QuestLog_StartRecordingInputsAfterDeferredEvent();
+}
+
+// Shows an invitation from another player once this player is free to answer.
+static void TryShowInvite(void)
+{
+    struct NetTalk *talk = &gNetSync.talk;
+    u8 slot = talk->inviteSlot;
+
+    if (slot == 0 || slot > NETSYNC_MAX_REMOTE || !gNetSync.remote[slot - 1].active)
+        return;
+    if (talk->gameState != NETTALK_GAME_IDLE && talk->gameState != NETTALK_GAME_DECLINED)
+        return;
+    if (ScriptContext_IsEnabled() || ArePlayerFieldControlsLocked())
+        return;
+
+    talk->answer = NETTALK_ANSWER_NONE; // the host may now report a cancellation
+    talk->slot = slot - 1;
+    talk->kind = talk->inviteKind;
+    talk->gameState = NETTALK_GAME_PROMPTING; // the host clears inviteSlot
+    ScriptContext_SetupScript(NetSync_EventScript_Invited);
+}
+
 // Called every frame from the overworld main callback.
 void NetSync_UpdateOverworld(void)
 {
@@ -312,9 +490,15 @@ void NetSync_UpdateOverworld(void)
     if (!IsOverworldSyncAllowed())
         return;
 
+    // (The link stays up until the player has left the Cable Club room.)
+    if (sReturningFromTalkLink && !gReceivedRemoteLinkPlayers)
+        FinishTalkLink();
+
     PublishLocalPlayer();
     gNetSync.overworldFrame = gNetSync.frameCounter;
 
     for (i = 0; i < NETSYNC_MAX_REMOTE; i++)
         UpdateRemotePlayer(i);
+
+    TryShowInvite();
 }

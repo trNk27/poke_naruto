@@ -1,4 +1,5 @@
 #include "global.h"
+#include "netsync.h"
 #include "gflib.h"
 #include "bike.h"
 #include "coord_event_weather.h"
@@ -435,6 +436,10 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
     const u8 *script;
 
     objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+    // Other online players aren't found above (they never block anyone),
+    // but can be talked to.
+    if (objectEventId == OBJECT_EVENTS_COUNT)
+        objectEventId = NetSync_GetRemotePlayerObjectAt(position->x, position->y);
     if (objectEventId == OBJECT_EVENTS_COUNT || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
     {
         if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)
