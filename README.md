@@ -26,8 +26,11 @@ Tips:
 * **Add to Home Screen** (Safari: Share → Add to Home Screen; Chrome: ⋮ → Add
   to Home screen) for a full-screen, app-like experience.
 * Turn your phone sideways for a bigger screen.
+* **▶▶** (next to Start) speeds the game up: tap for 2×, again for 3×, again
+  for normal speed. While you are linked for a trade or battle the game runs
+  at normal speed, and your speed comes back afterwards.
 * On a computer: arrow keys, **X** = A, **Z** = B, **Enter** = Start,
-  **Backspace** = Select, **A**/**S** = L/R.
+  **Backspace** = Select, **A**/**S** = L/R, **Space** = speed.
 * Your save lives in the browser on that device. Save in the game as usual.
   Clearing the browser's website data deletes it.
 
@@ -185,6 +188,7 @@ tests/build-test-rom.sh /tmp/test.gba   # also writes /tmp/test.elf (symbols)
 (cd server && npm start) &
 node tests/e2e.mjs /tmp/test.gba        # players see each other, names
 node tests/link-e2e.mjs /tmp/test.gba   # link up, trade, battle
+node tests/speed-e2e.mjs /tmp/test.gba  # fast-forward
 ```
 
 They need Playwright (`npm i -g playwright`) and, for `link-e2e.mjs`,

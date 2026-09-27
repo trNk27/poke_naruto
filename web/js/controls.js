@@ -15,6 +15,12 @@ const KEYBOARD = {
 };
 
 let keyHandler = null;
+let speedKeyHandler = null;
+
+/** Space cycles the game speed (see speed.js). */
+export function onSpeedKey(handler) {
+  speedKeyHandler = handler;
+}
 
 /**
  * The emulator listens for keys on the whole page and swallows them, which
@@ -129,6 +135,11 @@ export function setupControls(emulator) {
 
   // Keyboard (see captureKeyboard).
   keyHandler = (event) => {
+    if (event.code === 'Space') {
+      event.preventDefault();
+      if (event.type === 'keydown' && !event.repeat) speedKeyHandler?.();
+      return;
+    }
     const button = KEYBOARD[event.code];
     if (!button) return;
     event.preventDefault();

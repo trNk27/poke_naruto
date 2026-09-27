@@ -172,9 +172,12 @@ button.link { background: none; color: var(--accent); padding: 0; text-decoratio
 .btn.pressed { background: var(--btn-active); }
 
 .shoulders, .pad-row, .menu-row { display: flex; justify-content: space-between; align-items: center; }
-.menu-row { justify-content: center; gap: 24px; }
+.menu-row { justify-content: center; gap: 16px; }
 .shoulder { width: 88px; padding: 10px; border-radius: 10px 10px 4px 4px; }
 .pill { padding: 8px 14px; border-radius: 999px; font-size: 0.75rem; letter-spacing: 0.05em; }
+.speed { min-width: 64px; touch-action: manipulation; }
+.speed.active { background: var(--face); }
+.speed.held { opacity: 0.5; }
 
 .face { position: relative; width: 150px; height: 130px; }
 .round { position: absolute; width: 64px; height: 64px; border-radius: 50%; background: var(--face); font-size: 1.2rem; }

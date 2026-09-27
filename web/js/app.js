@@ -1,9 +1,10 @@
-import { captureKeyboard, setupControls } from './controls.js';
+import { captureKeyboard, onSpeedKey, setupControls } from './controls.js';
 import { startEmulator } from './emulator.js';
 import { NetClient } from './net.js';
 import { LinkManager } from './link.js';
 import { LinkGameState, MAX_REMOTE, NetSyncBridge } from './netsync.js';
 import { loadManifest, prepareRom } from './rom.js';
+import { setupSpeed } from './speed.js';
 
 const ROM_FILE_NAME = 'leafgreen-online.gba';
 const SEND_INTERVAL_MS = 50;
@@ -237,6 +238,8 @@ function startGame(name, room) {
   link.addEventListener('statechange', (e) => {
     if (e.detail === LinkGameState.ESTABLISHED) toast('Link established');
   });
+  const speed = setupSpeed(emulator, $('speed'), link, toast);
+  onSpeedKey(speed.cycle);
   net.connect(room, name);
   updateHud();
 

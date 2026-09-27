@@ -137,8 +137,9 @@ export class NetSyncBridge {
       const counter = view.getUint32(c.offset + OFFSET_FRAME_COUNTER, true);
       const frames = (counter - c.counter) >>> 0;
       const expected = ((now - c.time) / 1000) * 60;
-      // A running game advances by about one per frame; allow slowdowns.
-      c.hits = frames > 0 && frames <= expected * 2 + 10 ? c.hits + 1 : 0;
+      // A running game advances by about one per frame; allow slowdowns and
+      // fast-forward (see speed.js).
+      c.hits = frames > 0 && frames <= expected * 4 + 10 ? c.hits + 1 : 0;
       c.counter = counter;
       c.time = now;
       if (c.hits >= 3) {
