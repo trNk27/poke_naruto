@@ -37,6 +37,12 @@ Tips:
   **Backspace** = Select, **A**/**S** = L/R, **Space** = speed.
 * Your saves (one per version) live in the browser on that device. Save in
   the game as usual. Clearing the browser's website data deletes them.
+* **Export** (on the start screen, under the version's save) downloads your
+  save as a `.sav` file: keep it as a backup or **Import** it on another
+  device. Import also takes saves from other emulators and phone apps
+  (128 KB `.sav`/`.srm` files, not save states), so you can carry on a
+  regular LeafGreen game in **Classic**. Importing replaces that version's
+  save on the device, so export it first if you want to keep it.
 
 ### What works
 
@@ -225,6 +231,7 @@ tests/build-test-rom.sh /tmp/test.gba   # also writes /tmp/test.elf (symbols)
 node tests/e2e.mjs /tmp/test.gba        # players see each other, names
 node tests/link-e2e.mjs /tmp/test.gba   # link up, trade, battle
 node tests/speed-e2e.mjs /tmp/test.gba  # fast-forward
+node tests/save-e2e.mjs /tmp/test.gba   # export and import saves
 ```
 
 To test the classic version, build its test ROM with

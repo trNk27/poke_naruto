@@ -48,6 +48,16 @@
         </div>
       </fieldset>
 
+      <fieldset id="save-section">
+        <legend id="save-legend">Save</legend>
+        <div class="row">
+          <button type="button" id="save-import" class="secondary grow" disabled>Import</button>
+          <button type="button" id="save-export" class="secondary grow" disabled>Export</button>
+        </div>
+        <input id="save-file" type="file" accept=".sav,.srm,application/octet-stream" hidden>
+        <p id="save-hint" class="hint"></p>
+      </fieldset>
+
       <p id="setup-status" class="status" role="status"></p>
       <button type="submit" id="start" disabled>Loading…</button>
     </form>

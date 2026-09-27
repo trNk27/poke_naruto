@@ -5,6 +5,7 @@ import { LinkManager } from './link.js';
 import { TalkManager } from './talk.js';
 import { LinkGameState, MAX_REMOTE, NetSyncBridge } from './netsync.js';
 import { loadManifest, prepareRom } from './rom.js';
+import { downloadSave, normalizeSave, readSave, writeSave } from './saves.js';
 import { setupSpeed } from './speed.js';
 
 // The two versions players can choose between. The emulator names the save
@@ -74,7 +75,14 @@ $('new-room').addEventListener('click', () => { $('room-code').value = randomRoo
 const gameInputs = document.querySelectorAll('input[name="game"]');
 const selectedGame = () => [...gameInputs].find((input) => input.checked)?.value ?? 'naruto';
 function showGameHint() {
-  $('game-hint').textContent = GAMES[selectedGame()].hint;
+  const game = GAMES[selectedGame()];
+  $('game-hint').textContent = game.hint;
+  $('save-legend').textContent = `${game.label} save`;
+  $('save-import').textContent = 'Import';
+  $('save-export').textContent = 'Export';
+  $('save-hint').textContent = selectedGame() === 'classic'
+    ? 'Saves stay on this device. Export to back up or move to another device; import a .sav from another emulator or from a regular LeafGreen game.'
+    : 'Saves stay on this device. Export to back up or move to another device. Saves from regular LeafGreen belong in Classic.';
 }
 {
   const initial = [params.get('game'), storage.get('game')].find((id) => id in GAMES) ?? 'naruto';
@@ -121,6 +129,7 @@ async function init() {
     $('rom-picker').hidden = false;
   });
 
+  setupSaveButtons();
   $('start').disabled = false;
   $('start').textContent = 'Play';
 
@@ -133,6 +142,42 @@ async function init() {
     get link() { return link; },
     get talk() { return talk; },
   };
+}
+
+function setupSaveButtons() {
+  $('save-import').disabled = false;
+  $('save-export').disabled = false;
+
+  $('save-export').addEventListener('click', () => {
+    const game = GAMES[selectedGame()];
+    const save = readSave(emulator, game.romFile);
+    if (!save) {
+      setStatus(`There is no ${game.label} save on this device yet.`, true);
+      return;
+    }
+    downloadSave(save, `LeafGreen Online ${game.label}.sav`);
+    setStatus(`${game.label} save exported.`);
+  });
+
+  $('save-import').addEventListener('click', () => $('save-file').click());
+  $('save-file').addEventListener('change', async () => {
+    const file = $('save-file').files[0];
+    $('save-file').value = '';
+    if (!file) return;
+    const game = GAMES[selectedGame()];
+    try {
+      const save = normalizeSave(new Uint8Array(await file.arrayBuffer()));
+      if (readSave(emulator, game.romFile)
+        && !confirm(`This replaces your ${game.label} save on this device. Export it first if you want to keep it. Continue?`)) {
+        return;
+      }
+      await writeSave(emulator, game.romFile, save);
+      setStatus(`Save imported. Tap Play and choose CONTINUE.`);
+    } catch (err) {
+      console.error(err);
+      setStatus(err.message, true);
+    }
+  });
 }
 
 $('setup-form').addEventListener('submit', async (event) => {
