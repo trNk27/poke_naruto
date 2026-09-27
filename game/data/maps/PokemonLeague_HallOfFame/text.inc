@@ -1,5 +1,5 @@
 PokemonLeague_HallOfFame_Text_OakCongratulations::
-    .string "OAK: Er-hem!\n"
+    .string "HOKAGE: Er-hem!\n"
     .string "Congratulations, {PLAYER}!\p"
     .string "This floor is the POKéMON HALL OF\n"
     .string "FAME.\p"

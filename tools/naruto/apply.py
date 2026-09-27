@@ -471,6 +471,72 @@ def report(mapping):
     print('Not obtainable in the wild, as a gift or by evolving:', ', '.join(missing) or 'none')
 
 
+STRING = re.compile(r'"(?:[^"\\\n]|\\.)*"')
+TEXT_LINE_BREAK = re.compile(r'\\[nlp]')
+
+
+def rename_in_strings(text, names, too_long=None):
+    """Replaces names inside string literals only (never in identifiers).
+    Lines that grow past what fits a message box are added to `too_long`."""
+    if not names:
+        return text
+    # Not part of a longer word or of a {CONSTANT_NAME} control code.
+    pattern = re.compile(r'(?<![A-Z_])(' + '|'.join(re.escape(old) for old, _new in names) + r')(?![A-Z_])')
+    new_names = dict(names)
+
+    def fix(m):
+        old = m.group(0)
+        new = pattern.sub(lambda n: new_names[n.group(1)], old)
+        if new != old and too_long is not None:
+            def width(line):
+                return len(re.sub(r'\{[^}]*\}|["$]', '', line))
+            limit = max(36, max(width(line) for line in TEXT_LINE_BREAK.split(old)))
+            too_long.extend(line for line in TEXT_LINE_BREAK.split(new) if width(line) > limit)
+        return new
+    return STRING.sub(fix, text)
+
+
+def apply_trainer_names(already_written):
+    """Renames the story characters in every text string of the game."""
+    names = R.TRAINER_NAMES
+    olds = '|'.join(re.escape(old) for old, _new in names)
+    files = subprocess.check_output(['git', '-C', REPO, 'grep', '-lE', olds, BASELINE, '--', 'game/data', 'game/src'],
+                                    text=True).split()
+    changed, too_long = [], []
+    for entry in files:
+        rel = entry.split(':', 1)[1][len('game/'):]
+        if not rel.endswith(('.inc', '.c', '.h', '.s')):
+            continue
+        text = open(os.path.join(GAME, rel)).read() if rel in already_written else pristine(rel)
+        new = rename_in_strings(text, names, too_long)
+        if new != text:
+            write(rel, new)
+            changed.append(rel)
+    for rel, old, new in R.TEXT_FIXUPS:
+        text = open(os.path.join(GAME, rel)).read()
+        assert old in text, (rel, old)
+        write(rel, text.replace(old, new))
+    final = ''.join(open(os.path.join(GAME, rel)).read() for rel in changed)
+    too_long = [line for line in too_long if line in final]  # not fixed up by hand
+    intro = pristine('data/text/new_game_intro.inc')
+    for old, new in R.NAME_CHOICES.items():
+        intro = intro.replace(f'.string "{old}$"', f'.string "{new}$"')
+    write('data/text/new_game_intro.inc', intro)
+    print(f'Story characters renamed in {len(changed)} files.')
+    for line in too_long:
+        print('  check line length:', line)
+    return changed
+
+
+def apply_player_colors():
+    for path, changes in R.PLAYER_COLORS.items():
+        lines = pristine(path).replace('\r', '').split('\n')
+        for index, color in changes.items():
+            lines[3 + index] = ' '.join(str(v) for v in color)
+        with open(os.path.join(GAME, path), 'w', newline='\r\n') as f:
+            f.write('\n'.join(lines))
+
+
 def main():
     roster_by_key = {n['key']: n for n in R.ROSTER}
     assert len(roster_by_key) == len(R.ROSTER)
@@ -484,6 +550,9 @@ def main():
     apply_types_and_moves()
     apply_type_icons()
     apply_species_map(mapping)
+    written = set(MANAGED) | {os.path.relpath(p, GAME) for p in MAP_SCRIPTS}
+    apply_trainer_names(written)
+    apply_player_colors()
     report(mapping)
 
 

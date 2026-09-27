@@ -1,5 +1,5 @@
 PewterCity_Gym_Text_BrockIntro::
-    .string "So, you're here. I'm BROCK.\n"
+    .string "So, you're here. I'm ONOKI.\n"
     .string "I'm PEWTER's GYM LEADER.\p"
     .string "My rock-hard willpower is evident\n"
     .string "even in my POKéMON.\p"
@@ -24,7 +24,7 @@ PewterCity_Gym_Text_BrockDefeat::
     .string "on you this…the official POKéMON\l"
     .string "LEAGUE BOULDERBADGE.\p"
     .string "{FONT_NORMAL}{PLAYER} received the BOULDERBADGE\n"
-    .string "from BROCK!{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}\p"
+    .string "from ONOKI!{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}\p"
     .string "{FONT_MALE}Just having the BOULDERBADGE makes\n"
     .string "your POKéMON more powerful.\p"
     .string "It also enables the use of the\n"
@@ -38,7 +38,7 @@ PewterCity_Gym_Text_TakeThisWithYou::
 
 PewterCity_Gym_Text_ReceivedTM39FromBrock::
     .string "{PLAYER} received TM39\n"
-    .string "from BROCK.$"
+    .string "from ONOKI.$"
 
 PewterCity_Gym_Text_ExplainTM39::
     .string "A TM, Technical Machine, contains a\n"
@@ -68,7 +68,7 @@ PewterCity_Gym_Text_DontHaveRoomForThis::
 PewterCity_Gym_Text_LiamIntro::
     .string "Stop right there, kid!\p"
     .string "You're ten thousand light-years \n"
-    .string "from facing BROCK!$"
+    .string "from facing ONOKI!$"
 
 PewterCity_Gym_Text_LiamDefeat::
     .string "Darn!\p"
@@ -77,7 +77,7 @@ PewterCity_Gym_Text_LiamDefeat::
 
 PewterCity_Gym_Text_LiamPostBattle::
     .string "You're pretty hot.\n"
-    .string "…But not as hot as BROCK!$"
+    .string "…But not as hot as ONOKI!$"
 
 PewterCity_Gym_Text_LetMeTakeYouToTheTop::
     .string "Hiya!\n"
@@ -110,13 +110,13 @@ PewterCity_Gym_Text_YoureChampMaterial::
 
 PewterCity_Gym_Text_GymStatue::
     .string "PEWTER POKéMON GYM\n"
-    .string "LEADER: BROCK\p"
+    .string "LEADER: ONOKI\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}$"
 
 PewterCity_Gym_Text_GymStatuePlayerWon::
     .string "PEWTER POKéMON GYM\n"
-    .string "LEADER: BROCK\p"
+    .string "LEADER: ONOKI\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}, {PLAYER}$"
 

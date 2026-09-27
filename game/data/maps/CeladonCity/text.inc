@@ -32,7 +32,7 @@ CeladonCity_Text_GetLostOrIllPunchYou::
     .string "Get lost, or I'll punch you.$"
 
 CeladonCity_Text_KeepOutOfTeamRocketsWay::
-    .string "Keep out of TEAM ROCKET's way!$"
+    .string "Keep out of AKATSUKI's way!$"
 
 CeladonCity_Text_ExplainXAccuracyDireHit::
     .string "TRAINER TIPS\p"
@@ -49,7 +49,7 @@ CeladonCity_Text_CitySign::
 
 CeladonCity_Text_GymSign::
     .string "CELADON CITY POKéMON GYM\n"
-    .string "LEADER: ERIKA\l"
+    .string "LEADER: INO\l"
     .string "The Nature-Loving Princess!$"
 
 CeladonCity_Text_MansionSign::
@@ -72,7 +72,7 @@ CeladonCity_Text_PrizeExchangeSign::
     .string "PRIZE EXCHANGE$"
 
 CeladonCity_Text_GameCornerSign::
-    .string "ROCKET GAME CORNER\n"
+    .string "AKATSUKI GAME CORNER\n"
     .string "The playground for grown-ups!$"
 
 CeladonCity_Text_ScaldedTongueOnTea::

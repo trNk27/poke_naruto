@@ -4,7 +4,7 @@ CeladonCity_GameCorner_Text_CanExchangeCoinsNextDoor::
     .string "fabulous prizes next door.$"
 
 CeladonCity_GameCorner_Text_WelcomeBuySomeCoins::
-    .string "Welcome to ROCKET GAME CORNER!\p"
+    .string "Welcome to AKATSUKI GAME CORNER!\p"
     .string "Do you need some game COINS?\n"
     .string "Would you like to buy some?$"
 
@@ -30,7 +30,7 @@ CeladonCity_GameCorner_Text_HereAreYourCoins::
 CeladonCity_GameCorner_Text_RumoredTeamRocketRunsThisPlace::
     .string "Keep this quiet.\p"
     .string "It's rumored that this place is run\n"
-    .string "by TEAM ROCKET.$"
+    .string "by AKATSUKI.$"
 
 CeladonCity_GameCorner_Text_ThinkMachinesHaveDifferentOdds::
     .string "I think these machines have\n"
@@ -58,7 +58,7 @@ CeladonCity_GameCorner_Text_GymGuyAdvice::
     .string "Hey!\p"
     .string "You have better things to do,\n"
     .string "champ in the making!\p"
-    .string "CELADON GYM's LEADER is ERIKA.\p"
+    .string "CELADON GYM's LEADER is INO.\p"
     .string "She is a user of GRASS-type\n"
     .string "POKéMON, and at one with nature.\p"
     .string "She might appear docile because of\n"
@@ -114,7 +114,7 @@ CeladonCity_GameCorner_Text_GruntDefeat::
     .string "Dang!$"
 
 CeladonCity_GameCorner_Text_GruntPostBattle::
-    .string "The TEAM ROCKET HIDEOUT might\n"
+    .string "The AKATSUKI HIDEOUT might\n"
     .string "be discovered!\p"
     .string "I better tell BOSS!$"
 

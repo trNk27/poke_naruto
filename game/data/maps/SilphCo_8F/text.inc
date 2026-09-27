@@ -26,7 +26,7 @@ SilphCo_8F_Text_ParkerPostBattle::
     .string "BUILDING's maze?$"
 
 SilphCo_8F_Text_Grunt2Intro::
-    .string "I am one of the four ROCKET\n"
+    .string "I am one of the four AKATSUKI\n"
     .string "BROTHERS!$"
 
 SilphCo_8F_Text_Grunt2Defeat::
@@ -41,7 +41,7 @@ SilphCo_8F_Text_FloorSign::
     .string "8F$"
 
 SilphCo_8F_Text_ToRocketBossMonsAreTools::
-    .string "TEAM ROCKET's BOSS is terribly\n"
+    .string "AKATSUKI's BOSS is terribly\n"
     .string "cruel!\p"
     .string "To him, POKéMON are just tools to\n"
     .string "be used.\p"

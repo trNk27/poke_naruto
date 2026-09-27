@@ -1,5 +1,5 @@
 SilphCo_7F_Text_HaveMonForSavingUs::
-    .string "Oh! Hi! You're not a ROCKET!\n"
+    .string "Oh! Hi! You're not a AKATSUKI!\n"
     .string "You came to save us?\l"
     .string "Why, thank you!\p"
     .string "I want you to have this POKéMON\n"
@@ -20,7 +20,7 @@ SilphCo_7F_Text_ExplainLapras::
     .string "It'll give you a lift across water!$"
 
 SilphCo_7F_Text_RocketBossWentToBoardroom::
-    .string "TEAM ROCKET's BOSS went to the\n"
+    .string "AKATSUKI's BOSS went to the\n"
     .string "boardroom!\p"
     .string "Is our PRESIDENT okay?\n"
     .string "I'm worried.$"
@@ -32,20 +32,20 @@ SilphCo_7F_Text_SavedAtLast::
     .string "たすかったよ　ありがと！$"
 
 SilphCo_7F_Text_RocketsAfterMasterBall::
-    .string "TEAM ROCKET was after the MASTER\n"
+    .string "AKATSUKI was after the MASTER\n"
     .string "BALL, which catches any POKéMON.$"
 
 SilphCo_7F_Text_CanceledMasterBallProject::
     .string "We canceled the MASTER BALL\n"
-    .string "project because of TEAM ROCKET.$"
+    .string "project because of AKATSUKI.$"
 
 SilphCo_7F_Text_BadIfTeamRocketTookOver::
-    .string "It would be bad if TEAM ROCKET\n"
+    .string "It would be bad if AKATSUKI\n"
     .string "took over SILPH or our POKéMON.$"
 
 SilphCo_7F_Text_WowYouChasedOffTeamRocket::
     .string "Wow!\p"
-    .string "You chased off TEAM ROCKET all by\n"
+    .string "You chased off AKATSUKI all by\n"
     .string "yourself?$"
 
 SilphCo_7F_Text_ReallyDangerousHere::
@@ -80,7 +80,7 @@ SilphCo_7F_Text_JoshuaPostBattle::
     .string "skilled TRAINER!$"
 
 SilphCo_7F_Text_Grunt1Intro::
-    .string "I am one of the four ROCKET\n"
+    .string "I am one of the four AKATSUKI\n"
     .string "BROTHERS!$"
 
 SilphCo_7F_Text_Grunt1Defeat::
@@ -109,7 +109,7 @@ SilphCo_7F_Text_RivalWhatKeptYou::
 SilphCo_7F_Text_RivalIntro::
     .string "{RIVAL}: Hahaha! I thought you'd\n"
     .string "turn up if I waited here!\p"
-    .string "I guess TEAM ROCKET slowed you\n"
+    .string "I guess AKATSUKI slowed you\n"
     .string "down! Not that I care!\p"
     .string "I saw you in SAFFRON, so I decided\n"
     .string "to see if you got better!$"
@@ -117,7 +117,7 @@ SilphCo_7F_Text_RivalIntro::
 SilphCo_7F_Text_RivalDefeat::
     .string "Oh, man!\n"
     .string "So, you are ready for BOSS\l"
-    .string "ROCKET!$"
+    .string "AKATSUKI!$"
 
 SilphCo_7F_Text_RivalVictory::
     .string "{RIVAL}“おまえなあ‥\p"

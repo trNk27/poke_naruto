@@ -8,13 +8,13 @@ FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled::
 
 FiveIsland_RocketWarehouse_Text_Grunt2Intro::
     .string "Did you come here knowing it's\n"
-    .string "TEAM ROCKET's WAREHOUSE?$"
+    .string "AKATSUKI's WAREHOUSE?$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2Defeat::
     .string "What do you think you're doing?!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2PostBattle::
-    .string "TEAM ROCKET broke up?\n"
+    .string "AKATSUKI broke up?\n"
     .string "What planet are you from?$"
 
 FiveIsland_RocketWarehouse_Text_Grunt1Intro::
@@ -35,7 +35,7 @@ FiveIsland_RocketWarehouse_Text_Grunt3Intro::
     .string "I got word about you from the\n"
     .string "others.\p"
     .string "But there's no way a kid like you'd\n"
-    .string "know our BOSS GIOVANNI!$"
+    .string "know our BOSS PAIN!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt3Defeat::
     .string "Don't…you…dare…laugh…$"
@@ -47,7 +47,7 @@ FiveIsland_RocketWarehouse_Text_Grunt3PostBattle::
 FiveIsland_RocketWarehouse_Text_Admin1Intro::
     .string "I don't know or care if what I'm\n"
     .string "doing is right or wrong…\p"
-    .string "I just put my faith in GIOVANNI\n"
+    .string "I just put my faith in PAIN\n"
     .string "and do as I am told.$"
 
 FiveIsland_RocketWarehouse_Text_Admin1Defeat::
@@ -73,7 +73,7 @@ FiveIsland_RocketWarehouse_Text_Admin2Intro::
     .string "That's quite enough of you \n"
     .string "playing the hero, kid.\p"
     .string "Spreading lies about how TEAM\n"
-    .string "ROCKET has disbanded…\p"
+    .string "AKATSUKI has disbanded…\p"
     .string "It's such an obvious attempt to\n"
     .string "cause confusion in our ranks.\p"
     .string "Fortunately, we're not so ignorant\n"
@@ -85,16 +85,16 @@ FiveIsland_RocketWarehouse_Text_Admin2Defeat::
     .string "Urgh…\n"
     .string "You were too strong…\p"
     .string "…\n"
-    .string "Th-that's GIOVANNI's BADGE!\p"
+    .string "Th-that's PAIN's BADGE!\p"
     .string "So it's true?\n"
-    .string "TEAM ROCKET really has disbanded?$"
+    .string "AKATSUKI really has disbanded?$"
 
 FiveIsland_RocketWarehouse_Text_Admin2PostBattle::
     .string "We will abandon this WAREHOUSE…\p"
     .string "But don't think this is over.\n"
     .string "I won't let this be the end.\p"
-    .string "I will find GIOVANNI.\n"
-    .string "And I will resurrect TEAM ROCKET!\l"
+    .string "I will find PAIN.\n"
+    .string "And I will resurrect AKATSUKI!\l"
     .string "I will…\p"
     .string "Until then, farewell!$"
 
@@ -128,10 +128,10 @@ FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe::
 
 FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair::
     .string "What, you again?\p"
-    .string "You… You're not GIOVANNI's kid,\n"
+    .string "You… You're not PAIN's kid,\n"
     .string "are you?\p"
     .string "No, that can't be right!\n"
-    .string "GIOVANNI's kid has red hair.\p"
+    .string "PAIN's kid has red hair.\p"
     .string "You don't have any reasons for\n"
     .string "bugging me. Leave me alone!$"
 

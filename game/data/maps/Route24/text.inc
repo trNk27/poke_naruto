@@ -12,7 +12,7 @@ Route24_Text_YouDontHaveAnyRoom::
 
 Route24_Text_JoinTeamRocket::
     .string "By the way, how would you like to\n"
-    .string "join TEAM ROCKET?\p"
+    .string "join AKATSUKI?\p"
     .string "We're a group of professional\n"
     .string "criminals specializing in POKéMON!\p"
     .string "Want to join?\p"
@@ -29,7 +29,7 @@ Route24_Text_RocketDefeat::
 
 Route24_Text_YoudBecomeTopRocketLeader::
     .string "With your ability, you'd become\n"
-    .string "a top leader in TEAM ROCKET.\p"
+    .string "a top leader in AKATSUKI.\p"
     .string "Come on, think of the opportunity!\n"
     .string "Don't let this chance go to waste.$"
 

@@ -47,7 +47,7 @@ VermilionCity_Text_PokemonFanClubSign::
 
 VermilionCity_Text_GymSign::
     .string "VERMILION CITY POKéMON GYM\n"
-    .string "LEADER: LT. SURGE\l"
+    .string "LEADER: RAIKAGE\l"
     .string "The Lightning American!$"
 
 VermilionCity_Text_VermilionHarbor::
@@ -120,9 +120,9 @@ VermilionCity_Text_Seagallop12Departing::
 VermilionCity_Text_Route2AideHasPackageForYou::
     .string "Oh, hello, {PLAYER}!\n"
     .string "How are you doing?\p"
-    .string "It's me, one of PROF. OAK's AIDES.\p"
+    .string "It's me, one of HOKAGE's AIDES.\p"
     .string "Did you meet the other AIDE?\p"
-    .string "He had a package from PROF. OAK\n"
+    .string "He had a package from HOKAGE\n"
     .string "for you, {PLAYER}.\p"
     .string "He said he'd look for you around\n"
     .string "ROUTE 2, {PLAYER}.\p"

@@ -45,7 +45,7 @@ def read_jasc(path):
 
 def write_jasc(path, colors):
     with open(path, 'w', newline='\r\n') as f:
-        f.write('JASC-PAL\n0100\n16\n')
+        f.write(f'JASC-PAL\n0100\n{len(colors)}\n')
         for c in colors:
             f.write(f'{c[0]} {c[1]} {c[2]}\n')
 
@@ -55,7 +55,7 @@ def gba_color(c):
     return tuple(min(255, (v >> 3) << 3) for v in c)
 
 
-def remove_background(im):
+def remove_background(im, thresh=40):
     """Makes the flat background transparent by flooding it from the edges."""
     rgb = im.convert('RGB')
     w, h = rgb.size
@@ -66,7 +66,7 @@ def remove_background(im):
     for x, y in [(x, y) for x in range(0, w, 4) for y in (0, h - 1)] + [(x, y) for y in range(0, h, 4) for x in (0, w - 1)]:
         c = px[x, y]
         if c != marker and sum(abs(c[i] - bg[i]) for i in range(3)) <= 60:
-            ImageDraw.floodfill(rgb, (x, y), marker, thresh=40)
+            ImageDraw.floodfill(rgb, (x, y), marker, thresh=thresh)
     a = np.asarray(rgb)
     alpha = np.where((a == marker).all(-1), 0, 255).astype(np.uint8)
     out = rgb.convert('RGBA')

@@ -42,7 +42,7 @@ FuchsiaCity_Text_SafariZoneOfficeSign::
 
 FuchsiaCity_Text_GymSign::
     .string "FUCHSIA CITY POKéMON GYM\n"
-    .string "LEADER: KOGA\l"
+    .string "LEADER: TENTEN\l"
     .string "The Poisonous Ninja Master$"
 
 FuchsiaCity_Text_ChanseySign::

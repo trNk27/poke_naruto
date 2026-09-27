@@ -640,3 +640,48 @@ FALLBACK = {
     'DRAGON':   ('SNAKE', 'MANDA', 'MANDA'),
     'DARK':     ('NINKEN', 'GENIN', 'SHIKAMARU'),
 }
+
+
+# Story characters get Naruto characters' portraits (tools/naruto/trainers.py)
+# and names. Replaced inside the game's text strings only; each new name is at
+# most a little longer than the old one so the text still fits its boxes.
+TRAINER_NAMES = [
+    ('PROF. OAK', 'HOKAGE'),
+    ('OAK', 'HOKAGE'),
+    ('BROCK', 'ONOKI'),
+    ('MISTY', 'MEI'),
+    ('LT. SURGE', 'RAIKAGE'),
+    ('LT.SURGE', 'RAIKAGE'),
+    ('ERIKA', 'INO'),
+    ('KOGA', 'TENTEN'),
+    ('SABRINA', 'KURENAI'),
+    ('BLAINE', 'ASUMA'),
+    ('GIOVANNI', 'PAIN'),
+    ('LORELEI', 'KONAN'),
+    ('BRUNO', 'BEE'),
+    ('AGATHA', 'CHIYO'),
+    ('LANCE', 'MADARA'),
+    ('TEAM ROCKET', 'AKATSUKI'),
+    ('ROCKETS', 'AKATSUKI'),
+    ('ROCKET', 'AKATSUKI'),
+]
+
+# Lines that got too long after renaming, rewrapped by hand.
+TEXT_FIXUPS = [
+    ('src/data/text/quest_log.h', 'Played a lot of games at the AKATSUKI\\nGAME CORNER',
+     'Played a lot of games at the\\nAKATSUKI GAME CORNER'),
+    ('src/strings.c', "HOKAGE: It's important to get to know\\nyour",
+     "HOKAGE: It's important to get to\\nknow your"),
+]
+
+# Suggested names on the naming screen (LeafGreen's choices).
+NAME_CHOICES = {'GREEN': 'NARUTO', 'LEAF': 'SAKURA', 'RED': 'SASUKE'}
+
+# The player's red cap and jacket become Naruto orange: palette file ->
+# {colour index: new colour}. (The player sprites share these palettes.)
+PLAYER_COLORS = {
+    'graphics/object_events/palettes/player.pal': {11: (255, 160, 48), 12: (224, 112, 24), 8: (136, 64, 16)},
+    'graphics/object_events/palettes/player_reflection.pal': {12: (255, 200, 150)},
+    'graphics/trainers/palettes/red_back_pic.pal': {11: (255, 160, 48), 12: (224, 112, 24)},
+    'graphics/trainers/palettes/leaf_back_pic.pal': {11: (255, 160, 48), 12: (224, 112, 24)},
+}

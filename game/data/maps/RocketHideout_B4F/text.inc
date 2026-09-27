@@ -1,11 +1,11 @@
 RocketHideout_B4F_Text_GiovanniIntro::
     .string "So! I must say, I am impressed you\n"
     .string "got here.\p"
-    .string "TEAM ROCKET captures POKéMON from\n"
+    .string "AKATSUKI captures POKéMON from\n"
     .string "around the world.\p"
     .string "They're important tools for keeping\n"
     .string "our criminal enterprise going.\p"
-    .string "I am the leader, GIOVANNI!\p"
+    .string "I am the leader, PAIN!\p"
     .string "For your insolence, you will feel a\n"
     .string "world of pain!$"
 
@@ -30,7 +30,7 @@ RocketHideout_B4F_Text_Grunt2Defeat::
 
 RocketHideout_B4F_Text_Grunt2PostBattle::
     .string "Do you have something against TEAM\n"
-    .string "ROCKET?$"
+    .string "AKATSUKI?$"
 
 RocketHideout_B4F_Text_Grunt3Intro::
     .string "How can you not see the beauty of\n"

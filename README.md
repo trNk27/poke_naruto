@@ -78,6 +78,13 @@ rain boosts Suiton). The five chakra natures beat each other in a circle as in
 the series: Katon > Futon > Raiton > Doton > Suiton > Katon. The full chart is in
 `tools/naruto/roster.py`.
 
+**Characters.** Gym leaders, the Elite Four, the rival and the other trainers
+have Naruto-style portraits, and the story characters are renamed: the
+professor is the HOKAGE, the rival SASUKE (a suggested name), and the leaders
+are ONOKI, MEI, RAIKAGE, INO, TENTEN, KURENAI, ASUMA and PAIN (the boss), with
+KONAN, BEE, CHIYO and MADARA as the Elite Four. Team Rocket's grunts wear
+rogue-ninja cloaks, and the player wears orange.
+
 Everything comes from `tools/naruto/roster.py`; after editing it run
 `python3 tools/naruto/apply.py`, rebuild and regenerate the patches.
 The battle sprites and menu icons come from artwork in `tools/naruto/art/`
@@ -87,6 +94,10 @@ with Black Forest Labs' FLUX.2 [pro] by `tools/naruto/generate_art.py` (about
 turns the artwork into 64×64 16-colour sprites, a shiny palette, the menu
 icons (with three extra icon palettes made for the ninjas) and the sprite
 positions. To redo a ninja, delete its artwork, run both scripts and rebuild.
+`tools/naruto/trainers.py` does the same for the trainer portraits (four
+characters per generated image) and the pictures in the new-game scene, and
+`tools/naruto/title.py` makes the title screen (a NARUTO logo drawn with a
+font, and Kurama in place of Venusaur).
 
 ## Hosting
 

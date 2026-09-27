@@ -12,7 +12,7 @@ PokemonTower_7F_Text_Grunt2Intro::
     .string "This old guy marched right up to\n"
     .string "our HIDEOUT.\p"
     .string "Then, he starts ranting about how\n"
-    .string "TEAM ROCKET's abusing POKéMON.\p"
+    .string "AKATSUKI's abusing POKéMON.\p"
     .string "So, we're just talking it over as\n"
     .string "adults.$"
 
@@ -29,7 +29,7 @@ PokemonTower_7F_Text_Grunt3Intro::
     .string "You're not saving anyone, kid!$"
 
 PokemonTower_7F_Text_Grunt3Defeat::
-    .string "Don't fight us ROCKETS!$"
+    .string "Don't fight us AKATSUKI!$"
 
 PokemonTower_7F_Text_Grunt3PostBattle::
     .string "You're not getting away with this!$"

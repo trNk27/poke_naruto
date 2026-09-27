@@ -59,14 +59,20 @@ def request(url, key, body=None):
         return json.loads(res.read())
 
 
-def generate(ninja, key, ref=None):
-    body = {
-        'prompt': (REF_PROMPT if ref else PROMPT).format(look=ninja['look']),
-        'width': 1024,
-        'height': 512,
-        'output_format': 'png',
-        'seed': sum(map(ord, ninja['key'])),
-    }
+def request_image(prompt, key, path, width=1024, height=512, seed=0, ref=None, attempts=6):
+    """Generates one image and saves it as `path`. The API's prompt filter is
+    partly random and rejected requests cost nothing, so those are retried."""
+    for attempt in range(attempts):
+        try:
+            return request_image_once(prompt, key, path, width, height, seed, ref)
+        except RuntimeError as e:
+            if 'Request Moderated' not in str(e) or attempt == attempts - 1:
+                raise
+            print(f'  {os.path.basename(path)}: rejected by the prompt filter, retrying', flush=True)
+
+
+def request_image_once(prompt, key, path, width, height, seed, ref):
+    body = {'prompt': prompt, 'width': width, 'height': height, 'output_format': 'png', 'seed': seed}
     if ref:
         body['input_image'] = ref
     job = request(f'{API}/{MODEL}', key, body)
@@ -78,12 +84,17 @@ def generate(ninja, key, ref=None):
         if status == 'Ready':
             with urllib.request.urlopen(result['result']['sample'], timeout=120) as res:
                 image = res.read()
-            with open(os.path.join(ART, f'{ninja["key"]}.png'), 'wb') as f:
+            with open(path, 'wb') as f:
                 f.write(image)
             return
         if status not in ('Pending', 'Queued', 'Processing'):
-            raise RuntimeError(f'{ninja["key"]}: {status}: {result}')
-    raise RuntimeError(f'{ninja["key"]}: timed out')
+            raise RuntimeError(f'{os.path.basename(path)}: {status}: {result}')
+    raise RuntimeError(f'{os.path.basename(path)}: timed out')
+
+
+def generate(ninja, key, ref=None):
+    request_image((REF_PROMPT if ref else PROMPT).format(look=ninja['look']), key,
+                  os.path.join(ART, f'{ninja["key"]}.png'), seed=sum(map(ord, ninja['key'])), ref=ref)
 
 
 def main():

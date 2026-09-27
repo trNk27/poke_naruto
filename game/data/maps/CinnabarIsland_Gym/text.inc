@@ -1,6 +1,6 @@
 CinnabarIsland_Gym_Text_BlaineIntro::
     .string "Hah!\p"
-    .string "I am BLAINE, the red-hot LEADER\n"
+    .string "I am ASUMA, the red-hot LEADER\n"
     .string "of CINNABAR GYM!\p"
     .string "My fiery POKéMON are all rough\n"
     .string "and ready with intense heat!\p"
@@ -26,7 +26,7 @@ CinnabarIsland_Gym_Text_ExplainVolcanoBadge::
 
 CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine::
     .string "{PLAYER} received TM38\n"
-    .string "from BLAINE.$"
+    .string "from ASUMA.$"
 
 CinnabarIsland_Gym_Text_BlainePostBattle::
     .string "TM38 contains FIRE BLAST.\n"
@@ -86,18 +86,18 @@ CinnabarIsland_Gym_Text_RamonPostBattle::
     .string "I'd use that!$"
 
 CinnabarIsland_Gym_Text_DerekIntro::
-    .string "I know why BLAINE became a\n"
+    .string "I know why ASUMA became a\n"
     .string "TRAINER.$"
 
 CinnabarIsland_Gym_Text_DerekDefeat::
     .string "Ow!$"
 
 CinnabarIsland_Gym_Text_DerekPostBattle::
-    .string "Our LEADER, BLAINE, became lost\n"
+    .string "Our LEADER, ASUMA, became lost\n"
     .string "in the mountains but good.\p"
     .string "Night fell when a fiery bird\n"
     .string "POKéMON appeared.\p"
-    .string "Its light allowed BLAINE to find\n"
+    .string "Its light allowed ASUMA to find\n"
     .string "his way down safely.$"
 
 CinnabarIsland_Gym_Text_DustyIntro::
@@ -127,7 +127,7 @@ CinnabarIsland_Gym_Text_ZacPostBattle::
 CinnabarIsland_Gym_Text_GymGuyAdvice::
     .string "Yo!\n"
     .string "Champ in the making!\p"
-    .string "The hotheaded BLAINE is a FIRE\n"
+    .string "The hotheaded ASUMA is a FIRE\n"
     .string "POKéMON pro.\p"
     .string "Douse his spirits with water!\p"
     .string "You'd better take some\n"
@@ -139,13 +139,13 @@ CinnabarIsland_Gym_Text_GymGuyPostVictory::
 
 CinnabarIsland_Gym_Text_GymStatue::
     .string "CINNABAR POKéMON GYM\n"
-    .string "LEADER: BLAINE\p"
+    .string "LEADER: ASUMA\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}$"
 
 CinnabarIsland_Gym_Text_GymStatuePlayerWon::
     .string "CINNABAR POKéMON GYM\n"
-    .string "LEADER: BLAINE\p"
+    .string "LEADER: ASUMA\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}, {PLAYER}$"
 

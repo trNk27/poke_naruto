@@ -65,7 +65,7 @@ CeruleanCity_Text_OkayIllReturnStolenTM::
 
 CeruleanCity_Text_RecoveredTM28FromGrunt::
     .string "{PLAYER} recovered TM28 from\n"
-    .string "the TEAM ROCKET GRUNT.$"
+    .string "the AKATSUKI GRUNT.$"
 
 CeruleanCity_Text_BetterGetMovingBye::
     .string "I better get moving!\n"
@@ -102,10 +102,10 @@ CeruleanCity_Text_PokemonEncyclopediaAmusing::
 
 CeruleanCity_Text_PeopleHereWereRobbed::
     .string "The people here were robbed.\p"
-    .string "It's obvious that TEAM ROCKET is\n"
+    .string "It's obvious that AKATSUKI is\n"
     .string "behind this most heinous crime!\p"
     .string "Even our POLICE FORCE has\n"
-    .string "trouble with the ROCKETS!$"
+    .string "trouble with the AKATSUKI!$"
 
 CeruleanCity_Text_SlowbroUseSonicboom::
     .string "Okay! SLOWBRO!\n"
@@ -177,6 +177,6 @@ CeruleanCity_Text_BikeShopSign::
 
 CeruleanCity_Text_GymSign::
     .string "CERULEAN CITY POKéMON GYM\n"
-    .string "LEADER: MISTY\l"
+    .string "LEADER: MEI\l"
     .string "The Tomboyish Mermaid!$"
 

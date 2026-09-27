@@ -4,14 +4,14 @@ SaffronCity_Text_WhatDoYouWantGetLost::
 
 SaffronCity_Text_BossTakeTownForTeamRocket::
     .string "BOSS said he'll take this town\n"
-    .string "in the name of TEAM ROCKET!$"
+    .string "in the name of AKATSUKI!$"
 
 SaffronCity_Text_DontGetDefiantOrIllHurtYou::
     .string "Don't get defiant!\n"
     .string "Or I'll have to hurt you!$"
 
 SaffronCity_Text_SaffronBelongsToTeamRocket::
-    .string "SAFFRON belongs to TEAM ROCKET!$"
+    .string "SAFFRON belongs to AKATSUKI!$"
 
 SaffronCity_Text_CriminalLifeMakesMeFeelAlive::
     .string "My life as a criminal makes me feel\n"
@@ -27,16 +27,16 @@ SaffronCity_Text_WeCanExploitMonsAroundWorld::
     .string "We'll get stinking rich, yeahah!$"
 
 SaffronCity_Text_YouBeatTeamRocket::
-    .string "You beat TEAM ROCKET all alone?\n"
+    .string "You beat AKATSUKI all alone?\n"
     .string "That's amazing!$"
 
 SaffronCity_Text_SafeToGoOutAgain::
-    .string "Yeah! TEAM ROCKET is gone!\n"
+    .string "Yeah! AKATSUKI is gone!\n"
     .string "It's safe to go out again!$"
 
 SaffronCity_Text_PeopleComingBackToSaffron::
     .string "People fled from here in droves\n"
-    .string "when those ROCKETS came.\p"
+    .string "when those AKATSUKI came.\p"
     .string "They should be flocking back to\n"
     .string "SAFFRON now.$"
 
@@ -50,7 +50,7 @@ SaffronCity_Text_Pidgeot::
     .string "PIDGEOT: Bi bibii!$"
 
 SaffronCity_Text_SawRocketBossEscaping::
-    .string "I saw the ROCKET BOSS escaping\n"
+    .string "I saw the AKATSUKI BOSS escaping\n"
     .string "SILPH's building.$"
 
 SaffronCity_Text_ImASecurityGuard::
@@ -71,7 +71,7 @@ SaffronCity_Text_FightingDojo::
 
 SaffronCity_Text_GymSign::
     .string "SAFFRON CITY POKéMON GYM\n"
-    .string "LEADER: SABRINA\l"
+    .string "LEADER: KURENAI\l"
     .string "The Master of PSYCHIC POKéMON!$"
 
 SaffronCity_Text_FullHealCuresStatus::
@@ -108,8 +108,8 @@ SaffronCity_Text_HowCanClubNotRecognizeLance::
     .string "This FAN CLUB…\n"
     .string "No one here has a clue!\p"
     .string "How could they not recognize\n"
-    .string "the brilliance that is LANCE?\p"
+    .string "the brilliance that is MADARA?\p"
     .string "He stands for justice!\n"
     .string "He's cool, and yet passionate!\l"
-    .string "He's the greatest, LANCE!$"
+    .string "He's the greatest, MADARA!$"
 

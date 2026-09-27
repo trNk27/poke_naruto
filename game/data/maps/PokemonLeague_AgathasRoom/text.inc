@@ -1,6 +1,6 @@
 PokemonLeague_AgathasRoom_Text_Intro::
-    .string "I am AGATHA of the ELITE FOUR.\p"
-    .string "I hear OAK's taken a lot of\n"
+    .string "I am CHIYO of the ELITE FOUR.\p"
+    .string "I hear HOKAGE's taken a lot of\n"
     .string "interest in you, child.\p"
     .string "That old duff was once tough and\n"
     .string "handsome.\p"
@@ -14,8 +14,8 @@ PokemonLeague_AgathasRoom_Text_Intro::
     .string "TRAINER battles!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_AgathasRoom_Text_RematchIntro::
-    .string "I am AGATHA of the ELITE FOUR.\p"
-    .string "You're the child that OAK's taken\n"
+    .string "I am CHIYO of the ELITE FOUR.\p"
+    .string "You're the child that HOKAGE's taken\n"
     .string "under his wing, aren't you?\p"
     .string "That old duff was once tough and\n"
     .string "handsome.\p"

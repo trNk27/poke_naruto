@@ -31,7 +31,7 @@ SilphCo_9F_Text_EdPostBattle::
     .string "Think about type advantages.$"
 
 SilphCo_9F_Text_Grunt2Intro::
-    .string "I am one of the four ROCKET\n"
+    .string "I am one of the four AKATSUKI\n"
     .string "BROTHERS!$"
 
 SilphCo_9F_Text_Grunt2Defeat::

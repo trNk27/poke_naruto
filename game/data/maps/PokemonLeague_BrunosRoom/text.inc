@@ -1,5 +1,5 @@
 PokemonLeague_BrunosRoom_Text_Intro::
-    .string "I am BRUNO of the ELITE FOUR!\p"
+    .string "I am BEE of the ELITE FOUR!\p"
     .string "Through rigorous training, people\n"
     .string "and POKéMON can become stronger\l"
     .string "without limit.\p"
@@ -12,7 +12,7 @@ PokemonLeague_BrunosRoom_Text_Intro::
     .string "Hoo hah!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_BrunosRoom_Text_RematchIntro::
-    .string "I am BRUNO of the ELITE FOUR!\p"
+    .string "I am BEE of the ELITE FOUR!\p"
     .string "Through rigorous training, people\n"
     .string "and POKéMON can become stronger\l"
     .string "without limit.\p"

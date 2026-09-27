@@ -1,10 +1,10 @@
 Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough::
     .string "Hi! Remember me?\n"
-    .string "I'm one of PROF. OAK's AIDES.\p"
+    .string "I'm one of HOKAGE's AIDES.\p"
     .string "If your POKéDEX has complete data\n"
     .string "on {STR_VAR_1} species, I'm supposed to\l"
     .string "give you a reward.\p"
-    .string "PROF. OAK entrusted me with the\n"
+    .string "HOKAGE entrusted me with the\n"
     .string "{STR_VAR_2} for you.\p"
     .string "So, {PLAYER}, let me ask you.\p"
     .string "Have you gathered data on at least\n"

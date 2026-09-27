@@ -4,7 +4,7 @@ CeladonCity_Gym_Text_ErikaIntro::
     .string "It's so pleasant…\p"
     .string "…Oh, dear…\n"
     .string "I must have dozed off. Welcome.\p"
-    .string "My name is ERIKA.\n"
+    .string "My name is INO.\n"
     .string "I am the LEADER of CELADON GYM.\p"
     .string "I am a student of the art of\n"
     .string "flower arranging.\p"
@@ -36,7 +36,7 @@ CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
 
 CeladonCity_Gym_Text_ReceivedTM19FromErika::
     .string "{PLAYER} received TM19\n"
-    .string "from ERIKA.$"
+    .string "from INO.$"
 
 CeladonCity_Gym_Text_ExplainTM19::
     .string "TM19 contains GIGA DRAIN.\p"
@@ -58,7 +58,7 @@ CeladonCity_Gym_Text_KayDefeat::
 
 CeladonCity_Gym_Text_KayPostBattle::
     .string "Bleaah!\n"
-    .string "I hope ERIKA wipes you out!$"
+    .string "I hope INO wipes you out!$"
 
 CeladonCity_Gym_Text_BridgetIntro::
     .string "Oh, welcome.\n"
@@ -81,7 +81,7 @@ CeladonCity_Gym_Text_TinaDefeat::
     .string "You're an eye-opener!$"
 
 CeladonCity_Gym_Text_TinaPostBattle::
-    .string "Oh, you were looking at ERIKA…\n"
+    .string "Oh, you were looking at INO…\n"
     .string "You weren't looking at me…$"
 
 CeladonCity_Gym_Text_TamiaIntro::
@@ -109,7 +109,7 @@ CeladonCity_Gym_Text_LisaDefeat::
     .string "You!$"
 
 CeladonCity_Gym_Text_LisaPostBattle::
-    .string "Our LEADER ERIKA might be quiet,\n"
+    .string "Our LEADER INO might be quiet,\n"
     .string "but she's famous around here.$"
 
 CeladonCity_Gym_Text_LoriIntro::
@@ -140,13 +140,13 @@ CeladonCity_Gym_Text_MaryPostBattle::
 
 CeladonCity_Gym_Text_GymStatue::
     .string "CELADON POKéMON GYM\n"
-    .string "LEADER: ERIKA\p"
+    .string "LEADER: INO\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}$"
 
 CeladonCity_Gym_Text_GymStatuePlayerWon::
     .string "CELADON POKéMON GYM\n"
-    .string "LEADER: ERIKA\p"
+    .string "LEADER: INO\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}, {PLAYER}$"
 

@@ -32,7 +32,7 @@ SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
     .string "{PLAYER} received TM04 from\n"
-    .string "SABRINA.$"
+    .string "KURENAI.$"
 
 SaffronCity_Gym_Text_ExplainTM04::
     .string "TM04 is CALM MIND.\p"
@@ -43,7 +43,7 @@ SaffronCity_Gym_Text_BagFullOfOtherItems::
     .string "Your BAG is full of other items.$"
 
 SaffronCity_Gym_Text_AmandaIntro::
-    .string "SABRINA is far younger than I,\n"
+    .string "KURENAI is far younger than I,\n"
     .string "but she has earned my respect.$"
 
 SaffronCity_Gym_Text_AmandaDefeat::
@@ -52,7 +52,7 @@ SaffronCity_Gym_Text_AmandaDefeat::
 SaffronCity_Gym_Text_AmandaPostBattle::
     .string "In a battle of equals, the one\n"
     .string "with the stronger will wins.\p"
-    .string "If you wish to beat SABRINA, focus\n"
+    .string "If you wish to beat KURENAI, focus\n"
     .string "and will yourself to victory.$"
 
 SaffronCity_Gym_Text_JohanIntro::
@@ -87,7 +87,7 @@ SaffronCity_Gym_Text_TyronDefeat::
     .string "I don't believe this!$"
 
 SaffronCity_Gym_Text_TyronPostBattle::
-    .string "SABRINA just wiped out the KARATE\n"
+    .string "KURENAI just wiped out the KARATE\n"
     .string "MASTER next door.$"
 
 SaffronCity_Gym_Text_TashaIntro::
@@ -102,7 +102,7 @@ SaffronCity_Gym_Text_TashaPostBattle::
     .string "place.$"
 
 SaffronCity_Gym_Text_CameronIntro::
-    .string "SABRINA is young, but she's also\n"
+    .string "KURENAI is young, but she's also\n"
     .string "our highly skilled LEADER.\p"
     .string "You won't reach her easily!$"
 
@@ -121,7 +121,7 @@ SaffronCity_Gym_Text_CameronPostBattle::
 SaffronCity_Gym_Text_PrestonIntro::
     .string "SAFFRON POKéMON GYM is famous for\n"
     .string "training psychics.\p"
-    .string "You want to see SABRINA, don't\n"
+    .string "You want to see KURENAI, don't\n"
     .string "you? I can tell!$"
 
 SaffronCity_Gym_Text_PrestonDefeat::
@@ -134,7 +134,7 @@ SaffronCity_Gym_Text_PrestonPostBattle::
 SaffronCity_Gym_Text_GymGuyAdvice::
     .string "Yo!\n"
     .string "Champ in the making!\p"
-    .string "SABRINA's POKéMON use psychic\n"
+    .string "KURENAI's POKéMON use psychic\n"
     .string "power instead of force.\p"
     .string "FIGHTING POKéMON are especially\n"
     .string "weak against PSYCHIC POKéMON.\p"
@@ -148,13 +148,13 @@ SaffronCity_Gym_Text_GymGuyPostVictory::
 
 SaffronCity_Gym_Text_GymStatue::
     .string "SAFFRON POKéMON GYM\n"
-    .string "LEADER: SABRINA\p"
+    .string "LEADER: KURENAI\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}$"
 
 SaffronCity_Gym_Text_GymStatuePlayerWon::
     .string "SAFFRON POKéMON GYM\n"
-    .string "LEADER: SABRINA\p"
+    .string "LEADER: KURENAI\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}, {PLAYER}$"
 

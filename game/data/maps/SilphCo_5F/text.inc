@@ -1,10 +1,10 @@
 SilphCo_5F_Text_RocketsInUproarAboutIntruder::
-    .string "TEAM ROCKET is in an uproar over\n"
+    .string "AKATSUKI is in an uproar over\n"
     .string "some intruder.\p"
     .string "That's you, right?$"
 
 SilphCo_5F_Text_YoureOurHeroThankYou::
-    .string "TEAM ROCKET took off!\n"
+    .string "AKATSUKI took off!\n"
     .string "You're our hero! Thank you!$"
 
 SilphCo_5F_Text_Grunt1Intro::
@@ -16,7 +16,7 @@ SilphCo_5F_Text_Grunt1Defeat::
 
 SilphCo_5F_Text_Grunt1PostBattle::
     .string "It's not smart to pick a fight with\n"
-    .string "TEAM ROCKET!$"
+    .string "AKATSUKI!$"
 
 SilphCo_5F_Text_BeauIntro::
     .string "We study POKé BALL technology on\n"
@@ -43,7 +43,7 @@ SilphCo_5F_Text_DaltonPostBattle::
     .string "It's a long way to my BOSS!$"
 
 SilphCo_5F_Text_Grunt2Intro::
-    .string "Show TEAM ROCKET a little respect!$"
+    .string "Show AKATSUKI a little respect!$"
 
 SilphCo_5F_Text_Grunt2Defeat::
     .string "Cough…\n"

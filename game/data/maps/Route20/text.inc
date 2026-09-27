@@ -116,5 +116,5 @@ Route20_Text_SeafoamIslands::
 Route20_Text_MistyTrainsHere::
     .string "Strong TRAINERS and WATER POKéMON\n"
     .string "are common sights in these parts.\p"
-    .string "They say that MISTY of the\n"
+    .string "They say that MEI of the\n"
     .string "CERULEAN GYM trains here.$"

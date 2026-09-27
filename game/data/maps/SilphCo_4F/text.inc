@@ -4,10 +4,10 @@ SilphCo_4F_Text_CantYouSeeImHiding::
 
 SilphCo_4F_Text_TeamRocketIsGone::
     .string "Huh?\n"
-    .string "TEAM ROCKET is gone?$"
+    .string "AKATSUKI is gone?$"
 
 SilphCo_4F_Text_Grunt1Intro::
-    .string "TEAM ROCKET has taken control\n"
+    .string "AKATSUKI has taken control\n"
     .string "of SILPH CO.!$"
 
 SilphCo_4F_Text_Grunt1Defeat::

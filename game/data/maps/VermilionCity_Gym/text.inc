@@ -25,7 +25,7 @@ VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
 
 VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
     .string "{PLAYER} received TM34\n"
-    .string "from LT. SURGE.$"
+    .string "from RAIKAGE.$"
 
 VermilionCity_Gym_Text_ExplainTM34::
     .string "TM34 contains SHOCK WAVE!\p"
@@ -40,7 +40,7 @@ VermilionCity_Gym_Text_LtSurgeDefeat::
     .string "Fine, then, take the THUNDERBADGE!$"
 
 VermilionCity_Gym_Text_TuckerIntro::
-    .string "When I was in the Army, LT. SURGE\n"
+    .string "When I was in the Army, RAIKAGE\n"
     .string "was my strict CO.\p"
     .string "He was a hard taskmaster.$"
 
@@ -50,7 +50,7 @@ VermilionCity_Gym_Text_TuckerDefeat::
 
 VermilionCity_Gym_Text_TuckerPostBattle::
     .string "It's not easy opening that door.\p"
-    .string "LT. SURGE was always famous for\n"
+    .string "RAIKAGE was always famous for\n"
     .string "his cautious nature in the Army.$"
 
 VermilionCity_Gym_Text_BailyIntro::
@@ -63,7 +63,7 @@ VermilionCity_Gym_Text_BailyDefeat::
 
 VermilionCity_Gym_Text_BailyPostBattle::
     .string "Okay, I'll talk!\p"
-    .string "LT. SURGE said he hid door\n"
+    .string "RAIKAGE said he hid door\n"
     .string "switches inside something.$"
 
 VermilionCity_Gym_Text_DwayneIntro::
@@ -75,7 +75,7 @@ VermilionCity_Gym_Text_DwayneDefeat::
     .string "Surprised me!$"
 
 VermilionCity_Gym_Text_DwaynePostBattle::
-    .string "LT. SURGE installed the traps in\n"
+    .string "RAIKAGE installed the traps in\n"
     .string "the GYM himself.\p"
     .string "He set up double locks everywhere.\n"
     .string "Let me give you a hint.\p"
@@ -85,7 +85,7 @@ VermilionCity_Gym_Text_DwaynePostBattle::
 VermilionCity_Gym_Text_GymGuyAdvice::
     .string "Yo!\n"
     .string "Champ in the making!\p"
-    .string "LT. SURGE has a nickname.\p"
+    .string "RAIKAGE has a nickname.\p"
     .string "People refer to him as the\n"
     .string "Lightning American!\p"
     .string "He's an expert on electric\n"
@@ -93,7 +93,7 @@ VermilionCity_Gym_Text_GymGuyAdvice::
     .string "BIRD/WATER-type POKéMON match\n"
     .string "poorly against the ELECTRIC type.\p"
     .string "Beware of paralysis, too.\p"
-    .string "LT. SURGE is very cautious.\p"
+    .string "RAIKAGE is very cautious.\p"
     .string "He's locked himself in, so it won't\n"
     .string "be easy getting to him.$"
 
@@ -103,13 +103,13 @@ VermilionCity_Gym_Text_GymGuyPostVictory::
 
 VermilionCity_Gym_Text_GymStatue::
     .string "VERMILION POKéMON GYM\n"
-    .string "LEADER: LT. SURGE\p"
+    .string "LEADER: RAIKAGE\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}$"
 
 VermilionCity_Gym_Text_GymStatuePlayerWon::
     .string "VERMILION POKéMON GYM\n"
-    .string "LEADER: LT. SURGE\p"
+    .string "LEADER: RAIKAGE\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}, {PLAYER}$"
 

@@ -2,12 +2,12 @@ ViridianCity_Gym_Text_GiovanniIntro::
     .string "Fwahahaha!\n"
     .string "Welcome to my hideout!\p"
     .string "It shall be so until I can restore\n"
-    .string "TEAM ROCKET to its former glory.\p"
+    .string "AKATSUKI to its former glory.\p"
     .string "But, you have found me again.\n"
     .string "So be it.\l"
     .string "This time, I'm not holding back!\p"
     .string "Once more, you shall face\n"
-    .string "GIOVANNI, the greatest TRAINER!{PLAY_BGM}{MUS_ENCOUNTER_ROCKET}$"
+    .string "PAIN, the greatest TRAINER!{PLAY_BGM}{MUS_ENCOUNTER_ROCKET}$"
 
 ViridianCity_Gym_Text_GiovanniDefeat::
     .string "Ha!\n"
@@ -20,7 +20,7 @@ ViridianCity_Gym_Text_GiovanniPostBattle::
     .string "Having lost in this fashion, \n"
     .string "I can't face my followers.\l"
     .string "I have betrayed their trust.\p"
-    .string "As of today, TEAM ROCKET is\n"
+    .string "As of today, AKATSUKI is\n"
     .string "finished forever!\p"
     .string "As for myself, I shall dedicate\n"
     .string "my life to training again.\p"
@@ -40,7 +40,7 @@ ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis::
 
 ViridianCity_Gym_Text_ReceivedTM26FromGiovanni::
     .string "{PLAYER} received TM26\n"
-    .string "from GIOVANNI.$"
+    .string "from PAIN.$"
 
 ViridianCity_Gym_Text_ExplainTM26::
     .string "TM26 contains EARTHQUAKE.\p"
@@ -154,7 +154,7 @@ ViridianCity_Gym_Text_GymGuyAdvice::
     .string "here like GROUND-type POKéMON.$"
 
 ViridianCity_Gym_Text_GymGuyPostVictory::
-    .string "Blow me away! GIOVANNI was the\n"
+    .string "Blow me away! PAIN was the\n"
     .string "GYM LEADER of VIRIDIAN?$"
 
 ViridianCity_Gym_Text_GymStatue::
@@ -165,7 +165,7 @@ ViridianCity_Gym_Text_GymStatue::
 
 ViridianCity_Gym_Text_GymStatuePlayerWon::
     .string "VIRIDIAN POKéMON GYM\n"
-    .string "LEADER: GIOVANNI\p"
+    .string "LEADER: PAIN\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}, {PLAYER}$"
 

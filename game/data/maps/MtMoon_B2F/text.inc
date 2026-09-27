@@ -22,7 +22,7 @@ MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils::
     .string "fossils.$"
 
 MtMoon_B2F_Text_Grunt1Intro::
-    .string "We, TEAM ROCKET, shall find the\n"
+    .string "We, AKATSUKI, shall find the\n"
     .string "fossils!\p"
     .string "Reviving POKéMON from them will\n"
     .string "earn us huge riches!$"
@@ -33,10 +33,10 @@ MtMoon_B2F_Text_Grunt1Defeat::
 
 MtMoon_B2F_Text_Grunt1PostBattle::
     .string "You made me mad!\n"
-    .string "TEAM ROCKET will blacklist you!$"
+    .string "AKATSUKI will blacklist you!$"
 
 MtMoon_B2F_Text_Grunt2Intro::
-    .string "We, TEAM ROCKET, are POKéMON\n"
+    .string "We, AKATSUKI, are POKéMON\n"
     .string "gangsters!\l"
     .string "We strike fear with our strength!$"
 

@@ -31,7 +31,7 @@ PewterCity_Text_BrockOnlySeriousTrainerHere::
     .string "TRAINERS here.\p"
     .string "They're all like BUG CATCHERS,\n"
     .string "you know, just hobbyists.\p"
-    .string "But PEWTER GYM's BROCK isn't like\n"
+    .string "But PEWTER GYM's ONOKI isn't like\n"
     .string "that, not one bit.$"
 
 PewterCity_Text_DidYouCheckOutMuseum::
@@ -64,12 +64,12 @@ PewterCity_Text_SprayingRepelToKeepWildMonsOut::
 
 PewterCity_Text_BrocksLookingForChallengersFollowMe::
     .string "You're a TRAINER, right?\p"
-    .string "BROCK's looking for new\n"
+    .string "ONOKI's looking for new\n"
     .string "challengers. Follow me!$"
 
 PewterCity_Text_GoTakeOnBrock::
     .string "If you have the right stuff,\n"
-    .string "go take on BROCK!$"
+    .string "go take on ONOKI!$"
 
 PewterCity_Text_TrainerTipsEarningEXP::
     .string "TRAINER TIPS\p"
@@ -88,7 +88,7 @@ PewterCity_Text_MuseumOfScience::
 
 PewterCity_Text_GymSign::
     .string "PEWTER CITY POKéMON GYM\n"
-    .string "LEADER: BROCK\l"
+    .string "LEADER: ONOKI\l"
     .string "The Rock-Solid POKéMON TRAINER!$"
 
 PewterCity_Text_CitySign::
@@ -122,7 +122,7 @@ PewterCity_Text_OhPlayer::
 
 PewterCity_Text_AskedToDeliverThis::
     .string "I'm glad I caught up to you.\n"
-    .string "I'm PROF. OAK's AIDE.\p"
+    .string "I'm HOKAGE's AIDE.\p"
     .string "I've been asked to deliver this,\n"
     .string "so here you go.$"
 

@@ -2,8 +2,8 @@ FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland::
     .string "We've had a great and powerful\n"
     .string "TRAINER grow up on this island.\p"
     .string "I bet even you'd know her.\n"
-    .string "It's LORELEI of the ELITE FOUR!\p"
-    .string "When LORELEI was just a tyke,\n"
+    .string "It's KONAN of the ELITE FOUR!\p"
+    .string "When KONAN was just a tyke,\n"
     .string "I taught her about POKéMON.$"
 
 FourIsland_Mart_Text_IcefallCaveIsFrigid::

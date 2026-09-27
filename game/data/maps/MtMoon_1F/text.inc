@@ -67,7 +67,7 @@ MtMoon_1F_Text_KentDefeat::
 
 MtMoon_1F_Text_KentPostBattle::
     .string "I saw them!\n"
-    .string "I'm sure they're from TEAM ROCKET!$"
+    .string "I'm sure they're from AKATSUKI!$"
 
 MtMoon_1F_Text_RobbyIntro::
     .string "You need to go through this cave\n"
@@ -88,5 +88,5 @@ MtMoon_1F_Text_ZubatIsABloodsucker::
 MtMoon_1F_Text_BrockHelpsExcavateFossils::
     .string "Hi, I'm excavating for fossils here\n"
     .string "under MT. MOON.\p"
-    .string "Sometimes, BROCK of PEWTER GYM\n"
+    .string "Sometimes, ONOKI of PEWTER GYM\n"
     .string "lends me a hand.$"

@@ -72,24 +72,24 @@ SaffronCity_PokemonTrainerFanClub_Text_CountingOnYou::
     .string "I believe in shorts!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_BrocksMyHero::
-    .string "BROCK's my hero!\n"
+    .string "ONOKI's my hero!\n"
     .string "He's a man among men!\p"
     .string "Heheh, I got my mom to do\n"
     .string "something for me.\p"
-    .string "I got her to embroider “BROCK”\n"
+    .string "I got her to embroider “ONOKI”\n"
     .string "on my shorts!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_BrocksFanToBitterEnd::
     .string "…  …\p"
     .string "…  …\n"
-    .string "I'm BROCK's fan!\p"
+    .string "I'm ONOKI's fan!\p"
     .string "Even if I were his only fan,\n"
     .string "I swear it on my rock-hard will,\l"
     .string "and on my shorts!\p"
     .string "I'll be his fan to the bitter end!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_BrocksLastWordOnCool::
-    .string "BROCK's the last word on cool,\n"
+    .string "ONOKI's the last word on cool,\n"
     .string "end of story!\p"
     .string "Now there's a guy who I want to\n"
     .string "be like!$"
@@ -151,14 +151,14 @@ SaffronCity_PokemonTrainerFanClub_Text_EveryoneButMeStoppedBeingYourFan::
 
 SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeSabrina::
     .string "Do you know what?\n"
-    .string "I want to be like SABRINA!\p"
+    .string "I want to be like KURENAI!\p"
     .string "I want to be a psychic girl just\n"
     .string "like her!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingSabrinasFan::
     .string "Even if I'm the only one, I won't\n"
-    .string "stop being SABRINA's fan.\p"
-    .string "My dream is to be like SABRINA,\n"
+    .string "stop being KURENAI's fan.\p"
+    .string "My dream is to be like KURENAI,\n"
     .string "cute, but cool.\p"
     .string "I want to be a psychic girl just\n"
     .string "like her!$"

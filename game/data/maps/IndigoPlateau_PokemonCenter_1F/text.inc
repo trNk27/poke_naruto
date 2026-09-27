@@ -17,17 +17,17 @@ IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck::
 IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
     .string "I am so sorry, but you've wasted\n"
     .string "your time coming here.\p"
-    .string "LORELEI of the ELITE FOUR is\n"
+    .string "KONAN of the ELITE FOUR is\n"
     .string "absent, you see.\p"
     .string "As a result, the POKéMON LEAGUE is\n"
     .string "closed for the time being.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
-    .string "AGATHA's GHOST-type POKéMON are\n"
+    .string "CHIYO's GHOST-type POKéMON are\n"
     .string "horrifically terrifying in toughness.\p"
     .string "I took my FIGHTING-type POKéMON\n"
     .string "and raised them to the max.\p"
-    .string "I went at AGATHA feeling pretty\n"
+    .string "I went at CHIYO feeling pretty\n"
     .string "confident, but she whupped us.\p"
     .string "That old lady's also got a really\n"
     .string "short fuse, too.\p"
@@ -37,7 +37,7 @@ IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
 IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
     .string "Maybe becoming an ELITE FOUR\n"
     .string "member is in the blood.\p"
-    .string "From what I've heard, LANCE has\n"
+    .string "From what I've heard, MADARA has\n"
     .string "a cousin who's a GYM LEADER\l"
     .string "somewhere far away.$"
 

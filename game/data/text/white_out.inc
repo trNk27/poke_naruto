@@ -28,7 +28,7 @@ Text_HadQuiteAnExperienceTakeRest::
 Text_MomExplainHPGetPotions::
 	.string "MOM: Oh, good! You and your\n"
 	.string "POKéMON are looking great.\p"
-	.string "I just heard from PROF. OAK.\p"
+	.string "I just heard from HOKAGE.\p"
 	.string "He said that POKéMON's energy is\n"
 	.string "measured in HP.\p"
 	.string "If your POKéMON lose their HP,\n"

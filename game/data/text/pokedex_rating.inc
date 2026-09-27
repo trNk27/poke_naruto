@@ -1,5 +1,5 @@
 PokedexRating_Text_HowIsPokedexComingAlong::
-	.string "OAK: Good to see you!\n"
+	.string "HOKAGE: Good to see you!\n"
 	.string "How is your POKéDEX coming along?\p"
 	.string "Here, let me take a look.$"
 
@@ -8,7 +8,7 @@ PokedexRating_Text_SeenXOwnedY::
 	.string "on your POKéDEX is:\p"
 	.string "{STR_VAR_1} POKéMON seen and\n"
 	.string "{STR_VAR_2} POKéMON owned.\p"
-	.string "{FONT_NORMAL}PROF. OAK's rating:$"
+	.string "{FONT_NORMAL}HOKAGE's rating:$"
 
 PokedexRating_Text_LessThan10::
 	.string "You still have lots to do.\p"
@@ -114,7 +114,7 @@ PokedexRating_Text_ThankYouMadeDreamReality::
 	.string "You've made my dream a reality!$"
 
 PokedexRating_Text_LoveSeeingYourPokedex::
-	.string "OAK: Ah, welcome!\p"
+	.string "HOKAGE: Ah, welcome!\p"
 	.string "Tell me, how is your POKéDEX\n"
 	.string "coming along?\p"
 	.string "Wahaha!\p"

@@ -1,6 +1,6 @@
 PewterCity_PokemonCenter_1F_Text_TeamRocketMtMoonImOnPhone::
     .string "What!?\p"
-    .string "TEAM ROCKET is at MT. MOON?\n"
+    .string "AKATSUKI is at MT. MOON?\n"
     .string "Huh?\p"
     .string "I'm on the phone!\n"
     .string "Scram!$"

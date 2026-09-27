@@ -1,5 +1,5 @@
 FourIsland_IcefallCave_Back_Text_LoreleiKeepHandsOffMons::
-    .string "LORELEI: Keep your filthy hands\n"
+    .string "KONAN: Keep your filthy hands\n"
     .string "off the POKéMON in the cave!\p"
     .string "Do as I say, or you'll have me to\n"
     .string "answer to!$"
@@ -11,7 +11,7 @@ FourIsland_IcefallCave_Back_Text_ShutItLadyLeaveUsBe::
     .string "steamed up!$"
 
 FourIsland_IcefallCave_Back_Text_LoreleiPlayerHelpMeKickPoachersOut::
-    .string "LORELEI: {PLAYER}?!\n"
+    .string "KONAN: {PLAYER}?!\n"
     .string "What are you doing here?\p"
     .string "No, we can catch up later.\n"
     .string "Right now, I need your help.\p"
@@ -31,7 +31,7 @@ FourIsland_IcefallCave_Back_Text_GruntDefeat::
     .string "We didn't plan on this!$"
 
 FourIsland_IcefallCave_Back_Text_LoreleiWhereHaveYouTakenMons::
-    .string "LORELEI: Humph.\n"
+    .string "KONAN: Humph.\n"
     .string "So despicably weak.\p"
     .string "You!\n"
     .string "Tell me!\p"
@@ -45,7 +45,7 @@ FourIsland_IcefallCave_Back_Text_NotTellingYouThat::
     .string "I'm not telling you that!$"
 
 FourIsland_IcefallCave_Back_Text_LoreleiWellDeepFreezeYou::
-    .string "LORELEI: If you won't confess,\n"
+    .string "KONAN: If you won't confess,\n"
     .string "we'll deep-freeze you.\p"
     .string "My LAPRAS is furious for what\n"
     .string "you've done to its friends.\p"
@@ -55,12 +55,12 @@ FourIsland_IcefallCave_Back_Text_LoreleiWellDeepFreezeYou::
 FourIsland_IcefallCave_Back_Text_OkayRocketWareHouseFiveIsland::
     .string "Wawaah! Okay!\n"
     .string "I'll talk!\p"
-    .string "The POKéMON are in the ROCKET\n"
+    .string "The POKéMON are in the AKATSUKI\n"
     .string "WAREHOUSE on FIVE ISLAND.\p"
     .string "There! I said it!\n"
     .string "We'll be going now!\p"
     .string "…But I doubt you'll ever make it\n"
-    .string "into the ROCKET WAREHOUSE!\p"
+    .string "into the AKATSUKI WAREHOUSE!\p"
     .string "Heheheheh!$"
 
 FourIsland_IcefallCave_Back_Text_ThankYouThisIsAwful::
